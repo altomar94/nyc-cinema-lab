@@ -4,7 +4,7 @@ import xml.etree.ElementTree as ET
 import json
 
 # 1. Configuration
-LETTERBOXD_USERNAME = "YOUR_LETTERBOXD_USERNAME" # Replace with your actual handle
+LETTERBOXD_USERNAME = "TK94" # Replace with your actual handle
 RSS_URL = f"https://letterboxd.com/{TK94}/rss/"
 
 # 2. Fetch and Parse Letterboxd RSS Feed

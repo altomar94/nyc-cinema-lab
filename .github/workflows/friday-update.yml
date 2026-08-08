@@ -1,0 +1,30 @@
+name: Friday Repertory Auto-Update
+
+on:
+  schedule:
+    # Runs every Friday at 12:00 UTC (8:00 AM EDT)
+    - cron: '0 12 * * 5'
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+jobs:
+  build-and-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Run Auto-Updater
+        run: python update_screenings.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "GitHub Action Bot"
+          git config --global user.email "action@github.com"
+          git add index.html
+          git commit -m "Auto-update weekend showtimes" || exit 0
+          git push

@@ -563,9 +563,9 @@
       </div>
 
       <div class="filter-group">
-        <label>Repertory Venue</label>
+        <label>Venue</label>
         <select id="theaterSelect">
-          <option value="all">All NYC Repertory Venues</option>
+          <option value="all">All Venues</option>
           <option value="IFC Center">IFC Center (West Village)</option>
           <option value="Metrograph">Metrograph (Lower East Side)</option>
           <option value="Film Forum">Film Forum (Greenwich Village)</option>
@@ -881,8 +881,7 @@
       filtered.forEach(item => {
         const badgeClass = item.matchScore >= 75 ? 'match-high' : 'match-mid';
         const statusBadge = item.seen 
-          ? `<span class="status-badge status-seen">LOGGED IN PROFILE</span>`
-          : `<span class="status-badge status-unseen">UNSEEN DISCOVERY</span>`;
+          ? `<span class="status-badge status-seen">LOGGED IN PROFILE</span>`;
 
         const timesHTML = item.showtimes.map(t => `<span class="time-chip">${t}</span>`).join('');
 

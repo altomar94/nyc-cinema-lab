@@ -5,7 +5,7 @@ import json
 
 # 1. Configuration
 LETTERBOXD_USERNAME = "TK94" # Replace with your actual handle
-RSS_URL = f"https://letterboxd.com/{TK94}/rss/"
+RSS_URL = "https://letterboxd.com/TK94/rss/"
 
 # 2. Fetch and Parse Letterboxd RSS Feed
 req = urllib.request.Request(RSS_URL, headers={'User-Agent': 'Mozilla/5.0'})

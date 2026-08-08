@@ -78,7 +78,7 @@ def scrape_film_forum():
             t_elem = tile.select_one('.film-title, h3, h2')
             if not t_elem: continue
             title = t_elem.get_text(strip=True)
-            results.append(create_entry(title, "Repertory Selection", 1972, "Film Forum", "South Village", 35mm or 4K restoration revival screening at Film Forum., "35mm / 4K Restoration", ["Fri: 7:00 PM", "Sat: 4:30 PM", "Sun: 6:15 PM"], 95))
+            results.append(create_entry(title, "Repertory Selection", 1972, "Film Forum", "South Village", "35mm or 4K restoration revival screening at Film Forum.", "35mm / 4K Restoration", ["Fri: 7:00 PM", "Sat: 4:30 PM", "Sun: 6:15 PM"], 95))
     except Exception as e:
         print(f"[Scraper] Film Forum error: {e}")
     return results

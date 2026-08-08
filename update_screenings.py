@@ -1,60 +1,46 @@
 import re
 import urllib.request
 import xml.etree.ElementTree as ET
-import json
 
 # 1. Configuration
-LETTERBOXD_USERNAME = "TK94" # Replace with your actual handle
-RSS_URL = "https://letterboxd.com/TK94/rss/"
+LETTERBOXD_USERNAME = "TK94"
+RSS_URL = "https://letterboxd.com/tk94/rss/"
 
-# 2. Fetch and Parse Letterboxd RSS Feed
+# 2. Fetch Watched Titles from Letterboxd RSS
+watched_titles = set()
 req = urllib.request.Request(RSS_URL, headers={'User-Agent': 'Mozilla/5.0'})
+
 try:
     with urllib.request.urlopen(req) as response:
         xml_data = response.read()
-    
     root = ET.fromstring(xml_data)
-    items = root.findall('./channel/item')
-    
-    watched_titles = set()
-    for item in items:
+    for item in root.findall('./channel/item'):
         title_elem = item.find('title')
         if title_elem is not None and title_elem.text:
-            # RSS titles are formatted as "Film Title, Year - ★★★★"
             clean_title = title_elem.text.split(' - ')[0].split(', 19')[0].split(', 20')[0].strip().lower()
             watched_titles.add(clean_title)
-            
+    print(f"Successfully fetched {len(watched_titles)} titles from Letterboxd.")
 except Exception as e:
-    print(f"Error fetching Letterboxd RSS feed: {e}")
-    watched_titles = set()
+    print(f"Warning: Letterboxd RSS fetch failed ({e}). Proceeding without updating seen statuses.")
 
-# 3. Read Current index.html
+# 3. Read index.html
 with open("index.html", "r", encoding="utf-8") as f:
     html = f.read()
 
-# 4. Extract Existing Dataset Array
-match = re.search(r"const dataset = (\[.*?\]);", html, re.DOTALL)
-if match:
-    dataset = json.loads(match.group(1))
-    
-    # Cross-reference screenings against Letterboxd watched titles
-    for film in dataset:
-        if film["title"].lower() in watched_titles:
-            film["seen"] = True
-            
-    # Serialize back to JSON string
-    updated_dataset_json = json.dumps(dataset, indent=6)
-    
-    # Replace dataset in HTML
-    html = re.sub(
-        r"const dataset = \[.*?\];",
-        f"const dataset = {updated_dataset_json};",
-        html,
-        flags=re.DOTALL
-    )
+# 4. Safely update JavaScript object blocks without JSON decoding
+def update_seen_status(match):
+    block = match.group(0)
+    title_match = re.search(r'title:\s*["\']([^"\']+)["\']', block)
+    if title_match:
+        film_title = title_match.group(1).strip().lower()
+        if film_title in watched_titles:
+            block = re.sub(r'seen:\s*false', 'seen: true', block)
+    return block
 
-# 5. Save Updated index.html
+updated_html = re.sub(r'\{\s*title:\s*["\'].*?\}', update_seen_status, html, flags=re.DOTALL)
+
+# 5. Write back to index.html
 with open("index.html", "w", encoding="utf-8") as f:
-    f.write(html)
+    f.write(updated_html)
 
-print("Successfully synced Letterboxd watched status with index.html")
+print("Updated index.html successfully.")

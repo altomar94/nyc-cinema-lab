@@ -21,9 +21,11 @@ jobs:
           python-version: '3.10'
 
       - name: Install Dependencies
-        run: pip install requests beautifulsoup4 lxml
+        run: pip install requests beautifulsoup4 lxml scikit-learn
 
       - name: Run Auto-Updater
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: python update_screenings.py
 
       - name: Commit and Push Changes
@@ -31,5 +33,5 @@ jobs:
           git config --global user.name "GitHub Action Bot"
           git config --global user.email "action@github.com"
           git add index.html
-          git commit -m "Auto-update weekend showtimes across NYC cinemas" || exit 0
+          git commit -m "Auto-update weekend showtimes with Pure Taste Algorithm" || exit 0
           git push

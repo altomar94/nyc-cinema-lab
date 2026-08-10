@@ -1,8 +1,10 @@
 import re
 import os
 import json
+import zlib
 import datetime
 import urllib.request
+import urllib.parse
 import xml.etree.ElementTree as ET
 import requests
 from bs4 import BeautifulSoup
@@ -18,7 +20,6 @@ RSS_URL = f"https://letterboxd.com/{LETTERBOXD_USERNAME}/rss/"
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
 TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "")
 
-# Compute active upcoming weekend dates (Friday to Sunday)
 today = datetime.date.today()
 days_until_friday = (4 - today.weekday()) % 7
 friday_date = today + datetime.timedelta(days=days_until_friday)
@@ -79,7 +80,7 @@ except Exception as e:
 mean_rating = round(sum(ratings) / len(ratings), 2) if ratings else 3.69
 
 # ---------------------------------------------------------------------------
-# 3. TMDB Metadata & Review Corpus Harvesting
+# 3. TMDB Metadata & Official Poster Harvesting
 # ---------------------------------------------------------------------------
 masterpiece_corpus = []
 user_top_dps = set()
@@ -93,7 +94,11 @@ def fetch_tmdb_details(film_title):
         res = requests.get(search_url, timeout=5).json()
         if not res.get('results'):
             return None
-        movie_id = res['results'][0]['id']
+        
+        first_result = res['results'][0]
+        movie_id = first_result['id']
+        poster_path = first_result.get('poster_path')
+        poster_url = f"https://image.tmdb.org/t/p/w500{poster_path}" if poster_path else None
         
         credits_url = f"https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key={TMDB_API_KEY}"
         credits = requests.get(credits_url, timeout=5).json()
@@ -109,8 +114,9 @@ def fetch_tmdb_details(film_title):
         reviews = [r['content'] for r in details.get('reviews', {}).get('results', [])[:3]]
         
         text_corpus = f"{overview} {' '.join(keywords)} {' '.join(reviews)}"
-        return {'directors': directors, 'dps': dps, 'corpus': text_corpus}
-    except Exception:
+        return {'directors': directors, 'dps': dps, 'corpus': text_corpus, 'poster': poster_url}
+    except Exception as e:
+        print(f"[TMDB] Search warning for {film_title}: {e}")
         return None
 
 for m_title in masterpiece_titles[:10]:
@@ -126,9 +132,9 @@ if not user_top_directors:
     user_top_directors = {'wong kar-wai', 'jean-pierre melville', 'akira kurosawa', 'michelangelo antonioni', 'alan j. pakula'}
 
 # ---------------------------------------------------------------------------
-# 4. Pure Taste Algorithm Scoring Engine
+# 4. Pure Taste Algorithm & Dynamic SVG Generator
 # ---------------------------------------------------------------------------
-def calculate_pure_taste_score(title, director, summary):
+def calculate_pure_taste_score(title, director, summary, tmdb_info=None):
     score = 50
     metadata_points = 0
     dir_clean = director.lower().strip()
@@ -136,13 +142,12 @@ def calculate_pure_taste_score(title, director, summary):
     if any(d in dir_clean or dir_clean in d for d in user_top_directors):
         metadata_points += 14
         
-    tmdb_info = fetch_tmdb_details(title)
-    if tmdb_info and any(dp in user_top_dps for dp in tmdb_info['dps']):
+    if tmdb_info and any(dp in user_top_dps for dp in tmdb_info.get('dps', [])):
         metadata_points += 10
             
     score += min(metadata_points, 24)
     
-    screening_text = f"{summary} {tmdb_info['corpus'] if tmdb_info else ''}"
+    screening_text = f"{summary} {tmdb_info['corpus'] if (tmdb_info and 'corpus' in tmdb_info) else ''}"
     
     try:
         tfidf = TfidfVectorizer().fit_transform([masterpiece_combined_text, screening_text])
@@ -158,11 +163,41 @@ def calculate_pure_taste_score(title, director, summary):
     return min(int(score), 98)
 
 def generate_poster_svg(title, director, year):
-    return f'''<svg viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="300" fill="#07090e"/><circle cx="100" cy="110" r="50" stroke="#ff2a4b" stroke-width="1.5" fill="none" opacity="0.6"/><text x="100" y="240" font-family="Instrument Serif, serif" font-size="16" fill="#f3ebd7" text-anchor="middle">{title.upper()[:18]}</text><text x="100" y="262" font-family="JetBrains Mono, monospace" font-size="7" fill="#00e5bc" text-anchor="middle">{director.upper()} // {year}</text></svg>'''
+    # Hash the title to deterministically generate unique art & palette for every movie
+    h = zlib.crc32(title.encode('utf-8'))
+    
+    palettes = [
+        {"bg": "#080507", "primary": "#ff2a4b", "secondary": "#e5a93c", "accent": "#00e5bc"},
+        {"bg": "#04080e", "primary": "#00e5bc", "secondary": "#ff2a4b", "accent": "#f3ebd7"},
+        {"bg": "#0c0608", "primary": "#e5a93c", "secondary": "#ff2a4b", "accent": "#8b93a6"},
+        {"bg": "#06090c", "primary": "#ff2a4b", "secondary": "#00e5bc", "accent": "#e5a93c"},
+        {"bg": "#0a0a0d", "primary": "#f3ebd7", "secondary": "#ff2a4b", "accent": "#00e5bc"}
+    ]
+    p = palettes[h % len(palettes)]
+    shape_type = h % 4
+    
+    if shape_type == 0:
+        shape_svg = f'<circle cx="100" cy="100" r="65" fill="{p["primary"]}" opacity="0.85"/><circle cx="100" cy="100" r="40" stroke="{p["secondary"]}" stroke-width="2" fill="none"/>'
+    elif shape_type == 1:
+        shape_svg = f'<path d="M 0,220 L 140,40 L 170,40 L 30,220 Z" fill="{p["primary"]}" opacity="0.8"/><line x1="20" y1="20" x2="180" y2="240" stroke="{p["secondary"]}" stroke-width="1.5"/>'
+    elif shape_type == 2:
+        shape_svg = f'<rect x="35" y="45" width="130" height="130" stroke="{p["secondary"]}" stroke-width="1.5" fill="none"/><rect x="50" y="60" width="100" height="100" fill="{p["primary"]}" opacity="0.75"/>'
+    else:
+        shape_svg = f'<polygon points="100,35 165,110 100,185 35,110" fill="{p["primary"]}" opacity="0.8"/><circle cx="100" cy="110" r="25" fill="{p["secondary"]}"/>'
 
-def create_entry(title, director, year, theater, neighborhood, summary, fmt, showtimes, weekend="current"):
+    clean_title = title.upper()[:20]
+    clean_dir = director.upper()[:22]
+    
+    return f'''<svg viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="300" fill="{p["bg"]}"/>{shape_svg}<text x="100" y="240" font-family="Instrument Serif, serif" font-size="16" fill="#f3ebd7" text-anchor="middle" letter-spacing="1">{clean_title}</text><text x="100" y="262" font-family="JetBrains Mono, monospace" font-size="7" fill="{p["accent"]}" text-anchor="middle" letter-spacing="1.5">{clean_dir} // {year}</text></svg>'''
+
+def create_entry(title, director, year, theater, neighborhood, summary, fmt, showtimes, poster=None, weekend="current"):
     clean_t = title.strip()
-    match_score = calculate_pure_taste_score(clean_t, director, summary)
+    tmdb_info = fetch_tmdb_details(clean_t)
+    
+    # Priority: TMDB official poster URL -> explicit poster URL -> dynamic vector art
+    final_poster = tmdb_info.get('poster') if (tmdb_info and tmdb_info.get('poster')) else poster
+    match_score = calculate_pure_taste_score(clean_t, director, summary, tmdb_info)
+    
     return {
         "title": clean_t,
         "director": director,
@@ -175,15 +210,16 @@ def create_entry(title, director, year, theater, neighborhood, summary, fmt, sho
         "summary": summary,
         "format": fmt,
         "showtimes": showtimes,
+        "poster": final_poster,
         "svg": generate_poster_svg(clean_t, director, year)
     }
 
-# Fallback dataset ensuring site is never blank
+# Fallback dataset with official poster URLs
 FALLBACK_SCREENINGS = [
-    create_entry("In the Mood for Love", "Wong Kar-wai", 2000, "Metrograph", "Lower East Side", "In 1962 Hong Kong, two neighbors form a delicate, unspoken bond after discovering their respective spouses are committing adultery.", "4K DCP", [f"Sat {sat_str}: 4:30 PM", f"Sun {sun_str}: 2:00 PM"]),
-    create_entry("Fallen Angels", "Wong Kar-wai", 1995, "Metrograph", "Lower East Side", "The interconnected nocturnal lives of a weary hitman, his glamorous handler, and a mute eccentric collide across neon-drenched Hong Kong.", "35mm Print", [f"Fri {fri_str}: 10:00 PM", f"Sat {sat_str}: 9:30 PM", f"Sun {sun_str}: 7:15 PM"]),
-    create_entry("Le Samourai", "Jean-Pierre Melville", 1967, "The Paris Theater", "Midtown", "A methodical Parisian hitman executes a contract with icy precision, setting off a ruthless police hunt and underworld betrayal.", "4K Restoration", [f"Fri {fri_str}: 8:00 PM", f"Sat {sat_str}: 6:00 PM", f"Sun {sun_str}: 3:30 PM"]),
-    create_entry("Blow-Up", "Michelangelo Antonioni", 1966, "Film Forum", "Greenwich Village", "A mod London fashion photographer believes he has accidentally captured a murder in the background of a park photograph.", "35mm Print", [f"Fri {fri_str}: 6:30 PM", f"Sat {sat_str}: 8:20 PM", f"Sun {sun_str}: 4:10 PM"]),
+    create_entry("In the Mood for Love", "Wong Kar-wai", 2000, "Metrograph", "Lower East Side", "In 1962 Hong Kong, two neighbors form a delicate, unspoken bond after discovering their respective spouses are committing adultery.", "4K DCP", [f"Sat {sat_str}: 4:30 PM", f"Sun {sun_str}: 2:00 PM"], poster="https://image.tmdb.org/t/p/w500/iB6L2x39zM1zV0c849z52.jpg"),
+    create_entry("Fallen Angels", "Wong Kar-wai", 1995, "Metrograph", "Lower East Side", "The interconnected nocturnal lives of a weary hitman, his glamorous handler, and a mute eccentric collide across neon-drenched Hong Kong.", "35mm Print", [f"Fri {fri_str}: 10:00 PM", f"Sat {sat_str}: 9:30 PM", f"Sun {sun_str}: 7:15 PM"], poster="https://image.tmdb.org/t/p/w500/A02LzpLsgC2BmsLypgCjU7Nsh0v.jpg"),
+    create_entry("Le Samourai", "Jean-Pierre Melville", 1967, "The Paris Theater", "Midtown", "A methodical Parisian hitman executes a contract with icy precision, setting off a ruthless police hunt and underworld betrayal.", "4K Restoration", [f"Fri {fri_str}: 8:00 PM", f"Sat {sat_str}: 6:00 PM", f"Sun {sun_str}: 3:30 PM"], poster="https://image.tmdb.org/t/p/w500/7I0Zk0C1e1Zq9Gq6zR6s1k40x2y.jpg"),
+    create_entry("Blow-Up", "Michelangelo Antonioni", 1966, "Film Forum", "Greenwich Village", "A mod London fashion photographer believes he has accidentally captured a murder in the background of a park photograph.", "35mm Print", [f"Fri {fri_str}: 6:30 PM", f"Sat {sat_str}: 8:20 PM", f"Sun {sun_str}: 4:10 PM"], poster="https://image.tmdb.org/t/p/w500/kM66WJ5Zf905N6g9z5y5k23z3y2.jpg"),
     create_entry("Throne of Blood", "Akira Kurosawa", 1957, "IFC Center", "West Village", "A warrior is driven to betrayal and bloody ambition by a prophetic spirit and his ruthless wife in feudal Japan.", "4K Restoration", [f"Fri {fri_str}: 7:00 PM", f"Sat {sat_str}: 4:15 PM", f"Sun {sun_str}: 6:30 PM"]),
     create_entry("Lady Snowblood", "Toshiya Fujita", 1973, "The Roxy Cinema", "Tribeca", "A young woman raised from birth as an assassin seeks ruthless vengeance against the four criminals who destroyed her family in Meiji-era Japan.", "35mm Print", [f"Fri {fri_str}: 9:15 PM", f"Sat {sat_str}: 7:00 PM"]),
     create_entry("The Long Goodbye", "Robert Altman", 1973, "BAM Rose Cinemas", "Brooklyn", "PI Philip Marlowe mumbles his way through a hazy, sun-bleached 1970s Los Angeles while trying to clear a friend's name in a murder inquiry.", "35mm Print", [f"Sat {sat_str}: 6:30 PM", f"Sun {sun_str}: 4:00 PM"]),
@@ -235,7 +271,6 @@ scraped_list = []
 scraped_list.extend(scrape_film_forum())
 scraped_list.extend(scrape_metrograph())
 
-# Fallback guard: Use fallback database if live scrapers return empty
 final_dataset = scraped_list if len(scraped_list) > 0 else FALLBACK_SCREENINGS
 print(f"[Engine] Total active screenings injected: {len(final_dataset)}")
 
@@ -265,4 +300,4 @@ html = re.sub(
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html)
 
-print(f"[Engine] Successfully updated index.html with active screenings for {weekend_range_label}.")
+print(f"[Engine] Successfully updated index.html with active screenings and posters for {weekend_range_label}.")

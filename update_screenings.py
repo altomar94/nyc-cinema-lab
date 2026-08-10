@@ -37,6 +37,20 @@ STYLE_TROPES = [
     "noir", "crime", "surreal", "laconic", "nihilistic", "poetic"
 ]
 
+# Venue Ticket URLs
+THEATER_TICKET_URLS = {
+    "Film Forum": "https://filmforum.org/now_playing",
+    "IFC Center": "https://www.ifccenter.com/",
+    "Metrograph": "https://metrograph.com/nyc/",
+    "The Paris Theater": "https://www.paristheaternyc.com/",
+    "The Roxy Cinema": "https://www.roxycinematribeca.com/",
+    "Anthology Film Archives": "http://anthologyfilmarchives.org/film_screenings/calendar",
+    "Film at Lincoln Center": "https://www.filmlinc.org/now-playing/",
+    "Nitehawk Cinema": "https://nitehawkcinema.com/williamsburg/",
+    "Museum of the Moving Image": "https://movingimage.us/series/",
+    "BAM Rose Cinemas": "https://www.bam.org/film"
+}
+
 # ---------------------------------------------------------------------------
 # 2. Letterboxd Profile Harvesting
 # ---------------------------------------------------------------------------
@@ -163,9 +177,7 @@ def calculate_pure_taste_score(title, director, summary, tmdb_info=None):
     return min(int(score), 98)
 
 def generate_poster_svg(title, director, year):
-    # Hash the title to deterministically generate unique art & palette for every movie
     h = zlib.crc32(title.encode('utf-8'))
-    
     palettes = [
         {"bg": "#080507", "primary": "#ff2a4b", "secondary": "#e5a93c", "accent": "#00e5bc"},
         {"bg": "#04080e", "primary": "#00e5bc", "secondary": "#ff2a4b", "accent": "#f3ebd7"},
@@ -190,13 +202,13 @@ def generate_poster_svg(title, director, year):
     
     return f'''<svg viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="300" fill="{p["bg"]}"/>{shape_svg}<text x="100" y="240" font-family="Instrument Serif, serif" font-size="16" fill="#f3ebd7" text-anchor="middle" letter-spacing="1">{clean_title}</text><text x="100" y="262" font-family="JetBrains Mono, monospace" font-size="7" fill="{p["accent"]}" text-anchor="middle" letter-spacing="1.5">{clean_dir} // {year}</text></svg>'''
 
-def create_entry(title, director, year, theater, neighborhood, summary, fmt, showtimes, poster=None, weekend="current"):
+def create_entry(title, director, year, theater, neighborhood, summary, fmt, showtimes, poster=None, ticket_url=None, weekend="current"):
     clean_t = title.strip()
     tmdb_info = fetch_tmdb_details(clean_t)
     
-    # Priority: TMDB official poster URL -> explicit poster URL -> dynamic vector art
     final_poster = tmdb_info.get('poster') if (tmdb_info and tmdb_info.get('poster')) else poster
     match_score = calculate_pure_taste_score(clean_t, director, summary, tmdb_info)
+    final_ticket_url = ticket_url or THEATER_TICKET_URLS.get(theater, "#")
     
     return {
         "title": clean_t,
@@ -209,24 +221,25 @@ def create_entry(title, director, year, theater, neighborhood, summary, fmt, sho
         "weekend": weekend,
         "summary": summary,
         "format": fmt,
+        "ticketUrl": final_ticket_url,
         "showtimes": showtimes,
         "poster": final_poster,
         "svg": generate_poster_svg(clean_t, director, year)
     }
 
-# Fallback dataset with official poster URLs
+# Fallback dataset with direct ticket URLs
 FALLBACK_SCREENINGS = [
-    create_entry("In the Mood for Love", "Wong Kar-wai", 2000, "Metrograph", "Lower East Side", "In 1962 Hong Kong, two neighbors form a delicate, unspoken bond after discovering their respective spouses are committing adultery.", "4K DCP", [f"Sat {sat_str}: 4:30 PM", f"Sun {sun_str}: 2:00 PM"], poster="https://image.tmdb.org/t/p/w500/iB6L2x39zM1zV0c849z52.jpg"),
-    create_entry("Fallen Angels", "Wong Kar-wai", 1995, "Metrograph", "Lower East Side", "The interconnected nocturnal lives of a weary hitman, his glamorous handler, and a mute eccentric collide across neon-drenched Hong Kong.", "35mm Print", [f"Fri {fri_str}: 10:00 PM", f"Sat {sat_str}: 9:30 PM", f"Sun {sun_str}: 7:15 PM"], poster="https://image.tmdb.org/t/p/w500/A02LzpLsgC2BmsLypgCjU7Nsh0v.jpg"),
-    create_entry("Le Samourai", "Jean-Pierre Melville", 1967, "The Paris Theater", "Midtown", "A methodical Parisian hitman executes a contract with icy precision, setting off a ruthless police hunt and underworld betrayal.", "4K Restoration", [f"Fri {fri_str}: 8:00 PM", f"Sat {sat_str}: 6:00 PM", f"Sun {sun_str}: 3:30 PM"], poster="https://image.tmdb.org/t/p/w500/7I0Zk0C1e1Zq9Gq6zR6s1k40x2y.jpg"),
-    create_entry("Blow-Up", "Michelangelo Antonioni", 1966, "Film Forum", "Greenwich Village", "A mod London fashion photographer believes he has accidentally captured a murder in the background of a park photograph.", "35mm Print", [f"Fri {fri_str}: 6:30 PM", f"Sat {sat_str}: 8:20 PM", f"Sun {sun_str}: 4:10 PM"], poster="https://image.tmdb.org/t/p/w500/kM66WJ5Zf905N6g9z5y5k23z3y2.jpg"),
-    create_entry("Throne of Blood", "Akira Kurosawa", 1957, "IFC Center", "West Village", "A warrior is driven to betrayal and bloody ambition by a prophetic spirit and his ruthless wife in feudal Japan.", "4K Restoration", [f"Fri {fri_str}: 7:00 PM", f"Sat {sat_str}: 4:15 PM", f"Sun {sun_str}: 6:30 PM"]),
-    create_entry("Lady Snowblood", "Toshiya Fujita", 1973, "The Roxy Cinema", "Tribeca", "A young woman raised from birth as an assassin seeks ruthless vengeance against the four criminals who destroyed her family in Meiji-era Japan.", "35mm Print", [f"Fri {fri_str}: 9:15 PM", f"Sat {sat_str}: 7:00 PM"]),
-    create_entry("The Long Goodbye", "Robert Altman", 1973, "BAM Rose Cinemas", "Brooklyn", "PI Philip Marlowe mumbles his way through a hazy, sun-bleached 1970s Los Angeles while trying to clear a friend's name in a murder inquiry.", "35mm Print", [f"Sat {sat_str}: 6:30 PM", f"Sun {sun_str}: 4:00 PM"]),
-    create_entry("Deep Red", "Dario Argento", 1975, "IFC Center", "West Village", "A jazz pianist and an inquisitive journalist investigate the grisly murder of a psychic medium in a baroque Italian town.", "Archival 35mm", [f"Fri {fri_str}: 11:45 PM", f"Sat {sat_str}: 11:45 PM"]),
-    create_entry("Branded to Kill", "Seijun Suzuki", 1967, "Metrograph", "Lower East Side", "A hitman with a fetish for sniffing boiling rice fails an assignment and becomes the target of a mysterious rival hitman.", "35mm Print", [f"Sat {sat_str}: 10:15 PM", f"Sun {sun_str}: 8:45 PM"]),
-    create_entry("Klute", "Alan J. Pakula", 1971, "The Paris Theater", "Midtown", "A small-town detective searches for a missing executive in New York City with the help of a high-class call girl who is being stalked.", "35mm Print", [f"Fri {fri_str}: 5:30 PM", f"Sun {sun_str}: 6:00 PM"]),
-    create_entry("Night on Earth", "Jim Jarmusch", 1991, "Film Forum", "Greenwich Village", "A collection of five vignettes unfolding simultaneously inside taxicabs across Los Angeles, New York, Paris, Rome, and Helsinki.", "35mm Print", [f"Fri {fri_str}: 9:00 PM", f"Sat {sat_str}: 9:00 PM"])
+    create_entry("In the Mood for Love", "Wong Kar-wai", 2000, "Metrograph", "Lower East Side", "In 1962 Hong Kong, two neighbors form a delicate, unspoken bond after discovering their respective spouses are committing adultery.", "4K DCP", [f"Sat {sat_str}: 4:30 PM", f"Sun {sun_str}: 2:00 PM"], poster="https://image.tmdb.org/t/p/w500/iB6L2x39zM1zV0c849z52.jpg", ticket_url="https://metrograph.com/nyc/"),
+    create_entry("Fallen Angels", "Wong Kar-wai", 1995, "Metrograph", "Lower East Side", "The interconnected nocturnal lives of a weary hitman, his glamorous handler, and a mute eccentric collide across neon-drenched Hong Kong.", "35mm Print", [f"Fri {fri_str}: 10:00 PM", f"Sat {sat_str}: 9:30 PM", f"Sun {sun_str}: 7:15 PM"], poster="https://image.tmdb.org/t/p/w500/A02LzpLsgC2BmsLypgCjU7Nsh0v.jpg", ticket_url="https://metrograph.com/nyc/"),
+    create_entry("Le Samourai", "Jean-Pierre Melville", 1967, "The Paris Theater", "Midtown", "A methodical Parisian hitman executes a contract with icy precision, setting off a ruthless police hunt and underworld betrayal.", "4K Restoration", [f"Fri {fri_str}: 8:00 PM", f"Sat {sat_str}: 6:00 PM", f"Sun {sun_str}: 3:30 PM"], poster="https://image.tmdb.org/t/p/w500/7I0Zk0C1e1Zq9Gq6zR6s1k40x2y.jpg", ticket_url="https://www.paristheaternyc.com/"),
+    create_entry("Blow-Up", "Michelangelo Antonioni", 1966, "Film Forum", "Greenwich Village", "A mod London fashion photographer believes he has accidentally captured a murder in the background of a park photograph.", "35mm Print", [f"Fri {fri_str}: 6:30 PM", f"Sat {sat_str}: 8:20 PM", f"Sun {sun_str}: 4:10 PM"], poster="https://image.tmdb.org/t/p/w500/kM66WJ5Zf905N6g9z5y5k23z3y2.jpg", ticket_url="https://filmforum.org/now_playing"),
+    create_entry("Throne of Blood", "Akira Kurosawa", 1957, "IFC Center", "West Village", "A warrior is driven to betrayal and bloody ambition by a prophetic spirit and his ruthless wife in feudal Japan.", "4K Restoration", [f"Fri {fri_str}: 7:00 PM", f"Sat {sat_str}: 4:15 PM", f"Sun {sun_str}: 6:30 PM"], ticket_url="https://www.ifccenter.com/"),
+    create_entry("Lady Snowblood", "Toshiya Fujita", 1973, "The Roxy Cinema", "Tribeca", "A young woman raised from birth as an assassin seeks ruthless vengeance against the four criminals who destroyed her family in Meiji-era Japan.", "35mm Print", [f"Fri {fri_str}: 9:15 PM", f"Sat {sat_str}: 7:00 PM"], ticket_url="https://www.roxycinematribeca.com/"),
+    create_entry("The Long Goodbye", "Robert Altman", 1973, "BAM Rose Cinemas", "Brooklyn", "PI Philip Marlowe mumbles his way through a hazy, sun-bleached 1970s Los Angeles while trying to clear a friend's name in a murder inquiry.", "35mm Print", [f"Sat {sat_str}: 6:30 PM", f"Sun {sun_str}: 4:00 PM"], ticket_url="https://www.bam.org/film"),
+    create_entry("Deep Red", "Dario Argento", 1975, "IFC Center", "West Village", "A jazz pianist and an inquisitive journalist investigate the grisly murder of a psychic medium in a baroque Italian town.", "Archival 35mm", [f"Fri {fri_str}: 11:45 PM", f"Sat {sat_str}: 11:45 PM"], ticket_url="https://www.ifccenter.com/"),
+    create_entry("Branded to Kill", "Seijun Suzuki", 1967, "Metrograph", "Lower East Side", "A hitman with a fetish for sniffing boiling rice fails an assignment and becomes the target of a mysterious rival hitman.", "35mm Print", [f"Sat {sat_str}: 10:15 PM", f"Sun {sun_str}: 8:45 PM"], ticket_url="https://metrograph.com/nyc/"),
+    create_entry("Klute", "Alan J. Pakula", 1971, "The Paris Theater", "Midtown", "A small-town detective searches for a missing executive in New York City with the help of a high-class call girl who is being stalked.", "35mm Print", [f"Fri {fri_str}: 5:30 PM", f"Sun {sun_str}: 6:00 PM"], ticket_url="https://www.paristheaternyc.com/"),
+    create_entry("Night on Earth", "Jim Jarmusch", 1991, "Film Forum", "Greenwich Village", "A collection of five vignettes unfolding simultaneously inside taxicabs across Los Angeles, New York, Paris, Rome, and Helsinki.", "35mm Print", [f"Fri {fri_str}: 9:00 PM", f"Sat {sat_str}: 9:00 PM"], ticket_url="https://filmforum.org/now_playing")
 ]
 
 # ---------------------------------------------------------------------------
@@ -244,7 +257,8 @@ def scrape_film_forum():
             results.append(create_entry(
                 title, "Repertory Selection", 1972, "Film Forum", "South Village",
                 "35mm or 4K restoration revival screening at Film Forum.", "35mm / 4K Restoration",
-                [f"Fri {fri_str}: 7:00 PM", f"Sat {sat_str}: 4:30 PM", f"Sun {sun_str}: 6:15 PM"]
+                [f"Fri {fri_str}: 7:00 PM", f"Sat {sat_str}: 4:30 PM", f"Sun {sun_str}: 6:15 PM"],
+                ticket_url="https://filmforum.org/now_playing"
             ))
     except Exception as e:
         print(f"[Scraper] Film Forum error: {e}")
@@ -261,7 +275,8 @@ def scrape_metrograph():
                 results.append(create_entry(
                     title, "Metrograph Edition", 1978, "Metrograph", "Lower East Side",
                     "Archival print or curated series screening at Metrograph.", "35mm Archival Print",
-                    [f"Fri {fri_str}: 8:15 PM", f"Sat {sat_str}: 5:00 PM", f"Sun {sun_str}: 7:30 PM"]
+                    [f"Fri {fri_str}: 8:15 PM", f"Sat {sat_str}: 5:00 PM", f"Sun {sun_str}: 7:30 PM"],
+                    ticket_url="https://metrograph.com/nyc/"
                 ))
     except Exception as e:
         print(f"[Scraper] Metrograph error: {e}")
@@ -289,7 +304,7 @@ html = re.sub(r'<span>MEAN:\s*<strong>[\d\.]+\s*★</strong></span>', f'<span>ME
 scraped_json = json.dumps(final_dataset, indent=4)
 html = re.sub(r'const dataset = \[.*?\];', f'const dataset = {scraped_json};', html, flags=re.DOTALL)
 
-# Ensure "All Upcoming Weekends" remains selected by default, while updating current date label
+# Ensure "All Upcoming Weekends" remains selected by default
 html = re.sub(
     r'<select id="weekendSelect">.*?</select>',
     f'<select id="weekendSelect">\n          <option value="all" selected>All Upcoming Weekends</option>\n          <option value="current">{weekend_range_label} (This Weekend)</option>\n          <option value="aug14">Aug 14 – Aug 16</option>\n          <option value="aug21">Aug 21 – Aug 23 (Coppola Retrospective)</option>\n        </select>',
@@ -300,4 +315,4 @@ html = re.sub(
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html)
 
-print(f"[Engine] Successfully updated index.html with active screenings and posters for {weekend_range_label}.")
+print(f"[Engine] Successfully updated index.html with active screenings, posters, and ticket links for {weekend_range_label}.")

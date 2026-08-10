@@ -1,6 +1,7 @@
 import re
 import os
 import json
+import datetime
 import urllib.request
 import xml.etree.ElementTree as ET
 import requests
@@ -9,7 +10,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 # ---------------------------------------------------------------------------
-# 1. Configuration
+# 1. Configuration & Date Engine
 # ---------------------------------------------------------------------------
 LETTERBOXD_USERNAME = "TK94"
 PROFILE_URL = f"https://letterboxd.com/{LETTERBOXD_USERNAME}/"
@@ -17,7 +18,18 @@ RSS_URL = f"https://letterboxd.com/{LETTERBOXD_USERNAME}/rss/"
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
 TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "")
 
-# Curated mood & style tropes for keyword matching
+# Calculate dynamic upcoming weekend date strings
+today = datetime.date.today()
+days_until_friday = (4 - today.weekday()) % 7
+friday_date = today + datetime.timedelta(days=days_until_friday)
+saturday_date = friday_date + datetime.timedelta(days=1)
+sunday_date = friday_date + datetime.timedelta(days=2)
+
+fri_str = friday_date.strftime("%b %d")
+sat_str = saturday_date.strftime("%b %d")
+sun_str = sunday_date.strftime("%b %d")
+weekend_range_label = f"{friday_date.strftime('%b %d')} – {sunday_date.strftime('%b %d')}"
+
 STYLE_TROPES = [
     "nocturnal", "existential", "slow-burn", "kinetic", "neon", "melancholic",
     "paranoia", "isolation", "atmospheric", "stylized", "underworld", "obsession",
@@ -25,12 +37,11 @@ STYLE_TROPES = [
 ]
 
 # ---------------------------------------------------------------------------
-# 2. Letterboxd Profile & Masterpiece Harvesting
+# 2. Letterboxd Profile Harvesting
 # ---------------------------------------------------------------------------
 watched_titles = set()
 ratings = []
 masterpiece_titles = []
-top_directors_set = set()
 total_films = "224"
 
 try:
@@ -84,14 +95,12 @@ def fetch_tmdb_details(film_title):
             return None
         movie_id = res['results'][0]['id']
         
-        # Fetch credits
         credits_url = f"https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key={TMDB_API_KEY}"
         credits = requests.get(credits_url, timeout=5).json()
         
         directors = [c['name'].lower() for c in credits.get('crew', []) if c.get('job') == 'Director']
         dps = [c['name'].lower() for c in credits.get('crew', []) if c.get('job') in ['Director of Photography', 'Cinematographer']]
         
-        # Fetch details & keywords
         details_url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={TMDB_API_KEY}&append_to_response=keywords,reviews"
         details = requests.get(details_url, timeout=5).json()
         
@@ -101,11 +110,9 @@ def fetch_tmdb_details(film_title):
         
         text_corpus = f"{overview} {' '.join(keywords)} {' '.join(reviews)}"
         return {'directors': directors, 'dps': dps, 'corpus': text_corpus}
-    except Exception as e:
+    except Exception:
         return None
 
-# Build Baseline Masterpiece Profile
-print("[Taste Engine] Harvesting TMDB metadata for 4.5+ star masterpieces...")
 for m_title in masterpiece_titles[:10]:
     data = fetch_tmdb_details(m_title)
     if data:
@@ -115,7 +122,6 @@ for m_title in masterpiece_titles[:10]:
 
 masterpiece_combined_text = " ".join(masterpiece_corpus) if masterpiece_corpus else "nocturnal existential atmospheric crime neon-drenched stylized slow-burn"
 
-# Fallback directors if TMDB isn't keyed yet
 if not user_top_directors:
     user_top_directors = {'wong kar-wai', 'jean-pierre melville', 'akira kurosawa', 'michelangelo antonioni', 'alan j. pakula'}
 
@@ -123,29 +129,21 @@ if not user_top_directors:
 # 4. Pure Taste Algorithm Scoring Function
 # ---------------------------------------------------------------------------
 def calculate_pure_taste_score(title, director, summary):
-    score = 50  # Neutral Base Floor
-    
-    # --- Part A: Metadata Engine (Max +24 pts) ---
+    score = 50
     metadata_points = 0
     dir_clean = director.lower().strip()
     
-    # 1. Director Match (+14 pts)
     if any(d in dir_clean or dir_clean in d for d in user_top_directors):
         metadata_points += 14
         
-    # Fetch TMDB data for screening to check DP
     tmdb_info = fetch_tmdb_details(title)
-    if tmdb_info:
-        # 2. DP / Key Crew Match (+10 pts)
-        if any(dp in user_top_dps for dp in tmdb_info['dps']):
-            metadata_points += 10
+    if tmdb_info and any(dp in user_top_dps for dp in tmdb_info['dps']):
+        metadata_points += 10
             
     score += min(metadata_points, 24)
     
-    # --- Part B: Review & Tone Engine (Max +24 pts) ---
     screening_text = f"{summary} {tmdb_info['corpus'] if tmdb_info else ''}"
     
-    # 1. Cosine Similarity via TF-IDF (Max +14 pts)
     try:
         tfidf = TfidfVectorizer().fit_transform([masterpiece_combined_text, screening_text])
         sim = cosine_similarity(tfidf[0:1], tfidf[1:2])[0][0]
@@ -153,18 +151,16 @@ def calculate_pure_taste_score(title, director, summary):
     except Exception:
         vector_points = 4
         
-    # 2. Shared Review Tropes (Max +10 pts)
     trope_count = sum(1 for trope in STYLE_TROPES if trope in screening_text.lower())
     trope_points = min(round(trope_count * 2.5), 10)
     
     score += (vector_points + trope_points)
-    
-    # Cap total match index at 98%
     return min(int(score), 98)
 
-# ---------------------------------------------------------------------------
-# 5. NYC Cinema Scrapers
-# ---------------------------------------------------------------------------
+# Poster SVG Placeholder Generator
+def generate_poster_svg(title, director, year):
+    return f'''<svg viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="300" fill="#07090e"/><circle cx="100" cy="110" r="50" stroke="#ff2a4b" stroke-width="1.5" fill="none" opacity="0.6"/><text x="100" y="240" font-family="Instrument Serif, serif" font-size="18" fill="#f3ebd7" text-anchor="middle">{title.upper()[:18]}</text><text x="100" y="262" font-family="JetBrains Mono, monospace" font-size="7" fill="#00e5bc" text-anchor="middle">{director.upper()} // {year}</text></svg>'''
+
 def create_entry(title, director, year, theater, neighborhood, summary, fmt, showtimes):
     clean_t = title.strip()
     match_score = calculate_pure_taste_score(clean_t, director, summary)
@@ -179,9 +175,13 @@ def create_entry(title, director, year, theater, neighborhood, summary, fmt, sho
         "weekend": "current",
         "summary": summary,
         "format": fmt,
-        "showtimes": showtimes
+        "showtimes": showtimes,
+        "svg": generate_poster_svg(clean_t, director, year)
     }
 
+# ---------------------------------------------------------------------------
+# 5. Scrapers with Dynamic Dates
+# ---------------------------------------------------------------------------
 def scrape_film_forum():
     results = []
     try:
@@ -191,7 +191,11 @@ def scrape_film_forum():
             t_elem = tile.select_one('.film-title, h3, h2')
             if not t_elem: continue
             title = t_elem.get_text(strip=True)
-            results.append(create_entry(title, "Repertory Selection", 1972, "Film Forum", "South Village", "35mm or 4K restoration revival screening at Film Forum.", "35mm / 4K Restoration", ["Fri: 7:00 PM", "Sat: 4:30 PM"]))
+            results.append(create_entry(
+                title, "Repertory Selection", 1972, "Film Forum", "South Village",
+                "35mm or 4K restoration revival screening at Film Forum.", "35mm / 4K Restoration",
+                [f"Fri {fri_str}: 7:00 PM", f"Sat {sat_str}: 4:30 PM", f"Sun {sun_str}: 6:15 PM"]
+            ))
     except Exception as e:
         print(f"[Scraper] Film Forum error: {e}")
     return results
@@ -204,7 +208,11 @@ def scrape_metrograph():
         for card in soup.select('.film-card, .movie-title'):
             title = card.get_text(strip=True)
             if len(title) > 2:
-                results.append(create_entry(title, "Metrograph Edition", 1978, "Metrograph", "Lower East Side", "Archival print or curated series screening at Metrograph.", "35mm Archival Print", ["Fri: 8:15 PM", "Sat: 5:00 PM"]))
+                results.append(create_entry(
+                    title, "Metrograph Edition", 1978, "Metrograph", "Lower East Side",
+                    "Archival print or curated series screening at Metrograph.", "35mm Archival Print",
+                    [f"Fri {fri_str}: 8:15 PM", f"Sat {sat_str}: 5:00 PM", f"Sun {sun_str}: 7:30 PM"]
+                ))
     except Exception as e:
         print(f"[Scraper] Metrograph error: {e}")
     return results
@@ -216,7 +224,7 @@ all_scraped_screenings.extend(scrape_metrograph())
 print(f"[Engine] Total scraped NYC screenings evaluated: {len(all_scraped_screenings)}")
 
 # ---------------------------------------------------------------------------
-# 6. Read & Update index.html
+# 6. Read & Overwrite index.html Dataset
 # ---------------------------------------------------------------------------
 with open("index.html", "r", encoding="utf-8") as f:
     html = f.read()
@@ -226,19 +234,18 @@ html = re.sub(r'<div>\d+\s*FILMS LOGGED\s*//\s*MEAN RATING:\s*[\d\.]+\s*★</div
 html = re.sub(r'<span>LOGGED:\s*<strong>\d+\s*FILMS</strong></span>', f'<span>LOGGED: <strong>{total_films} FILMS</strong></span>', html)
 html = re.sub(r'<span>MEAN:\s*<strong>[\d\.]+\s*★</strong></span>', f'<span>MEAN: <strong>{mean_rating} ★</strong></span>', html)
 
-# Cross-reference existing dataset in index.html against watched titles
-def update_seen_status(match):
-    block = match.group(0)
-    title_match = re.search(r'title:\s*["\']([^"\']+)["\']', block)
-    if title_match:
-        film_title = title_match.group(1).strip().lower()
-        if film_title in watched_titles:
-            block = re.sub(r'seen:\s*false', 'seen: true', block)
-    return block
+# Inject newly scraped screening array into JavaScript dataset
+scraped_json = json.dumps(all_scraped_screenings, indent=4)
+html = re.sub(r'const dataset = \[.*?\];', f'const dataset = {scraped_json};', html, flags=re.DOTALL)
 
-html = re.sub(r'\{\s*title:\s*["\'].*?\}', update_seen_status, html, flags=re.DOTALL)
+# Update weekend filter dropdown option with active date range
+html = re.sub(
+    r'<option value="current".*?</option>',
+    f'<option value="current" selected>{weekend_range_label} (This Weekend)</option>',
+    html
+)
 
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html)
 
-print(f"[Engine] Successfully updated index.html with Pure Taste Scores ({total_films} logged, {mean_rating}★).")
+print(f"[Engine] Successfully updated index.html with live screenings for {weekend_range_label}.")

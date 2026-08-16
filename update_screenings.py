@@ -1,12 +1,10 @@
 import re
 import os
-import csv
 import json
 import zlib
 import datetime
 import urllib.request
 import urllib.parse
-from collections import defaultdict
 import requests
 from bs4 import BeautifulSoup
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -16,7 +14,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 # 1. Date & Configuration
 # ---------------------------------------------------------------------------
 TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "")
-CSV_PATH = "ratings.csv"
+PROFILE_JSON = "taste_profile.json"
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
 
 today = datetime.date.today()
@@ -47,21 +45,31 @@ THEATER_TICKET_URLS = {
 }
 
 # ---------------------------------------------------------------------------
-# 2. Rating Weight Multiplier Engine
+# 2. Instant Taste Profile Loading (0 API Calls for Profile)
 # ---------------------------------------------------------------------------
-def get_rating_weight(stars):
-    if stars >= 5.0: return 3.0
-    if stars >= 4.5: return 2.0
-    if stars >= 4.0: return 1.0
-    if stars >= 3.5: return 0.5
-    if stars >= 3.0: return -0.5
-    if stars >= 2.5: return -1.0
-    return -2.5
+if os.path.exists(PROFILE_JSON):
+    print(f"[Taste Engine] Loading cached profile from {PROFILE_JSON}...")
+    with open(PROFILE_JSON, "r", encoding="utf-8") as f:
+        profile = json.load(f)
+    total_films = profile.get("total_films", 224)
+    mean_rating = profile.get("mean_rating", 3.79)
+    watched_titles = set(profile.get("watched_titles", []))
+    director_affinity = profile.get("director_affinity", {})
+    dp_affinity = profile.get("dp_affinity", {})
+    positive_review_text = profile.get("positive_review_text", "")
+else:
+    print("[Taste Engine] taste_profile.json not found. Using baseline fallback.")
+    total_films = 224
+    mean_rating = 3.79
+    watched_titles = set()
+    director_affinity = {"wong kar-wai": 6.0, "jean-pierre melville": 4.0, "akira kurosawa": 3.0}
+    dp_affinity = {"christopher doyle": 5.0}
+    positive_review_text = "nocturnal existential atmospheric crime neon-drenched stylized slow-burn"
 
 # ---------------------------------------------------------------------------
-# 3. TMDB Metadata Helper
+# 3. TMDB Helper for Active Screenings
 # ---------------------------------------------------------------------------
-def fetch_tmdb_details(film_title):
+def fetch_screening_tmdb(film_title):
     if not TMDB_API_KEY:
         return None
     try:
@@ -74,18 +82,14 @@ def fetch_tmdb_details(film_title):
         movie_id = first['id']
         poster_url = f"https://image.tmdb.org/t/p/w500{first.get('poster_path')}" if first.get('poster_path') else None
         
-        credits_url = f"https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key={TMDB_API_KEY}"
-        credits = requests.get(credits_url, timeout=5).json()
+        credits_res = requests.get(f"https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key={TMDB_API_KEY}", timeout=5).json()
+        directors = [c['name'].lower() for c in credits_res.get('crew', []) if c.get('job') == 'Director']
+        dps = [c['name'].lower() for c in credits_res.get('crew', []) if c.get('job') in ['Director of Photography', 'Cinematographer']]
         
-        directors = [c['name'].lower() for c in credits.get('crew', []) if c.get('job') == 'Director']
-        dps = [c['name'].lower() for c in credits.get('crew', []) if c.get('job') in ['Director of Photography', 'Cinematographer']]
-        
-        details_url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={TMDB_API_KEY}&append_to_response=keywords,reviews"
-        details = requests.get(details_url, timeout=5).json()
-        
-        overview = details.get('overview', '')
-        keywords = [k['name'].lower() for k in details.get('keywords', {}).get('keywords', [])]
-        reviews = [r['content'] for r in details.get('reviews', {}).get('results', [])[:3]]
+        details_res = requests.get(f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={TMDB_API_KEY}&append_to_response=keywords,reviews", timeout=5).json()
+        overview = details_res.get('overview', '')
+        keywords = [k['name'].lower() for k in details_res.get('keywords', {}).get('keywords', [])]
+        reviews = [r['content'] for r in details_res.get('reviews', {}).get('results', [])[:2]]
         
         corpus = f"{overview} {' '.join(keywords)} {' '.join(reviews)}"
         return {'directors': directors, 'dps': dps, 'corpus': corpus, 'poster': poster_url}
@@ -93,70 +97,18 @@ def fetch_tmdb_details(film_title):
         return None
 
 # ---------------------------------------------------------------------------
-# 4. Ingest All Logged Films from CSV
-# ---------------------------------------------------------------------------
-watched_titles = set()
-director_affinity = defaultdict(float)
-dp_affinity = defaultdict(float)
-positive_corpus = []
-all_ratings = []
-
-if os.path.exists(CSV_PATH):
-    print(f"[Taste Engine] Parsing lifetime data from {CSV_PATH}...")
-    with open(CSV_PATH, mode='r', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            title = row.get('Name', '').strip()
-            rating_raw = row.get('Rating', '')
-            if not title or not rating_raw:
-                continue
-            
-            try:
-                stars = float(rating_raw)
-            except ValueError:
-                continue
-            
-            clean_title = title.lower()
-            watched_titles.add(clean_title)
-            all_ratings.append(stars)
-            weight = get_rating_weight(stars)
-            
-            # Fetch TMDB data for high and low extremes to calibrate taste model
-            if stars >= 4.0 or stars <= 2.5:
-                meta = fetch_tmdb_details(title)
-                if meta:
-                    for d in meta['directors']:
-                        director_affinity[d] += weight
-                    for dp in meta['dps']:
-                        dp_affinity[dp] += weight
-                    if weight > 0:
-                        positive_corpus.append(meta['corpus'])
-else:
-    print("[Taste Engine] ratings.csv not found. Operating in fallback baseline mode.")
-    all_ratings = [3.79] * 224
-    director_affinity['wong kar-wai'] = 6.0
-    director_affinity['jean-pierre melville'] = 4.0
-    director_affinity['akira kurosawa'] = 3.0
-
-total_films = len(all_ratings) if all_ratings else 224
-mean_rating = round(sum(all_ratings) / len(all_ratings), 2) if all_ratings else 3.79
-positive_review_text = " ".join(positive_corpus) if positive_corpus else "nocturnal existential atmospheric crime neon-drenched stylized slow-burn"
-
-# ---------------------------------------------------------------------------
-# 5. Weighted Taste Scoring Function
+# 4. Pure Taste Match Index Calculation
 # ---------------------------------------------------------------------------
 def calculate_taste_score(title, director, summary, tmdb_info=None):
-    score = 50.0  # Baseline neutral
+    score = 50.0
     dir_clean = director.lower().strip()
     
-    # 1. Weighted Director Metric (-14 to +14 pts)
     dir_score = 0.0
     for d, weight in director_affinity.items():
         if d in dir_clean or dir_clean in d:
             dir_score += weight * 3.5
     score += max(-14.0, min(14.0, dir_score))
     
-    # 2. Weighted DP Metric (-10 to +10 pts)
     if tmdb_info:
         dp_score = 0.0
         for dp in tmdb_info.get('dps', []):
@@ -164,7 +116,6 @@ def calculate_taste_score(title, director, summary, tmdb_info=None):
                 dp_score += dp_affinity[dp] * 2.5
         score += max(-10.0, min(10.0, dp_score))
         
-    # 3. Tone & Review Semantic Similarity (0 to +14 pts)
     screening_text = f"{summary} {tmdb_info['corpus'] if (tmdb_info and 'corpus' in tmdb_info) else ''}"
     try:
         tfidf = TfidfVectorizer().fit_transform([positive_review_text, screening_text])
@@ -173,14 +124,13 @@ def calculate_taste_score(title, director, summary, tmdb_info=None):
     except Exception:
         score += 4
         
-    # 4. Curated Style Tropes (0 to +10 pts)
     trope_count = sum(1 for trope in STYLE_TROPES if trope in screening_text.lower())
     score += min(round(trope_count * 2.5), 10)
     
     return max(30, min(int(score), 98))
 
 # ---------------------------------------------------------------------------
-# 6. SVG Generator & Screening Ingestion
+# 5. Poster SVGs & Screening Creation
 # ---------------------------------------------------------------------------
 def generate_poster_svg(title, director, year):
     h = zlib.crc32(title.encode('utf-8'))
@@ -207,7 +157,7 @@ def generate_poster_svg(title, director, year):
 
 def create_entry(title, director, year, theater, neighborhood, summary, fmt, showtimes, poster=None, ticket_url=None, weekend="current"):
     clean_t = title.strip()
-    tmdb_info = fetch_tmdb_details(clean_t)
+    tmdb_info = fetch_screening_tmdb(clean_t)
     final_poster = tmdb_info.get('poster') if (tmdb_info and tmdb_info.get('poster')) else poster
     match_score = calculate_taste_score(clean_t, director, summary, tmdb_info)
     final_ticket = ticket_url or THEATER_TICKET_URLS.get(theater, "#")
@@ -230,21 +180,21 @@ def create_entry(title, director, year, theater, neighborhood, summary, fmt, sho
     }
 
 FALLBACK_SCREENINGS = [
-    create_entry("In the Mood for Love", "Wong Kar-wai", 2000, "Metrograph", "Lower East Side", "In 1962 Hong Kong, two neighbors form a delicate, unspoken bond after discovering their respective spouses are committing adultery.", "4K DCP", [f"Sat {sat_str}: 4:30 PM", f"Sun {sun_str}: 2:00 PM"], poster="https://image.tmdb.org/t/p/w500/iB6L2x39zM1zV0c849z52.jpg", ticket_url="https://metrograph.com/nyc/"),
-    create_entry("Fallen Angels", "Wong Kar-wai", 1995, "Metrograph", "Lower East Side", "The interconnected nocturnal lives of a weary hitman, his glamorous handler, and a mute eccentric collide across neon-drenched Hong Kong.", "35mm Print", [f"Fri {fri_str}: 10:00 PM", f"Sat {sat_str}: 9:30 PM", f"Sun {sun_str}: 7:15 PM"], poster="https://image.tmdb.org/t/p/w500/A02LzpLsgC2BmsLypgCjU7Nsh0v.jpg", ticket_url="https://metrograph.com/nyc/"),
-    create_entry("Le Samourai", "Jean-Pierre Melville", 1967, "The Paris Theater", "Midtown", "A methodical Parisian hitman executes a contract with icy precision, setting off a ruthless police hunt and underworld betrayal.", "4K Restoration", [f"Fri {fri_str}: 8:00 PM", f"Sat {sat_str}: 6:00 PM", f"Sun {sun_str}: 3:30 PM"], poster="https://image.tmdb.org/t/p/w500/7I0Zk0C1e1Zq9Gq6zR6s1k40x2y.jpg", ticket_url="https://www.paristheaternyc.com/"),
-    create_entry("Blow-Up", "Michelangelo Antonioni", 1966, "Film Forum", "Greenwich Village", "A mod London fashion photographer believes he has accidentally captured a murder in the background of a park photograph.", "35mm Print", [f"Fri {fri_str}: 6:30 PM", f"Sat {sat_str}: 8:20 PM", f"Sun {sun_str}: 4:10 PM"], poster="https://image.tmdb.org/t/p/w500/kM66WJ5Zf905N6g9z5y5k23z3y2.jpg", ticket_url="https://filmforum.org/now_playing"),
-    create_entry("Throne of Blood", "Akira Kurosawa", 1957, "IFC Center", "West Village", "A warrior is driven to betrayal and bloody ambition by a prophetic spirit and his ruthless wife in feudal Japan.", "4K Restoration", [f"Fri {fri_str}: 7:00 PM", f"Sat {sat_str}: 4:15 PM", f"Sun {sun_str}: 6:30 PM"], ticket_url="https://www.ifccenter.com/"),
-    create_entry("Lady Snowblood", "Toshiya Fujita", 1973, "The Roxy Cinema", "Tribeca", "A young woman raised from birth as an assassin seeks ruthless vengeance against the four criminals who destroyed her family in Meiji-era Japan.", "35mm Print", [f"Fri {fri_str}: 9:15 PM", f"Sat {sat_str}: 7:00 PM"], ticket_url="https://www.roxycinematribeca.com/"),
-    create_entry("The Long Goodbye", "Robert Altman", 1973, "BAM Rose Cinemas", "Brooklyn", "PI Philip Marlowe mumbles his way through a hazy, sun-bleached 1970s Los Angeles while trying to clear a friend's name in a murder inquiry.", "35mm Print", [f"Sat {sat_str}: 6:30 PM", f"Sun {sun_str}: 4:00 PM"], ticket_url="https://www.bam.org/film"),
-    create_entry("Deep Red", "Dario Argento", 1975, "IFC Center", "West Village", "A jazz pianist and an inquisitive journalist investigate the grisly murder of a psychic medium in a baroque Italian town.", "Archival 35mm", [f"Fri {fri_str}: 11:45 PM", f"Sat {sat_str}: 11:45 PM"], ticket_url="https://www.ifccenter.com/"),
-    create_entry("Branded to Kill", "Seijun Suzuki", 1967, "Metrograph", "Lower East Side", "A hitman with a fetish for sniffing boiling rice fails an assignment and becomes the target of a mysterious rival hitman.", "35mm Print", [f"Sat {sat_str}: 10:15 PM", f"Sun {sun_str}: 8:45 PM"], ticket_url="https://metrograph.com/nyc/"),
-    create_entry("Klute", "Alan J. Pakula", 1971, "The Paris Theater", "Midtown", "A small-town detective searches for a missing executive in New York City with the help of a high-class call girl who is being stalked.", "35mm Print", [f"Fri {fri_str}: 5:30 PM", f"Sun {sun_str}: 6:00 PM"], ticket_url="https://www.paristheaternyc.com/"),
-    create_entry("Night on Earth", "Jim Jarmusch", 1991, "Film Forum", "Greenwich Village", "A collection of five vignettes unfolding simultaneously inside taxicabs across Los Angeles, New York, Paris, Rome, and Helsinki.", "35mm Print", [f"Fri {fri_str}: 9:00 PM", f"Sat {sat_str}: 9:00 PM"], ticket_url="https://filmforum.org/now_playing")
+    create_entry("In the Mood for Love", "Wong Kar-wai", 2000, "Metrograph", "Lower East Side", "In 1962 Hong Kong, two neighbors form a delicate, unspoken bond after discovering their respective spouses are committing adultery.", "4K DCP", [f"Sat {sat_str}: 4:30 PM", f"Sun {sun_str}: 2:00 PM"], poster="https://m.media-amazon.com/images/M/MV5BYmVkNmIwYzgtMTk3Mi00MjhkLTk5NTgtNzA2Yjg0MDVjNzk1XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", ticket_url="https://metrograph.com/nyc/"),
+    create_entry("Fallen Angels", "Wong Kar-wai", 1995, "Metrograph", "Lower East Side", "The interconnected nocturnal lives of a weary hitman, his glamorous handler, and a mute eccentric collide across neon-drenched Hong Kong.", "35mm Print", [f"Fri {fri_str}: 10:00 PM", f"Sat {sat_str}: 9:30 PM", f"Sun {sun_str}: 7:15 PM"], poster="https://m.media-amazon.com/images/M/MV5BMDY4NTdhOGMtZmRiZC00MTY2LWI1MmYtMDNjYjRhNWZlMmIxXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", ticket_url="https://metrograph.com/nyc/"),
+    create_entry("Le Samourai", "Jean-Pierre Melville", 1967, "The Paris Theater", "Midtown", "A methodical Parisian hitman executes a contract with icy precision, setting off a ruthless police hunt and underworld betrayal.", "4K Restoration", [f"Fri {fri_str}: 8:00 PM", f"Sat {sat_str}: 6:00 PM", f"Sun {sun_str}: 3:30 PM"], poster="https://m.media-amazon.com/images/M/MV5BYWYwYWYyMDctZjFiNy00YmNmLWE1NmEtMmVkM2RlYzQ4Y2NhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", ticket_url="https://www.paristheaternyc.com/"),
+    create_entry("Blow-Up", "Michelangelo Antonioni", 1966, "Film Forum", "Greenwich Village", "A mod London fashion photographer believes he has accidentally captured a murder in the background of a park photograph.", "35mm Print", [f"Fri {fri_str}: 6:30 PM", f"Sat {sat_str}: 8:20 PM", f"Sun {sun_str}: 4:10 PM"], poster="https://m.media-amazon.com/images/M/MV5BMjA4Nzg5NTY4N15BMl5BanBnXkFtZTcwNjc3ODgyMQ@@._V1_FMjpg_UX1000_.jpg", ticket_url="https://filmforum.org/now_playing"),
+    create_entry("Throne of Blood", "Akira Kurosawa", 1957, "IFC Center", "West Village", "A warrior is driven to betrayal and bloody ambition by a prophetic spirit and his ruthless wife in feudal Japan.", "4K Restoration", [f"Fri {fri_str}: 7:00 PM", f"Sat {sat_str}: 4:15 PM", f"Sun {sun_str}: 6:30 PM"], poster="https://m.media-amazon.com/images/M/MV5BYjFjM2YyYjEtMjcwYi00NGQ2LWIzNGMtNTBhYTQ1YWRmNzNmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", ticket_url="https://www.ifccenter.com/"),
+    create_entry("Lady Snowblood", "Toshiya Fujita", 1973, "The Roxy Cinema", "Tribeca", "A young woman raised from birth as an assassin seeks ruthless vengeance against the four criminals who destroyed her family in Meiji-era Japan.", "35mm Print", [f"Fri {fri_str}: 9:15 PM", f"Sat {sat_str}: 7:00 PM"], poster="https://m.media-amazon.com/images/M/MV5BNTI2ZmExNzQtYmFlMC00MDU2LTg0ZTUtZTFhNDBkYTAyZjljXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", ticket_url="https://www.roxycinematribeca.com/"),
+    create_entry("The Long Goodbye", "Robert Altman", 1973, "BAM Rose Cinemas", "Brooklyn", "PI Philip Marlowe mumbles his way through a hazy, sun-bleached 1970s Los Angeles while trying to clear a friend's name in a murder inquiry.", "35mm Print", [f"Sat {sat_str}: 6:30 PM", f"Sun {sun_str}: 4:00 PM"], poster="https://m.media-amazon.com/images/M/MV5BOTU2MTc3NWItM2I0Ny00OTc5LTgzNWItNzI5NmZkMjY4YjMzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", ticket_url="https://www.bam.org/film"),
+    create_entry("Deep Red", "Dario Argento", 1975, "IFC Center", "West Village", "A jazz pianist and an inquisitive journalist investigate the grisly murder of a psychic medium in a baroque Italian town.", "Archival 35mm", [f"Fri {fri_str}: 11:45 PM", f"Sat {sat_str}: 11:45 PM"], poster="https://m.media-amazon.com/images/M/MV5BMTY3NTUxNTc4OV5BMl5BanBnXkFtZTcwMjI5Njg3OA@@._V1_FMjpg_UX1000_.jpg", ticket_url="https://www.ifccenter.com/"),
+    create_entry("Branded to Kill", "Seijun Suzuki", 1967, "Metrograph", "Lower East Side", "A hitman with a fetish for sniffing boiling rice fails an assignment and becomes the target of a mysterious rival hitman.", "35mm Print", [f"Sat {sat_str}: 10:15 PM", f"Sun {sun_str}: 8:45 PM"], poster="https://m.media-amazon.com/images/M/MV5BYzA2NTcxMjAtMTY1NS00ZWI4LTk2MWUtZjEzYzA1MDRmNGVmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", ticket_url="https://metrograph.com/nyc/"),
+    create_entry("Klute", "Alan J. Pakula", 1971, "The Paris Theater", "Midtown", "A small-town detective searches for a missing executive in New York City with the help of a high-class call girl who is being stalked.", "35mm Print", [f"Fri {fri_str}: 5:30 PM", f"Sun {sun_str}: 6:00 PM"], poster="https://m.media-amazon.com/images/M/MV5BMTUwMDYxMzk1MF5BMl5BanBnXkFtZTgwNTU5MzIyMDE@._V1_FMjpg_UX1000_.jpg", ticket_url="https://www.paristheaternyc.com/"),
+    create_entry("Night on Earth", "Jim Jarmusch", 1991, "Film Forum", "Greenwich Village", "A collection of five vignettes unfolding simultaneously inside taxicabs across Los Angeles, New York, Paris, Rome, and Helsinki.", "35mm Print", [f"Fri {fri_str}: 9:00 PM", f"Sat {sat_str}: 9:00 PM"], poster="https://m.media-amazon.com/images/M/MV5BY2FmZTU4NzAtMGQxMy00OTQ1LWE2NTgtN2UyOGQwMzI3Y2ZiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", ticket_url="https://filmforum.org/now_playing")
 ]
 
 # ---------------------------------------------------------------------------
-# 7. Scrapers
+# 6. Scrapers
 # ---------------------------------------------------------------------------
 def scrape_film_forum():
     results = []
@@ -291,7 +241,7 @@ final_dataset = scraped_list if len(scraped_list) > 0 else FALLBACK_SCREENINGS
 print(f"[Engine] Total active screenings injected: {len(final_dataset)}")
 
 # ---------------------------------------------------------------------------
-# 8. Write to index.html
+# 7. Write to index.html
 # ---------------------------------------------------------------------------
 with open("index.html", "r", encoding="utf-8") as f:
     html = f.read()
@@ -310,4 +260,4 @@ html = re.sub(r'const dataset = \[.*?\];', f'const dataset = {scraped_json};', h
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html)
 
-print(f"[Engine] Successfully recalibrated model with {total_films} logged films (Average: {mean_rating}★).")
+print(f"[Engine] Updated index.html ({total_films} logged, {mean_rating}★ avg, weekend {weekend_range_label}).")

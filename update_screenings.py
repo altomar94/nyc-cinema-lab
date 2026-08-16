@@ -2,6 +2,7 @@ import re
 import os
 import json
 import zlib
+import html
 import datetime
 import urllib.request
 import urllib.parse
@@ -60,27 +61,43 @@ else:
     positive_review_text = "nocturnal existential atmospheric crime neon-drenched stylized slow-burn"
 
 # ---------------------------------------------------------------------------
-# 3. TMDB Metadata Fetcher (Pulls Real Director, DP, Year, Poster)
+# 3. Clean Title & Fetch TMDB Metadata
 # ---------------------------------------------------------------------------
 tmdb_cache = {}
 
+def clean_film_title(raw_title):
+    """Strips venue noise, format tags, and subtitle additions before querying TMDB."""
+    t = raw_title.strip()
+    # Remove parentheticals, brackets, and format tags
+    t = re.sub(r'\(.*?\)|\[.*?\]', '', t)
+    t = re.sub(r'\b(35mm|70mm|16mm|4k|restoration|restored|dcp|q&a|in person|repertory|special screening|preview|staff picks)\b', '', t, flags=re.I)
+    # Remove trailing series names after colons or hyphens if they are long
+    if " - " in t:
+        t = t.split(" - ")[0]
+    if " – " in t:
+        t = t.split(" – ")[0]
+    t = re.sub(r'\s+', ' ', t).strip()
+    return t
+
 def fetch_real_tmdb_metadata(film_title):
-    clean_key = film_title.strip().lower()
-    clean_search = re.sub(r'\(.*?\)|\[.*?\]|35mm|4k restoration|dcp', '', clean_key).strip()
+    clean_search = clean_film_title(film_title)
+    clean_key = clean_search.lower()
     
-    if clean_search in tmdb_cache:
-        return tmdb_cache[clean_search]
+    if clean_key in tmdb_cache:
+        return tmdb_cache[clean_key]
         
     if not TMDB_API_KEY or len(clean_search) < 2:
         return None
     try:
         search_url = f"https://api.themoviedb.org/3/search/movie?api_key={TMDB_API_KEY}&query={urllib.parse.quote(clean_search)}"
         res = requests.get(search_url, timeout=5).json()
-        if not res.get('results'):
-            tmdb_cache[clean_search] = None
+        results = res.get('results', [])
+        if not results:
+            tmdb_cache[clean_key] = None
             return None
         
-        movie = res['results'][0]
+        # Best match candidate
+        movie = results[0]
         movie_id = movie['id']
         release_date = movie.get('release_date', '')
         year = int(release_date.split('-')[0]) if (release_date and release_date.split('-')[0].isdigit()) else None
@@ -97,6 +114,7 @@ def fetch_real_tmdb_metadata(film_title):
         
         corpus = f"{overview} {' '.join(keywords)} {' '.join(reviews)}"
         data = {
+            'title': movie.get('title', clean_search),
             'director': directors[0] if directors else 'Unknown',
             'directors': [d.lower() for d in directors],
             'dps': [dp.lower() for dp in dps],
@@ -105,7 +123,7 @@ def fetch_real_tmdb_metadata(film_title):
             'corpus': corpus,
             'poster': poster_url
         }
-        tmdb_cache[clean_search] = data
+        tmdb_cache[clean_key] = data
         return data
     except Exception:
         return None
@@ -144,7 +162,7 @@ def calculate_taste_score(title, director, summary, tmdb_info=None):
     return max(30, min(int(score), 98))
 
 # ---------------------------------------------------------------------------
-# 5. Poster SVGs & Entry Creation
+# 5. Responsive SVG Poster Generator
 # ---------------------------------------------------------------------------
 def generate_poster_svg(title, director, year):
     h = zlib.crc32(title.encode('utf-8'))
@@ -155,52 +173,125 @@ def generate_poster_svg(title, director, year):
         {"bg": "#06090c", "primary": "#ff2a4b", "secondary": "#00e5bc", "accent": "#e5a93c"}
     ]
     p = palettes[h % len(palettes)]
-    return f'''<svg viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="300" fill="{p["bg"]}"/><circle cx="100" cy="100" r="50" fill="{p["primary"]}" opacity="0.8"/><text x="100" y="240" font-family="Instrument Serif, serif" font-size="16" fill="#f3ebd7" text-anchor="middle">{title.upper()[:20]}</text><text x="100" y="262" font-family="JetBrains Mono, monospace" font-size="7" fill="{p["accent"]}" text-anchor="middle">{str(director).upper()[:22]} // {year or ''}</text></svg>'''
+    
+    clean_display_title = html.escape(title.upper())
+    # Dynamically scale font size based on title length so it never clips
+    title_len = len(clean_display_title)
+    if title_len > 24:
+        font_size = 11
+    elif title_len > 16:
+        font_size = 13
+    else:
+        font_size = 16
+
+    clean_meta = html.escape(f"{str(director).upper()[:18]} // {year or ''}")
+
+    return (
+        f'<svg viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">'
+        f'<rect width="200" height="300" fill="{p["bg"]}"/>'
+        f'<circle cx="100" cy="100" r="48" fill="{p["primary"]}" opacity="0.8"/>'
+        f'<text x="100" y="238" font-family="Instrument Serif, serif" font-size="{font_size}" '
+        f'fill="#f3ebd7" text-anchor="middle" letter-spacing="0.5">{clean_display_title}</text>'
+        f'<text x="100" y="260" font-family="JetBrains Mono, monospace" font-size="7" '
+        f'fill="{p["accent"]}" text-anchor="middle" letter-spacing="1">{clean_meta}</text>'
+        f'</svg>'
+    )
 
 def create_entry(title, theater, neighborhood, ticket_url, summary, fmt, showtimes):
-    clean_t = title.strip()
+    clean_t = clean_film_title(title)
     tmdb_info = fetch_real_tmdb_metadata(clean_t)
     
+    display_title = tmdb_info['title'] if (tmdb_info and tmdb_info.get('title')) else clean_t
     director = tmdb_info['director'] if (tmdb_info and tmdb_info.get('director')) else 'Repertory Selection'
     year = tmdb_info['year'] if (tmdb_info and tmdb_info.get('year')) else 'Classic'
     final_summary = tmdb_info['overview'] if (tmdb_info and tmdb_info.get('overview')) else summary
     poster = tmdb_info.get('poster') if tmdb_info else None
-    match_score = calculate_taste_score(clean_t, director, final_summary, tmdb_info)
+    match_score = calculate_taste_score(display_title, director, final_summary, tmdb_info)
     
     return {
-        "title": clean_t,
+        "title": display_title,
         "director": director,
         "year": year,
         "theater": theater,
         "neighborhood": neighborhood,
         "matchScore": match_score,
-        "seen": clean_t.lower() in watched_titles,
+        "seen": display_title.lower() in watched_titles or clean_t.lower() in watched_titles,
         "weekend": "current",
         "summary": final_summary[:180] + "..." if len(final_summary) > 180 else final_summary,
         "format": fmt,
         "ticketUrl": ticket_url,
         "showtimes": showtimes,
         "poster": poster,
-        "svg": generate_poster_svg(clean_t, director, year)
+        "svg": generate_poster_svg(display_title, director, year)
     }
 
 # ---------------------------------------------------------------------------
-# 6. Direct Live Theater Scrapers (Real Schedules Only)
+# 6. Scrapers (Targeted In-Theater Calendars Only)
 # ---------------------------------------------------------------------------
+def scrape_metrograph():
+    """Scrapes only active theater showtimes, excluding Metrograph At Home."""
+    results = []
+    url = "https://metrograph.com/nyc/"
+    try:
+        res = requests.get(url, headers=HEADERS, timeout=10)
+        soup = BeautifulSoup(res.text, 'lxml')
+        
+        # Target calendar / screening blocks exclusively
+        screening_containers = soup.select('.showtimes-film, .calendar-row, .single-film, article.film')
+        if not screening_containers:
+            screening_containers = soup.select('.film-block, .daily-schedule .film')
+
+        found_titles = set()
+        for block in screening_containers:
+            title_elem = block.select_one('h2, h3, .film-title, a[href*="/film/"]')
+            if not title_elem:
+                continue
+            
+            raw_title = title_elem.get_text(strip=True)
+            if not raw_title or len(raw_title) < 2 or raw_title.lower() in ["metrograph", "membership", "tickets"]:
+                continue
+            
+            # Avoid streaming / at-home tags
+            block_text = block.get_text().lower()
+            if "at home" in block_text or "streaming" in block_text or "digital" in block_text:
+                continue
+
+            cleaned = clean_film_title(raw_title)
+            if cleaned.lower() in found_titles:
+                continue
+            found_titles.add(cleaned.lower())
+
+            results.append(create_entry(
+                title=cleaned,
+                theater="Metrograph",
+                neighborhood="Lower East Side",
+                ticket_url=url,
+                summary="Archival 35mm print or curated repertory screening at Metrograph.",
+                fmt="35mm Archival Print",
+                showtimes=[f"Fri {fri_str}: 8:00 PM", f"Sat {sat_str}: 5:30 PM", f"Sun {sun_str}: 9:00 PM"]
+            ))
+    except Exception as e:
+        print(f"[Scraper] Metrograph error: {e}")
+    print(f"[Scraper] Harvested {len(results)} live in-theater films from Metrograph")
+    return results
+
 def scrape_film_forum():
     results = []
     url = "https://filmforum.org/now_playing"
     try:
         res = requests.get(url, headers=HEADERS, timeout=10)
         soup = BeautifulSoup(res.text, 'lxml')
-        for item in soup.select('.film-tile, .now_playing_list li, .entry-title'):
-            t_elem = item.select_one('h2, h3, a')
-            if not t_elem:
+        
+        # Scrape all active movie listings from Film Forum's now playing page
+        for item in soup.select('.entry-content li, .movie, .film, .now-playing-item, .film-tile'):
+            title_elem = item.select_one('h2, h3, a, strong')
+            if not title_elem:
                 continue
-            title = t_elem.get_text(strip=True)
-            if len(title) > 2 and "buy tickets" not in title.lower() and "membership" not in title.lower():
+            raw_title = title_elem.get_text(strip=True)
+            if len(raw_title) > 2 and "film forum" not in raw_title.lower() and "donate" not in raw_title.lower():
+                cleaned = clean_film_title(raw_title)
                 results.append(create_entry(
-                    title=title,
+                    title=cleaned,
                     theater="Film Forum",
                     neighborhood="Greenwich Village",
                     ticket_url=url,
@@ -213,40 +304,21 @@ def scrape_film_forum():
     print(f"[Scraper] Harvested {len(results)} live films from Film Forum")
     return results
 
-def scrape_metrograph():
-    results = []
-    url = "https://metrograph.com/nyc/"
-    try:
-        res = requests.get(url, headers=HEADERS, timeout=10)
-        soup = BeautifulSoup(res.text, 'lxml')
-        for card in soup.select('.film-card, .movie-title, a[href*="/film/"]'):
-            title = card.get_text(strip=True)
-            if len(title) > 2 and "metrograph" not in title.lower() and "tickets" not in title.lower() and len(title) < 60:
-                results.append(create_entry(
-                    title=title,
-                    theater="Metrograph",
-                    neighborhood="Lower East Side",
-                    ticket_url=url,
-                    summary="Archival 35mm print or curated series screening at Metrograph.",
-                    fmt="35mm Archival Print",
-                    showtimes=[f"Fri {fri_str}: 8:00 PM", f"Sat {sat_str}: 5:30 PM", f"Sun {sun_str}: 9:00 PM"]
-                ))
-    except Exception as e:
-        print(f"[Scraper] Metrograph error: {e}")
-    print(f"[Scraper] Harvested {len(results)} live films from Metrograph")
-    return results
-
 def scrape_ifc_center():
     results = []
     url = "https://www.ifccenter.com/"
     try:
         res = requests.get(url, headers=HEADERS, timeout=10)
         soup = BeautifulSoup(res.text, 'lxml')
-        for item in soup.select('.details h3 a, .film-title a'):
-            title = item.get_text(strip=True)
-            if len(title) > 2:
+        for item in soup.select('.details h3 a, .film-title a, #now-playing .film-item'):
+            title_elem = item.select_one('h3, a') if not item.name == 'a' else item
+            if not title_elem:
+                continue
+            raw_title = title_elem.get_text(strip=True)
+            if len(raw_title) > 2 and "ifc center" not in raw_title.lower():
+                cleaned = clean_film_title(raw_title)
                 results.append(create_entry(
-                    title=title,
+                    title=cleaned,
                     theater="IFC Center",
                     neighborhood="West Village",
                     ticket_url=url,
@@ -260,11 +332,11 @@ def scrape_ifc_center():
     return results
 
 # ---------------------------------------------------------------------------
-# 7. Harvest & Deduplicate
+# 7. Harvest, Deduplicate & Build Dataset
 # ---------------------------------------------------------------------------
 all_screenings = []
-all_screenings.extend(scrape_film_forum())
 all_screenings.extend(scrape_metrograph())
+all_screenings.extend(scrape_film_forum())
 all_screenings.extend(scrape_ifc_center())
 
 seen_keys = set()
@@ -279,28 +351,28 @@ for item in all_screenings:
 print(f"[Engine] Total verified live screenings catalogued: {len(final_dataset)}")
 
 # ---------------------------------------------------------------------------
-# 8. Safe HTML Writing (Lambda prevents regex escape collisions)
+# 8. Safe HTML Writing
 # ---------------------------------------------------------------------------
 with open("index.html", "r", encoding="utf-8") as f:
-    html = f.read()
+    html_content = f.read()
 
-# Update Top Bar Stats
-html = re.sub(
+# Update Live Letterboxd Stats
+html_content = re.sub(
     r'<div>\d+\s*FILMS LOGGED\s*//\s*(?:MEAN|AVERAGE)\s*RATING:\s*[\d\.]+\s*★</div>',
     lambda _: f'<div>{total_films} FILMS LOGGED // AVERAGE RATING: {mean_rating} ★</div>',
-    html
+    html_content
 )
 
-# Inject real dataset
+# Inject real dataset cleanly
 scraped_json = json.dumps(final_dataset, indent=4)
-html = re.sub(
+html_content = re.sub(
     r'const dataset = \[.*?\];',
     lambda _: f'const dataset = {scraped_json};',
-    html,
+    html_content,
     flags=re.DOTALL
 )
 
 with open("index.html", "w", encoding="utf-8") as f:
-    f.write(html)
+    f.write(html_content)
 
 print(f"[Engine] Successfully published {len(final_dataset)} live screenings to index.html.")

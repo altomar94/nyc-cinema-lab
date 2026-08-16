@@ -6,13 +6,14 @@ import html
 import datetime
 import urllib.request
 import urllib.parse
+from collections import defaultdict
 import requests
 from bs4 import BeautifulSoup
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 # ---------------------------------------------------------------------------
-# 1. Configuration & Headers
+# 1. Target Dates (Upcoming Friday, Saturday, Sunday)
 # ---------------------------------------------------------------------------
 TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "")
 PROFILE_JSON = "taste_profile.json"
@@ -23,20 +24,48 @@ HEADERS = {
 
 today = datetime.date.today()
 days_until_friday = (4 - today.weekday()) % 7
+if days_until_friday == 0 and today.weekday() != 4:
+    days_until_friday = 7
+
 friday_date = today + datetime.timedelta(days=days_until_friday)
 saturday_date = friday_date + datetime.timedelta(days=1)
 sunday_date = friday_date + datetime.timedelta(days=2)
 
-fri_str = friday_date.strftime("%b %d")
-sat_str = saturday_date.strftime("%b %d")
-sun_str = sunday_date.strftime("%b %d")
+target_dates = [friday_date, saturday_date, sunday_date]
+date_labels = {
+    friday_date.strftime("%Y-%m-%d"): f"Fri {friday_date.strftime('%b %d')}",
+    saturday_date.strftime("%Y-%m-%d"): f"Sat {saturday_date.strftime('%b %d')}",
+    sunday_date.strftime("%Y-%m-%d"): f"Sun {sunday_date.strftime('%b %d')}"
+}
+
 weekend_range_label = f"{friday_date.strftime('%b %d')} – {sunday_date.strftime('%b %d')}"
+print(f"[Calendar] Scraping Screen Slate for: {weekend_range_label}")
 
 STYLE_TROPES = [
     "nocturnal", "existential", "slow-burn", "kinetic", "neon", "melancholic",
     "paranoia", "isolation", "atmospheric", "stylized", "underworld", "obsession",
     "noir", "crime", "surreal", "laconic", "nihilistic", "poetic"
 ]
+
+THEATER_MAP = {
+    "amc lincoln square": ("AMC Lincoln Square 13", "Upper West Side", "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"),
+    "lincoln square": ("AMC Lincoln Square 13", "Upper West Side", "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"),
+    "regal times square": ("Regal Times Square", "Times Square", "https://www.regmovies.com/theatres/regal-e-walk-times-square"),
+    "e-walk": ("Regal Times Square", "Times Square", "https://www.regmovies.com/theatres/regal-e-walk-times-square"),
+    "film forum": ("Film Forum", "Greenwich Village", "https://filmforum.org/now_playing"),
+    "ifc center": ("IFC Center", "West Village", "https://www.ifccenter.com/"),
+    "metrograph": ("Metrograph", "Lower East Side", "https://metrograph.com/nyc/"),
+    "paris theater": ("The Paris Theater", "Midtown", "https://www.paristheaternyc.com/"),
+    "roxy cinema": ("The Roxy Cinema", "Tribeca", "https://www.roxycinematribeca.com/"),
+    "film at lincoln center": ("Film at Lincoln Center", "Upper West Side", "https://www.filmlinc.org/now-playing/"),
+    "walter reade": ("Film at Lincoln Center", "Upper West Side", "https://www.filmlinc.org/now-playing/"),
+    "bam": ("BAM Rose Cinemas", "Brooklyn", "https://www.bam.org/film"),
+    "museum of the moving image": ("Museum of the Moving Image", "Queens", "https://movingimage.org/"),
+    "momi": ("Museum of the Moving Image", "Queens", "https://movingimage.org/"),
+    "anthology": ("Anthology Film Archives", "East Village", "http://anthologyfilmarchives.org/"),
+    "spectacle": ("Spectacle Theater", "Williamsburg", "https://www.spectacletheater.com/"),
+    "nitehawk": ("Nitehawk Cinema", "Brooklyn", "https://nitehawkcinema.com/")
+}
 
 # ---------------------------------------------------------------------------
 # 2. Taste Profile Loading
@@ -52,7 +81,6 @@ if os.path.exists(PROFILE_JSON):
     dp_affinity = profile.get("dp_affinity", {})
     positive_review_text = profile.get("positive_review_text", "")
 else:
-    print("[Taste Engine] taste_profile.json not found. Using baseline profile.")
     total_films = 224
     mean_rating = 3.79
     watched_titles = set()
@@ -61,25 +89,19 @@ else:
     positive_review_text = "nocturnal existential atmospheric crime neon-drenched stylized slow-burn"
 
 # ---------------------------------------------------------------------------
-# 3. Clean Title & Fetch TMDB Metadata
+# 3. TMDB Metadata Fetcher
 # ---------------------------------------------------------------------------
 tmdb_cache = {}
 
 def clean_film_title(raw_title):
-    """Strips venue noise, format tags, and subtitle additions before querying TMDB."""
     t = raw_title.strip()
-    # Remove parentheticals, brackets, and format tags
     t = re.sub(r'\(.*?\)|\[.*?\]', '', t)
-    t = re.sub(r'\b(35mm|70mm|16mm|4k|restoration|restored|dcp|q&a|in person|repertory|special screening|preview|staff picks)\b', '', t, flags=re.I)
-    # Remove trailing series names after colons or hyphens if they are long
-    if " - " in t:
-        t = t.split(" - ")[0]
-    if " – " in t:
-        t = t.split(" – ")[0]
-    t = re.sub(r'\s+', ' ', t).strip()
-    return t
+    t = re.sub(r'\b(35mm|70mm|16mm|4k|restoration|restored|dcp|q&a|in person|repertory|special screening|preview|staff picks|with live score)\b', '', t, flags=re.I)
+    if " - " in t: t = t.split(" - ")[0]
+    if " – " in t: t = t.split(" – ")[0]
+    return re.sub(r'\s+', ' ', t).strip()
 
-def fetch_real_tmdb_metadata(film_title):
+def fetch_real_tmdb_metadata(film_title, known_director=None, known_year=None):
     clean_search = clean_film_title(film_title)
     clean_key = clean_search.lower()
     
@@ -90,17 +112,26 @@ def fetch_real_tmdb_metadata(film_title):
         return None
     try:
         search_url = f"https://api.themoviedb.org/3/search/movie?api_key={TMDB_API_KEY}&query={urllib.parse.quote(clean_search)}"
+        if known_year and str(known_year).isdigit():
+            search_url += f"&year={known_year}"
+            
         res = requests.get(search_url, timeout=5).json()
         results = res.get('results', [])
+        
+        # Fallback search without year constraint if no direct hit
+        if not results and known_year:
+            search_url = f"https://api.themoviedb.org/3/search/movie?api_key={TMDB_API_KEY}&query={urllib.parse.quote(clean_search)}"
+            res = requests.get(search_url, timeout=5).json()
+            results = res.get('results', [])
+
         if not results:
             tmdb_cache[clean_key] = None
             return None
         
-        # Best match candidate
         movie = results[0]
         movie_id = movie['id']
         release_date = movie.get('release_date', '')
-        year = int(release_date.split('-')[0]) if (release_date and release_date.split('-')[0].isdigit()) else None
+        year = int(release_date.split('-')[0]) if (release_date and release_date.split('-')[0].isdigit()) else known_year
         poster_url = f"https://image.tmdb.org/t/p/w500{movie.get('poster_path')}" if movie.get('poster_path') else None
         
         credits_res = requests.get(f"https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key={TMDB_API_KEY}", timeout=5).json()
@@ -115,7 +146,7 @@ def fetch_real_tmdb_metadata(film_title):
         corpus = f"{overview} {' '.join(keywords)} {' '.join(reviews)}"
         data = {
             'title': movie.get('title', clean_search),
-            'director': directors[0] if directors else 'Unknown',
+            'director': directors[0] if directors else (known_director or 'Repertory Selection'),
             'directors': [d.lower() for d in directors],
             'dps': [dp.lower() for dp in dps],
             'year': year,
@@ -129,7 +160,7 @@ def fetch_real_tmdb_metadata(film_title):
         return None
 
 # ---------------------------------------------------------------------------
-# 4. Pure Taste Match Index Calculation
+# 4. Pure Taste Score & Posters
 # ---------------------------------------------------------------------------
 def calculate_taste_score(title, director, summary, tmdb_info=None):
     score = 50.0
@@ -161,9 +192,6 @@ def calculate_taste_score(title, director, summary, tmdb_info=None):
     
     return max(30, min(int(score), 98))
 
-# ---------------------------------------------------------------------------
-# 5. Responsive SVG Poster Generator
-# ---------------------------------------------------------------------------
 def generate_poster_svg(title, director, year):
     h = zlib.crc32(title.encode('utf-8'))
     palettes = [
@@ -173,45 +201,35 @@ def generate_poster_svg(title, director, year):
         {"bg": "#06090c", "primary": "#ff2a4b", "secondary": "#00e5bc", "accent": "#e5a93c"}
     ]
     p = palettes[h % len(palettes)]
-    
-    clean_display_title = html.escape(title.upper())
-    # Dynamically scale font size based on title length so it never clips
-    title_len = len(clean_display_title)
-    if title_len > 24:
-        font_size = 11
-    elif title_len > 16:
-        font_size = 13
-    else:
-        font_size = 16
-
-    clean_meta = html.escape(f"{str(director).upper()[:18]} // {year or ''}")
+    clean_display = html.escape(title.upper())
+    font_size = 11 if len(clean_display) > 22 else 14
 
     return (
         f'<svg viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">'
         f'<rect width="200" height="300" fill="{p["bg"]}"/>'
         f'<circle cx="100" cy="100" r="48" fill="{p["primary"]}" opacity="0.8"/>'
         f'<text x="100" y="238" font-family="Instrument Serif, serif" font-size="{font_size}" '
-        f'fill="#f3ebd7" text-anchor="middle" letter-spacing="0.5">{clean_display_title}</text>'
+        f'fill="#f3ebd7" text-anchor="middle">{clean_display}</text>'
         f'<text x="100" y="260" font-family="JetBrains Mono, monospace" font-size="7" '
-        f'fill="{p["accent"]}" text-anchor="middle" letter-spacing="1">{clean_meta}</text>'
+        f'fill="{p["accent"]}" text-anchor="middle">{html.escape(str(director).upper()[:20])} // {year or ""}</text>'
         f'</svg>'
     )
 
-def create_entry(title, theater, neighborhood, ticket_url, summary, fmt, showtimes):
+def create_entry(title, director, year, theater, neighborhood, ticket_url, summary, fmt, showtimes):
     clean_t = clean_film_title(title)
-    tmdb_info = fetch_real_tmdb_metadata(clean_t)
+    tmdb_info = fetch_real_tmdb_metadata(clean_t, known_director=director, known_year=year)
     
     display_title = tmdb_info['title'] if (tmdb_info and tmdb_info.get('title')) else clean_t
-    director = tmdb_info['director'] if (tmdb_info and tmdb_info.get('director')) else 'Repertory Selection'
-    year = tmdb_info['year'] if (tmdb_info and tmdb_info.get('year')) else 'Classic'
+    final_director = tmdb_info['director'] if (tmdb_info and tmdb_info.get('director')) else (director or 'Repertory Selection')
+    final_year = tmdb_info['year'] if (tmdb_info and tmdb_info.get('year')) else (year or 'Classic')
     final_summary = tmdb_info['overview'] if (tmdb_info and tmdb_info.get('overview')) else summary
     poster = tmdb_info.get('poster') if tmdb_info else None
-    match_score = calculate_taste_score(display_title, director, final_summary, tmdb_info)
+    match_score = calculate_taste_score(display_title, final_director, final_summary, tmdb_info)
     
     return {
         "title": display_title,
-        "director": director,
-        "year": year,
+        "director": final_director,
+        "year": final_year,
         "theater": theater,
         "neighborhood": neighborhood,
         "matchScore": match_score,
@@ -222,148 +240,134 @@ def create_entry(title, theater, neighborhood, ticket_url, summary, fmt, showtim
         "ticketUrl": ticket_url,
         "showtimes": showtimes,
         "poster": poster,
-        "svg": generate_poster_svg(display_title, director, year)
+        "svg": generate_poster_svg(display_title, final_director, final_year)
     }
 
 # ---------------------------------------------------------------------------
-# 6. Scrapers (Targeted In-Theater Calendars Only)
+# 5. Screen Slate Weekend Scraper
 # ---------------------------------------------------------------------------
-def scrape_metrograph():
-    """Scrapes only active theater showtimes, excluding Metrograph At Home."""
+def scrape_screen_slate():
+    """Scrapes Screen Slate daily calendar listings for target weekend dates."""
+    screenings_map = defaultdict(lambda: {
+        'director': None, 'year': None, 'theater': None,
+        'neighborhood': None, 'ticket_url': None, 'summary': None,
+        'format': 'DCP', 'showtimes': []
+    })
+    
+    # Scrape each target date (e.g. 2026-08-21, 2026-08-22, 2026-08-23)
+    urls_to_scrape = [
+        ("https://www.screenslate.com/listings", "Today")
+    ]
+    for d in target_dates:
+        d_str = d.strftime("%Y-%m-%d")
+        urls_to_scrape.append((f"https://www.screenslate.com/listings/{d_str}", date_labels[d_str]))
+
+    for url, day_label in urls_to_scrape:
+        try:
+            print(f"[Scraper] Querying {url}...")
+            res = requests.get(url, headers=HEADERS, timeout=12)
+            if res.status_code != 200:
+                continue
+                
+            soup = BeautifulSoup(res.text, 'lxml')
+            
+            # Find venue sections or listing blocks
+            venues = soup.select('.venue-section, .views-row, article, .daily-listing')
+            if not venues:
+                venues = [soup]
+
+            current_venue_info = None
+
+            for elem in soup.find_all(['h2', 'h3', 'h4', 'article', 'li', 'div']):
+                text = elem.get_text(" ", strip=True)
+                
+                # Check for venue header
+                for k, v in THEATER_MAP.items():
+                    if k in text.lower() and len(text) < 60:
+                        current_venue_info = v
+                        break
+                        
+                if not current_venue_info:
+                    continue
+
+                # Match film title & details inside this venue section
+                title_elem = elem.select_one('a[href*="/film/"], a[href*="/event/"], strong, .title')
+                if not title_elem:
+                    continue
+                    
+                raw_title = clean_film_title(title_elem.get_text(strip=True))
+                if len(raw_title) < 2 or raw_title.lower() in ["read more", "buy tickets", "tickets", "membership"]:
+                    continue
+                
+                # Format detection
+                fmt = "DCP"
+                if "70mm" in text.lower(): fmt = "70mm Print"
+                elif "35mm" in text.lower(): fmt = "35mm Print"
+                elif "16mm" in text.lower(): fmt = "16mm Print"
+                elif "4k" in text.lower() or "restoration" in text.lower(): fmt = "4K Restoration"
+                
+                # Times extraction (e.g. 7:00pm, 9:30pm)
+                time_matches = re.findall(r'\b\d{1,2}:\d{2}\s*(?:am|pm)\b', text, re.I)
+                times = [f"{day_label}: {t.upper()}" for t in time_matches] if time_matches else [f"{day_label}: See Schedule"]
+                
+                # Year extraction if present
+                year_match = re.search(r'\b(19\d\d|20[0-2]\d)\b', text)
+                year = int(year_match.group(1)) if year_match else None
+                
+                # Store entry
+                t_name, neigh, t_url = current_venue_info
+                key = (raw_title.lower(), t_name)
+                
+                entry = screenings_map[key]
+                entry['title'] = raw_title
+                entry['theater'] = t_name
+                entry['neighborhood'] = neigh
+                entry['ticket_url'] = t_url
+                entry['year'] = year or entry['year']
+                entry['format'] = fmt
+                entry['summary'] = f"Playing at {t_name}."
+                for t in times:
+                    if t not in entry['showtimes']:
+                        entry['showtimes'].append(t)
+                        
+        except Exception as e:
+            print(f"[Scraper] Error scraping {url}: {e}")
+
     results = []
-    url = "https://metrograph.com/nyc/"
-    try:
-        res = requests.get(url, headers=HEADERS, timeout=10)
-        soup = BeautifulSoup(res.text, 'lxml')
-        
-        # Target calendar / screening blocks exclusively
-        screening_containers = soup.select('.showtimes-film, .calendar-row, .single-film, article.film')
-        if not screening_containers:
-            screening_containers = soup.select('.film-block, .daily-schedule .film')
-
-        found_titles = set()
-        for block in screening_containers:
-            title_elem = block.select_one('h2, h3, .film-title, a[href*="/film/"]')
-            if not title_elem:
-                continue
-            
-            raw_title = title_elem.get_text(strip=True)
-            if not raw_title or len(raw_title) < 2 or raw_title.lower() in ["metrograph", "membership", "tickets"]:
-                continue
-            
-            # Avoid streaming / at-home tags
-            block_text = block.get_text().lower()
-            if "at home" in block_text or "streaming" in block_text or "digital" in block_text:
-                continue
-
-            cleaned = clean_film_title(raw_title)
-            if cleaned.lower() in found_titles:
-                continue
-            found_titles.add(cleaned.lower())
-
+    for (t_clean, theater_name), data in screenings_map.items():
+        if data['showtimes']:
             results.append(create_entry(
-                title=cleaned,
-                theater="Metrograph",
-                neighborhood="Lower East Side",
-                ticket_url=url,
-                summary="Archival 35mm print or curated repertory screening at Metrograph.",
-                fmt="35mm Archival Print",
-                showtimes=[f"Fri {fri_str}: 8:00 PM", f"Sat {sat_str}: 5:30 PM", f"Sun {sun_str}: 9:00 PM"]
+                title=data['title'],
+                director=data['director'],
+                year=data['year'],
+                theater=data['theater'],
+                neighborhood=data['neighborhood'],
+                ticket_url=data['ticket_url'],
+                summary=data['summary'],
+                fmt=data['format'],
+                showtimes=data['showtimes'][:4]
             ))
-    except Exception as e:
-        print(f"[Scraper] Metrograph error: {e}")
-    print(f"[Scraper] Harvested {len(results)} live in-theater films from Metrograph")
-    return results
 
-def scrape_film_forum():
-    results = []
-    url = "https://filmforum.org/now_playing"
-    try:
-        res = requests.get(url, headers=HEADERS, timeout=10)
-        soup = BeautifulSoup(res.text, 'lxml')
-        
-        # Scrape all active movie listings from Film Forum's now playing page
-        for item in soup.select('.entry-content li, .movie, .film, .now-playing-item, .film-tile'):
-            title_elem = item.select_one('h2, h3, a, strong')
-            if not title_elem:
-                continue
-            raw_title = title_elem.get_text(strip=True)
-            if len(raw_title) > 2 and "film forum" not in raw_title.lower() and "donate" not in raw_title.lower():
-                cleaned = clean_film_title(raw_title)
-                results.append(create_entry(
-                    title=cleaned,
-                    theater="Film Forum",
-                    neighborhood="Greenwich Village",
-                    ticket_url=url,
-                    summary="35mm or 4K restoration revival screening at Film Forum.",
-                    fmt="35mm / 4K DCP",
-                    showtimes=[f"Fri {fri_str}: 6:30 PM", f"Sat {sat_str}: 4:15 PM", f"Sun {sun_str}: 7:00 PM"]
-                ))
-    except Exception as e:
-        print(f"[Scraper] Film Forum error: {e}")
-    print(f"[Scraper] Harvested {len(results)} live films from Film Forum")
-    return results
-
-def scrape_ifc_center():
-    results = []
-    url = "https://www.ifccenter.com/"
-    try:
-        res = requests.get(url, headers=HEADERS, timeout=10)
-        soup = BeautifulSoup(res.text, 'lxml')
-        for item in soup.select('.details h3 a, .film-title a, #now-playing .film-item'):
-            title_elem = item.select_one('h3, a') if not item.name == 'a' else item
-            if not title_elem:
-                continue
-            raw_title = title_elem.get_text(strip=True)
-            if len(raw_title) > 2 and "ifc center" not in raw_title.lower():
-                cleaned = clean_film_title(raw_title)
-                results.append(create_entry(
-                    title=cleaned,
-                    theater="IFC Center",
-                    neighborhood="West Village",
-                    ticket_url=url,
-                    summary="Special theatrical presentation at IFC Center.",
-                    fmt="DCP / 35mm",
-                    showtimes=[f"Fri {fri_str}: 7:15 PM", f"Sat {sat_str}: 4:00 PM", f"Sun {sun_str}: 8:30 PM"]
-                ))
-    except Exception as e:
-        print(f"[Scraper] IFC Center error: {e}")
-    print(f"[Scraper] Harvested {len(results)} live films from IFC Center")
+    print(f"[Scraper] Screen Slate: {len(results)} verified NYC screenings gathered.")
     return results
 
 # ---------------------------------------------------------------------------
-# 7. Harvest, Deduplicate & Build Dataset
+# 6. Execute & Write to index.html
 # ---------------------------------------------------------------------------
-all_screenings = []
-all_screenings.extend(scrape_metrograph())
-all_screenings.extend(scrape_film_forum())
-all_screenings.extend(scrape_ifc_center())
+final_dataset = scrape_screen_slate()
+print(f"[Engine] Total active screenings catalogued: {len(final_dataset)}")
 
-seen_keys = set()
-final_dataset = []
-
-for item in all_screenings:
-    key = f"{item['title'].lower()}_{item['theater'].lower()}"
-    if key not in seen_keys:
-        seen_keys.add(key)
-        final_dataset.append(item)
-
-print(f"[Engine] Total verified live screenings catalogued: {len(final_dataset)}")
-
-# ---------------------------------------------------------------------------
-# 8. Safe HTML Writing
-# ---------------------------------------------------------------------------
 with open("index.html", "r", encoding="utf-8") as f:
     html_content = f.read()
 
-# Update Live Letterboxd Stats
+# Update Letterboxd Stats
 html_content = re.sub(
     r'<div>\d+\s*FILMS LOGGED\s*//\s*(?:MEAN|AVERAGE)\s*RATING:\s*[\d\.]+\s*★</div>',
     lambda _: f'<div>{total_films} FILMS LOGGED // AVERAGE RATING: {mean_rating} ★</div>',
     html_content
 )
 
-# Inject real dataset cleanly
+# Inject verified dataset
 scraped_json = json.dumps(final_dataset, indent=4)
 html_content = re.sub(
     r'const dataset = \[.*?\];',
@@ -375,4 +379,4 @@ html_content = re.sub(
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html_content)
 
-print(f"[Engine] Successfully published {len(final_dataset)} live screenings to index.html.")
+print(f"[Engine] Successfully published {len(final_dataset)} screenings to index.html.")

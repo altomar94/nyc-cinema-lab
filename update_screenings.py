@@ -66,7 +66,6 @@ tmdb_cache = {}
 
 def fetch_real_tmdb_metadata(film_title):
     clean_key = film_title.strip().lower()
-    # Clean common noise in titles like (35mm) or [Restoration]
     clean_search = re.sub(r'\(.*?\)|\[.*?\]|35mm|4k restoration|dcp', '', clean_key).strip()
     
     if clean_search in tmdb_cache:
@@ -186,7 +185,7 @@ def create_entry(title, theater, neighborhood, ticket_url, summary, fmt, showtim
     }
 
 # ---------------------------------------------------------------------------
-# 6. Direct Live Theater Scrapers (Real Schedules)
+# 6. Direct Live Theater Scrapers (Real Schedules Only)
 # ---------------------------------------------------------------------------
 def scrape_film_forum():
     results = []
@@ -261,7 +260,7 @@ def scrape_ifc_center():
     return results
 
 # ---------------------------------------------------------------------------
-# 7. Harvest, Deduplicate & Write
+# 7. Harvest & Deduplicate
 # ---------------------------------------------------------------------------
 all_screenings = []
 all_screenings.extend(scrape_film_forum())
@@ -279,21 +278,29 @@ for item in all_screenings:
 
 print(f"[Engine] Total verified live screenings catalogued: {len(final_dataset)}")
 
+# ---------------------------------------------------------------------------
+# 8. Safe HTML Writing (Lambda prevents regex escape collisions)
+# ---------------------------------------------------------------------------
 with open("index.html", "r", encoding="utf-8") as f:
     html = f.read()
 
 # Update Top Bar Stats
 html = re.sub(
     r'<div>\d+\s*FILMS LOGGED\s*//\s*(?:MEAN|AVERAGE)\s*RATING:\s*[\d\.]+\s*★</div>',
-    f'<div>{total_films} FILMS LOGGED // AVERAGE RATING: {mean_rating} ★</div>',
+    lambda _: f'<div>{total_films} FILMS LOGGED // AVERAGE RATING: {mean_rating} ★</div>',
     html
 )
 
-# Inject real dataset into index.html
+# Inject real dataset
 scraped_json = json.dumps(final_dataset, indent=4)
-html = re.sub(r'const dataset = \[.*?\];', f'const dataset = {scraped_json};', html, flags=re.DOTALL)
+html = re.sub(
+    r'const dataset = \[.*?\];',
+    lambda _: f'const dataset = {scraped_json};',
+    html,
+    flags=re.DOTALL
+)
 
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html)
 
-print("[Engine] Successfully published live screenings to index.html.")
+print(f"[Engine] Successfully published {len(final_dataset)} live screenings to index.html.")

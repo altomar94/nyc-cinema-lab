@@ -5,6 +5,7 @@ import zlib
 import datetime
 import urllib.request
 import urllib.parse
+from collections import defaultdict
 import requests
 from bs4 import BeautifulSoup
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -15,7 +16,9 @@ from sklearn.metrics.pairwise import cosine_similarity
 # ---------------------------------------------------------------------------
 TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "")
 PROFILE_JSON = "taste_profile.json"
-HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+}
 
 today = datetime.date.today()
 days_until_friday = (4 - today.weekday()) % 7
@@ -34,16 +37,20 @@ STYLE_TROPES = [
     "noir", "crime", "surreal", "laconic", "nihilistic", "poetic"
 ]
 
-THEATER_TICKET_URLS = {
-    "Film Forum": "https://filmforum.org/now_playing",
-    "IFC Center": "https://www.ifccenter.com/",
-    "Metrograph": "https://metrograph.com/nyc/",
-    "The Paris Theater": "https://www.paristheaternyc.com/",
-    "The Roxy Cinema": "https://www.roxycinematribeca.com/",
-    "Film at Lincoln Center": "https://www.filmlinc.org/now-playing/",
-    "BAM Rose Cinemas": "https://www.bam.org/film",
-    "AMC Lincoln Square 13": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13",
-    "Regal Times Square": "https://www.regmovies.com/theatres/regal-e-walk-times-square"
+THEATER_MAP = {
+    "amc lincoln square": ("AMC Lincoln Square 13", "Upper West Side", "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"),
+    "lincoln square": ("AMC Lincoln Square 13", "Upper West Side", "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"),
+    "regal times square": ("Regal Times Square", "Times Square", "https://www.regmovies.com/theatres/regal-e-walk-times-square"),
+    "e-walk": ("Regal Times Square", "Times Square", "https://www.regmovies.com/theatres/regal-e-walk-times-square"),
+    "film forum": ("Film Forum", "Greenwich Village", "https://filmforum.org/now_playing"),
+    "ifc center": ("IFC Center", "West Village", "https://www.ifccenter.com/"),
+    "metrograph": ("Metrograph", "Lower East Side", "https://metrograph.com/nyc/"),
+    "paris theater": ("The Paris Theater", "Midtown", "https://www.paristheaternyc.com/"),
+    "roxy cinema": ("The Roxy Cinema", "Tribeca", "https://www.roxycinematribeca.com/"),
+    "film at lincoln center": ("Film at Lincoln Center", "Upper West Side", "https://www.filmlinc.org/now-playing/"),
+    "walter reade": ("Film at Lincoln Center", "Upper West Side", "https://www.filmlinc.org/now-playing/"),
+    "bam": ("BAM Rose Cinemas", "Brooklyn", "https://www.bam.org/film"),
+    "anthology": ("Anthology Film Archives", "East Village", "http://anthologyfilmarchives.org/")
 }
 
 # ---------------------------------------------------------------------------
@@ -69,15 +76,22 @@ else:
     positive_review_text = "nocturnal existential atmospheric crime neon-drenched stylized slow-burn"
 
 # ---------------------------------------------------------------------------
-# 3. TMDB Helper for Active Screenings
+# 3. TMDB Helper for Screenings
 # ---------------------------------------------------------------------------
+tmdb_cache = {}
+
 def fetch_screening_tmdb(film_title):
+    clean_key = film_title.strip().lower()
+    if clean_key in tmdb_cache:
+        return tmdb_cache[clean_key]
+        
     if not TMDB_API_KEY:
         return None
     try:
         search_url = f"https://api.themoviedb.org/3/search/movie?api_key={TMDB_API_KEY}&query={urllib.parse.quote(film_title)}"
         res = requests.get(search_url, timeout=5).json()
         if not res.get('results'):
+            tmdb_cache[clean_key] = None
             return None
         
         first = res['results'][0]
@@ -94,7 +108,9 @@ def fetch_screening_tmdb(film_title):
         reviews = [r['content'] for r in details_res.get('reviews', {}).get('results', [])[:2]]
         
         corpus = f"{overview} {' '.join(keywords)} {' '.join(reviews)}"
-        return {'directors': directors, 'dps': dps, 'corpus': corpus, 'poster': poster_url}
+        data = {'directors': directors, 'dps': dps, 'corpus': corpus, 'poster': poster_url}
+        tmdb_cache[clean_key] = data
+        return data
     except Exception:
         return None
 
@@ -162,7 +178,6 @@ def create_entry(title, director, year, theater, neighborhood, summary, fmt, sho
     tmdb_info = fetch_screening_tmdb(clean_t)
     final_poster = tmdb_info.get('poster') if (tmdb_info and tmdb_info.get('poster')) else poster
     match_score = calculate_taste_score(clean_t, director, summary, tmdb_info)
-    final_ticket = ticket_url or THEATER_TICKET_URLS.get(theater, "#")
     
     return {
         "title": clean_t,
@@ -175,7 +190,7 @@ def create_entry(title, director, year, theater, neighborhood, summary, fmt, sho
         "weekend": weekend,
         "summary": summary,
         "format": fmt,
-        "ticketUrl": final_ticket,
+        "ticketUrl": ticket_url or "https://www.screenslate.com",
         "showtimes": showtimes,
         "poster": final_poster,
         "svg": generate_poster_svg(clean_t, director, year)
@@ -187,68 +202,112 @@ FALLBACK_SCREENINGS = [
     create_entry("Le Samourai", "Jean-Pierre Melville", 1967, "The Paris Theater", "Midtown", "A methodical Parisian hitman executes a contract with icy precision, setting off a ruthless police hunt and underworld betrayal.", "4K Restoration", [f"Fri {fri_str}: 8:00 PM", f"Sat {sat_str}: 6:00 PM", f"Sun {sun_str}: 3:30 PM"], poster="https://m.media-amazon.com/images/M/MV5BYWYwYWYyMDctZjFiNy00YmNmLWE1NmEtMmVkM2RlYzQ4Y2NhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", ticket_url="https://www.paristheaternyc.com/"),
     create_entry("Blow-Up", "Michelangelo Antonioni", 1966, "Film Forum", "Greenwich Village", "A mod London fashion photographer believes he has accidentally captured a murder in the background of a park photograph.", "35mm Print", [f"Fri {fri_str}: 6:30 PM", f"Sat {sat_str}: 8:20 PM", f"Sun {sun_str}: 4:10 PM"], poster="https://m.media-amazon.com/images/M/MV5BMjA4Nzg5NTY4N15BMl5BanBnXkFtZTcwNjc3ODgyMQ@@._V1_FMjpg_UX1000_.jpg", ticket_url="https://filmforum.org/now_playing"),
     create_entry("Throne of Blood", "Akira Kurosawa", 1957, "IFC Center", "West Village", "A warrior is driven to betrayal and bloody ambition by a prophetic spirit and his ruthless wife in feudal Japan.", "4K Restoration", [f"Fri {fri_str}: 7:00 PM", f"Sat {sat_str}: 4:15 PM", f"Sun {sun_str}: 6:30 PM"], poster="https://m.media-amazon.com/images/M/MV5BYjFjM2YyYjEtMjcwYi00NGQ2LWIzNGMtNTBhYTQ1YWRmNzNmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", ticket_url="https://www.ifccenter.com/"),
-    create_entry("Lady Snowblood", "Toshiya Fujita", 1973, "The Roxy Cinema", "Tribeca", "A young woman raised from birth as an assassin seeks ruthless vengeance against the four criminals who destroyed her family in Meiji-era Japan.", "35mm Print", [f"Fri {fri_str}: 9:15 PM", f"Sat {sat_str}: 7:00 PM"], poster="https://m.media-amazon.com/images/M/MV5BNTI2ZmExNzQtYmFlMC00MDU2LTg0ZTUtZTFhNDBkYTAyZjljXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", ticket_url="https://www.roxycinematribeca.com/"),
-    create_entry("The Long Goodbye", "Robert Altman", 1973, "BAM Rose Cinemas", "Brooklyn", "PI Philip Marlowe mumbles his way through a hazy, sun-bleached 1970s Los Angeles while trying to clear a friend's name in a murder inquiry.", "35mm Print", [f"Sat {sat_str}: 6:30 PM", f"Sun {sun_str}: 4:00 PM"], poster="https://m.media-amazon.com/images/M/MV5BOTU2MTc3NWItM2I0Ny00OTc5LTgzNWItNzI5NmZkMjY4YjMzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", ticket_url="https://www.bam.org/film"),
-    create_entry("Deep Red", "Dario Argento", 1975, "IFC Center", "West Village", "A jazz pianist and an inquisitive journalist investigate the grisly murder of a psychic medium in a baroque Italian town.", "Archival 35mm", [f"Fri {fri_str}: 11:45 PM", f"Sat {sat_str}: 11:45 PM"], poster="https://m.media-amazon.com/images/M/MV5BMTY3NTUxNTc4OV5BMl5BanBnXkFtZTcwMjI5Njg3OA@@._V1_FMjpg_UX1000_.jpg", ticket_url="https://www.ifccenter.com/"),
-    create_entry("Branded to Kill", "Seijun Suzuki", 1967, "Metrograph", "Lower East Side", "A hitman with a fetish for sniffing boiling rice fails an assignment and becomes the target of a mysterious rival hitman.", "35mm Print", [f"Sat {sat_str}: 10:15 PM", f"Sun {sun_str}: 8:45 PM"], poster="https://m.media-amazon.com/images/M/MV5BYzA2NTcxMjAtMTY1NS00ZWI4LTk2MWUtZjEzYzA1MDRmNGVmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", ticket_url="https://metrograph.com/nyc/"),
-    create_entry("Klute", "Alan J. Pakula", 1971, "The Paris Theater", "Midtown", "A small-town detective searches for a missing executive in New York City with the help of a high-class call girl who is being stalked.", "35mm Print", [f"Fri {fri_str}: 5:30 PM", f"Sun {sun_str}: 6:00 PM"], poster="https://m.media-amazon.com/images/M/MV5BMTUwMDYxMzk1MF5BMl5BanBnXkFtZTgwNTU5MzIyMDE@._V1_FMjpg_UX1000_.jpg", ticket_url="https://www.paristheaternyc.com/"),
-    create_entry("Night on Earth", "Jim Jarmusch", 1991, "Film Forum", "Greenwich Village", "A collection of five vignettes unfolding simultaneously inside taxicabs across Los Angeles, New York, Paris, Rome, and Helsinki.", "35mm Print", [f"Fri {fri_str}: 9:00 PM", f"Sat {sat_str}: 9:00 PM"], poster="https://m.media-amazon.com/images/M/MV5BY2FmZTU4NzAtMGQxMy00OTQ1LWE2NTgtN2UyOGQwMzI3Y2ZiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", ticket_url="https://filmforum.org/now_playing"),
-    
-    # Multiplex & Special Event Screenings
-    create_entry("Oppenheimer", "Christopher Nolan", 2023, "AMC Lincoln Square 13", "Upper West Side", "A biographical drama detailing theoretical physicist J. Robert Oppenheimer and the Manhattan Project.", "70mm IMAX", [f"Fri {fri_str}: 6:45 PM", f"Sat {sat_str}: 2:30 PM", f"Sun {sun_str}: 7:15 PM"], ticket_url="https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"),
-    create_entry("Dune: Part Two", "Denis Villeneuve", 2024, "AMC Lincoln Square 13", "Upper West Side", "Paul Atreides unites with the Fremen people of the desert planet Arrakis to wage war against House Harkonnen.", "IMAX Laser GT", [f"Fri {fri_str}: 8:00 PM", f"Sat {sat_str}: 4:00 PM"], ticket_url="https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"),
-    create_entry("Heat", "Michael Mann", 1995, "Regal Times Square", "Times Square", "A methodical thief and a relentless LAPD homicide detective engage in a lethal cat-and-mouse confrontation across Los Angeles.", "4K Laser RPX", [f"Sat {sat_str}: 8:30 PM", f"Sun {sun_str}: 5:15 PM"], ticket_url="https://www.regmovies.com/theatres/regal-e-walk-times-square")
+    create_entry("Oppenheimer", "Christopher Nolan", 2023, "AMC Lincoln Square 13", "Upper West Side", "A biographical drama detailing theoretical physicist J. Robert Oppenheimer and the Manhattan Project.", "70mm IMAX", [f"Fri {fri_str}: 6:45 PM", f"Sat {sat_str}: 2:30 PM", f"Sun {sun_str}: 7:15 PM"], poster="https://m.media-amazon.com/images/M/MV5BN2JkMDc5MGQtZjg3YS00NmFiLWIyZmQtZTJmNTM5MjVmYTQ4XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", ticket_url="https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"),
+    create_entry("Heat", "Michael Mann", 1995, "Regal Times Square", "Times Square", "A methodical thief and a relentless LAPD homicide detective engage in a lethal cat-and-mouse confrontation across Los Angeles.", "4K Laser RPX", [f"Sat {sat_str}: 8:30 PM", f"Sun {sun_str}: 5:15 PM"], poster="https://m.media-amazon.com/images/M/MV5BYjY1MDlhM2QtYmRkYS00Yjc5LWIwY2ItNmVkOWJjZDQ5MmU3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", ticket_url="https://www.regmovies.com/theatres/regal-e-walk-times-square")
 ]
 
 # ---------------------------------------------------------------------------
-# 6. Scrapers
+# 6. Screen Slate Aggregator Scraper
 # ---------------------------------------------------------------------------
-def scrape_film_forum():
-    results = []
+def scrape_screen_slate():
+    screenings = []
+    url = "https://www.screenslate.com/listings"
+    print(f"[Scraper] Querying Screen Slate listings from {url}...")
+    
     try:
-        res = requests.get("https://filmforum.org/now_playing", headers=HEADERS, timeout=10)
+        res = requests.get(url, headers=HEADERS, timeout=12)
+        if res.status_code != 200:
+            print(f"[Scraper] Screen Slate returned status code {res.status_code}")
+            return screenings
+            
         soup = BeautifulSoup(res.text, 'lxml')
-        for tile in soup.select('.film-tile, .now-playing-item'):
-            t_elem = tile.select_one('.film-title, h3, h2')
-            if not t_elem: continue
-            title = t_elem.get_text(strip=True)
-            results.append(create_entry(
-                title, "Repertory Selection", 1972, "Film Forum", "South Village",
-                "35mm or 4K restoration revival screening at Film Forum.", "35mm / 4K Restoration",
-                [f"Fri {fri_str}: 7:00 PM", f"Sat {sat_str}: 4:30 PM", f"Sun {sun_str}: 6:15 PM"],
-                ticket_url="https://filmforum.org/now_playing"
+        
+        # Parse screening blocks from Screen Slate
+        articles = soup.select('article, .views-row, .listing, .daily-screening')
+        for art in articles:
+            # Title
+            title_elem = art.select_one('h2, h3, .title, a[hreflang]')
+            if not title_elem:
+                continue
+            title = title_elem.get_text(strip=True)
+            if not title or len(title) < 2:
+                continue
+                
+            # Venue Matching
+            venue_text = art.get_text().lower()
+            matched_theater = None
+            neighborhood = "New York"
+            ticket_url = "https://www.screenslate.com/listings"
+            
+            for key, (t_name, neigh, t_url) in THEATER_MAP.items():
+                if key in venue_text:
+                    matched_theater = t_name
+                    neighborhood = neigh
+                    ticket_url = t_url
+                    break
+                    
+            if not matched_theater:
+                continue
+                
+            # Summary / Description
+            desc_elem = art.select_one('p, .field-body, .description')
+            summary = desc_elem.get_text(strip=True) if desc_elem else "Special presentation / repertory exhibition in NYC."
+            
+            # Format parsing
+            fmt = "35mm / DCP"
+            if "70mm" in venue_text or "70mm" in summary.lower():
+                fmt = "70mm Print"
+            elif "35mm" in venue_text or "35mm" in summary.lower():
+                fmt = "35mm Print"
+            elif "imax" in venue_text or "imax" in summary.lower():
+                fmt = "IMAX Laser"
+            elif "4k" in venue_text or "4k" in summary.lower():
+                fmt = "4K Restoration"
+                
+            # Showtimes
+            showtimes = [f"Fri {fri_str}: 7:00 PM", f"Sat {sat_str}: 4:30 PM", f"Sun {sun_str}: 6:30 PM"]
+            time_elems = art.select('.time, .showtime, time')
+            if time_elems:
+                showtimes = [t.get_text(strip=True) for t in time_elems[:3] if len(t.get_text(strip=True)) > 2]
+                
+            screenings.append(create_entry(
+                title=title,
+                director="Curated Selection",
+                year=1985,
+                theater=matched_theater,
+                neighborhood=neighborhood,
+                summary=summary[:160] + "..." if len(summary) > 160 else summary,
+                fmt=fmt,
+                showtimes=showtimes,
+                ticket_url=ticket_url
             ))
+            
     except Exception as e:
-        print(f"[Scraper] Film Forum error: {e}")
-    return results
-
-def scrape_metrograph():
-    results = []
-    try:
-        res = requests.get("https://metrograph.com/nyc/", headers=HEADERS, timeout=10)
-        soup = BeautifulSoup(res.text, 'lxml')
-        for card in soup.select('.film-card, .movie-title'):
-            title = card.get_text(strip=True)
-            if len(title) > 2:
-                results.append(create_entry(
-                    title, "Metrograph Edition", 1978, "Metrograph", "Lower East Side",
-                    "Archival print or curated series screening at Metrograph.", "35mm Archival Print",
-                    [f"Fri {fri_str}: 8:15 PM", f"Sat {sat_str}: 5:00 PM", f"Sun {sun_str}: 7:30 PM"],
-                    ticket_url="https://metrograph.com/nyc/"
-                ))
-    except Exception as e:
-        print(f"[Scraper] Metrograph error: {e}")
-    return results
-
-scraped_list = []
-scraped_list.extend(scrape_film_forum())
-scraped_list.extend(scrape_metrograph())
-
-final_dataset = scraped_list if len(scraped_list) > 0 else FALLBACK_SCREENINGS
-print(f"[Engine] Total active screenings injected: {len(final_dataset)}")
+        print(f"[Scraper] Screen Slate error: {e}")
+        
+    print(f"[Scraper] Harvested {len(screenings)} listings from Screen Slate.")
+    return screenings
 
 # ---------------------------------------------------------------------------
-# 7. Write to index.html
+# 7. Merge Screenings & Build Final Dataset
+# ---------------------------------------------------------------------------
+slate_screenings = scrape_screen_slate()
+
+# Deduplicate by title + theater
+seen_keys = set()
+merged = []
+
+for item in (slate_screenings + FALLBACK_SCREENINGS):
+    key = f"{item['title'].lower()}_{item['theater'].lower()}"
+    if key not in seen_keys:
+        seen_keys.add(key)
+        merged.append(item)
+
+final_dataset = merged
+print(f"[Engine] Total active screenings catalogued: {len(final_dataset)}")
+
+# ---------------------------------------------------------------------------
+# 8. Write to index.html
 # ---------------------------------------------------------------------------
 with open("index.html", "r", encoding="utf-8") as f:
     html = f.read()
@@ -267,4 +326,4 @@ html = re.sub(r'const dataset = \[.*?\];', f'const dataset = {scraped_json};', h
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html)
 
-print(f"[Engine] Successfully updated index.html with active screenings for {weekend_range_label}.")
+print(f"[Engine] Successfully updated index.html for {weekend_range_label}.")

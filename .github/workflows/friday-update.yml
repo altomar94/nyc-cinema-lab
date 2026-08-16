@@ -1,10 +1,10 @@
-name: Friday Repertory Auto-Update
+name: Weekend Repertory Auto-Update
 
 on:
   schedule:
-    # Runs every Friday at 10:00 AM UTC (6:00 AM EDT)
-    - cron: '0 10 * * 5'
-  workflow_dispatch: # Allows manual trigger from the GitHub Actions UI
+    # Runs at 10:00 AM UTC (6:00 AM EDT) every Wednesday and Friday
+    - cron: '0 10 * * 3,5'
+  workflow_dispatch: # Allows manual run anytime from the Actions tab
 
 permissions:
   contents: write

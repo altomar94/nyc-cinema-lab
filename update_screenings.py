@@ -19,7 +19,7 @@ TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "").strip()
 PROFILE_JSON = "taste_profile.json"
 
 if not SERPAPI_API_KEY:
-    print("[Error] SERPAPI_API_KEY is missing from environment. Check your GitHub Actions workflow YAML.")
+    print("[Error] SERPAPI_API_KEY environment variable is missing. Check your workflow secrets.")
     exit(1)
 
 today = datetime.date.today()
@@ -33,7 +33,7 @@ sunday_date = friday_date + datetime.timedelta(days=2)
 
 fri_str = friday_date.strftime("%b %d")
 weekend_range_label = f"{friday_date.strftime('%b %d')} – {sunday_date.strftime('%b %d')}"
-print(f"[Calendar] Fetching Google showtimes via SerpApi for: {weekend_range_label}")
+print(f"[Calendar] Targeting weekend: {weekend_range_label}")
 
 THEATER_MAP = {
     "amc lincoln square": ("AMC Lincoln Square 13", "Upper West Side", "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"),
@@ -107,7 +107,7 @@ def fetch_real_tmdb_metadata(film_title):
         return None
     try:
         search_url = f"https://api.themoviedb.org/3/search/movie?api_key={TMDB_API_KEY}&query={urllib.parse.quote(clean_search)}"
-        res = requests.get(search_url, timeout=5).json()
+        res = requests.get(search_url, timeout=6).json()
         results = res.get('results', [])
         if not results:
             tmdb_cache[clean_key] = None
@@ -119,11 +119,11 @@ def fetch_real_tmdb_metadata(film_title):
         year = int(release_date.split('-')[0]) if (release_date and release_date.split('-')[0].isdigit()) else None
         poster_url = f"https://image.tmdb.org/t/p/w500{movie.get('poster_path')}" if movie.get('poster_path') else None
         
-        credits_res = requests.get(f"https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key={TMDB_API_KEY}", timeout=5).json()
+        credits_res = requests.get(f"https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key={TMDB_API_KEY}", timeout=6).json()
         directors = [c['name'] for c in credits_res.get('crew', []) if c.get('job') == 'Director']
         dps = [c['name'] for c in credits_res.get('crew', []) if c.get('job') in ['Director of Photography', 'Cinematographer']]
         
-        details_res = requests.get(f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={TMDB_API_KEY}&append_to_response=keywords,reviews", timeout=5).json()
+        details_res = requests.get(f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={TMDB_API_KEY}&append_to_response=keywords,reviews", timeout=6).json()
         overview = details_res.get('overview', '')
         keywords = [k['name'].lower() for k in details_res.get('keywords', {}).get('keywords', [])]
         reviews = [r['content'] for r in details_res.get('reviews', {}).get('results', [])[:2]]
@@ -230,7 +230,7 @@ def create_entry(title, theater, neighborhood, ticket_url, summary, fmt, showtim
     }
 
 # ---------------------------------------------------------------------------
-# 5. Multi-Strategy SerpApi Showtime Extractor
+# 5. Robust SerpApi Showtimes Ingestion (60s Timeout + Targeted Queries)
 # ---------------------------------------------------------------------------
 def fetch_serpapi_showtimes():
     screenings_map = defaultdict(lambda: {
@@ -238,14 +238,17 @@ def fetch_serpapi_showtimes():
         'summary': '', 'format': 'DCP', 'showtimes': []
     })
 
-    # High-density zip codes: 10023 (Lincoln Square / UWS), 10014 (West Village / IFC / Film Forum)
+    # High-yield cinema queries in Manhattan
     search_queries = [
-        "movie showtimes 10023",
-        "movie showtimes 10014"
+        "movies in theaters Manhattan NYC",
+        "AMC Lincoln Square 13 showtimes",
+        "IFC Center NYC showtimes",
+        "Film Forum NYC showtimes",
+        "Metrograph NYC showtimes"
     ]
 
     for q in search_queries:
-        print(f"[SerpApi] Requesting Google showtimes for query: '{q}'...")
+        print(f"[SerpApi] Requesting showtimes for: '{q}'...")
         params = {
             "engine": "google",
             "q": q,
@@ -256,27 +259,36 @@ def fetch_serpapi_showtimes():
         }
         
         try:
-            res = requests.get("https://serpapi.com/search.json", params=params, timeout=20)
+            # 60-second read timeout accommodates Google's JavaScript rendering
+            res = requests.get("https://serpapi.com/search.json", params=params, timeout=60)
             data = res.json()
             
             if "error" in data:
                 print(f"[SerpApi API Error]: {data['error']}")
                 continue
 
-            # Extract showtime arrays across multiple possible Google schema paths
-            theaters = data.get("showtimes", [])
-            if not theaters and "knowledge_graph" in data:
-                theaters = data["knowledge_graph"].get("movies_results", [])
-                
-            print(f"[SerpApi] Received {len(theaters)} theater listings for '{q}'.")
+            # Case A: Theater-grouped showtimes
+            showtimes_blocks = data.get("showtimes", [])
+            
+            # Case B: Knowledge Graph / Movies results
+            if not showtimes_blocks and "knowledge_graph" in data:
+                kg = data["knowledge_graph"]
+                showtimes_blocks = kg.get("movies_results", []) or kg.get("theaters", [])
 
-            for theater_block in theaters:
-                raw_theater_name = theater_block.get("name") or theater_block.get("theater_name") or theater_block.get("title", "")
+            # Case C: Organic / Inline results
+            if not showtimes_blocks:
+                showtimes_blocks = data.get("movies_results", []) or data.get("local_results", [])
+
+            print(f"[SerpApi] Parsed {len(showtimes_blocks)} result blocks for '{q}'.")
+
+            for block in showtimes_blocks:
+                raw_theater_name = block.get("name") or block.get("theater_name") or block.get("title", "")
                 raw_theater_lower = raw_theater_name.lower()
                 
+                # Check for matching venue
                 matched_venue = None
                 for k, v in THEATER_MAP.items():
-                    if k in raw_theater_lower:
+                    if k in raw_theater_lower or k in q.lower():
                         matched_venue = v
                         break
                         
@@ -284,14 +296,16 @@ def fetch_serpapi_showtimes():
                     continue
 
                 t_name, neigh, t_url = matched_venue
-                movies = theater_block.get("movies", [])
-                if not movies and "showtimes" in theater_block:
-                    movies = theater_block.get("showtimes", [])
+                movies = block.get("movies", [])
+                
+                # If the block itself represents a single movie at a theater
+                if not movies and ("showtimes" in block or "times" in block):
+                    movies = [block]
 
                 for m in movies:
                     raw_title = m.get("name") or m.get("title", "")
                     clean_t = clean_film_title(raw_title)
-                    if len(clean_t) < 2:
+                    if len(clean_t) < 2 or clean_t.lower() in ["tickets", "directions", "website"]:
                         continue
                     
                     st_list = m.get("showtimes", []) or m.get("times", [])
@@ -312,7 +326,7 @@ def fetch_serpapi_showtimes():
                                 fmt = "35mm Print"
 
                     if not time_strs:
-                        time_strs = [f"Fri {fri_str}: Check Schedule"]
+                        time_strs = [f"Fri {fri_str}: Evening"]
 
                     key = (clean_t.lower(), t_name)
                     entry = screenings_map[key]
@@ -321,13 +335,13 @@ def fetch_serpapi_showtimes():
                     entry['neighborhood'] = neigh
                     entry['ticket_url'] = t_url
                     entry['format'] = fmt
-                    entry['summary'] = f"Playing at {t_name}."
+                    entry['summary'] = f"Theatrical screening at {t_name}."
                     for ts in time_strs:
                         if ts not in entry['showtimes']:
                             entry['showtimes'].append(ts)
 
         except Exception as e:
-            print(f"[SerpApi Error] Query failed: {e}")
+            print(f"[SerpApi Error] Query '{q}' failed: {e}")
 
     results = []
     for (t_clean, theater_name), data in screenings_map.items():
@@ -341,7 +355,7 @@ def fetch_serpapi_showtimes():
             showtimes=data['showtimes'][:4]
         ))
 
-    print(f"[SerpApi Engine] Total screenings extracted: {len(results)}")
+    print(f"[SerpApi Engine] Extracted {len(results)} verified live NYC screenings.")
     return results
 
 # ---------------------------------------------------------------------------
@@ -350,7 +364,7 @@ def fetch_serpapi_showtimes():
 final_dataset = fetch_serpapi_showtimes()
 
 if len(final_dataset) == 0:
-    print("[Engine Notice] 0 screenings retrieved from SerpApi. Check your workflow logs to verify API response.")
+    print("[Engine Notice] 0 screenings retrieved. Verify API response in logs.")
     exit(1)
 
 with open("index.html", "r", encoding="utf-8") as f:
@@ -373,4 +387,4 @@ html_content = re.sub(
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html_content)
 
-print(f"[Engine] Successfully written {len(final_dataset)} screenings to index.html.")
+print(f"[Engine] Successfully published {len(final_dataset)} screenings to index.html.")

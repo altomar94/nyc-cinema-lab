@@ -14,9 +14,13 @@ from sklearn.metrics.pairwise import cosine_similarity
 # ---------------------------------------------------------------------------
 # 1. Configuration & Target Weekend Dates
 # ---------------------------------------------------------------------------
-SERPAPI_API_KEY = os.environ.get("SERPAPI_API_KEY", "")
-TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "")
+SERPAPI_API_KEY = os.environ.get("SERPAPI_API_KEY", "").strip()
+TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "").strip()
 PROFILE_JSON = "taste_profile.json"
+
+if not SERPAPI_API_KEY:
+    print("[Error] SERPAPI_API_KEY is missing from environment. Check your GitHub Actions workflow YAML.")
+    exit(1)
 
 today = datetime.date.today()
 days_until_friday = (4 - today.weekday()) % 7
@@ -28,16 +32,16 @@ saturday_date = friday_date + datetime.timedelta(days=1)
 sunday_date = friday_date + datetime.timedelta(days=2)
 
 fri_str = friday_date.strftime("%b %d")
-sat_str = saturday_date.strftime("%b %d")
-sun_str = sunday_date.strftime("%b %d")
 weekend_range_label = f"{friday_date.strftime('%b %d')} – {sunday_date.strftime('%b %d')}"
 print(f"[Calendar] Fetching Google showtimes via SerpApi for: {weekend_range_label}")
 
 THEATER_MAP = {
     "amc lincoln square": ("AMC Lincoln Square 13", "Upper West Side", "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"),
     "lincoln square 13": ("AMC Lincoln Square 13", "Upper West Side", "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"),
+    "lincoln square": ("AMC Lincoln Square 13", "Upper West Side", "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"),
     "regal e-walk": ("Regal Times Square", "Times Square", "https://www.regmovies.com/theatres/regal-e-walk-times-square"),
     "regal times square": ("Regal Times Square", "Times Square", "https://www.regmovies.com/theatres/regal-e-walk-times-square"),
+    "times square": ("Regal Times Square", "Times Square", "https://www.regmovies.com/theatres/regal-e-walk-times-square"),
     "film forum": ("Film Forum", "Greenwich Village", "https://filmforum.org/now_playing"),
     "ifc center": ("IFC Center", "West Village", "https://www.ifccenter.com/"),
     "metrograph": ("Metrograph", "Lower East Side", "https://metrograph.com/nyc/"),
@@ -80,14 +84,14 @@ else:
     positive_review_text = ""
 
 # ---------------------------------------------------------------------------
-# 3. Clean Title & Fetch TMDB Metadata
+# 3. TMDB Metadata Fetcher
 # ---------------------------------------------------------------------------
 tmdb_cache = {}
 
 def clean_film_title(raw_title):
     t = raw_title.strip()
     t = re.sub(r'\(.*?\)|\[.*?\]', '', t)
-    t = re.sub(r'\b(35mm|70mm|16mm|4k|restoration|restored|dcp|q&a|in person|repertory|special screening|preview|staff picks|with live score|waverly midnights|imax)\b', '', t, flags=re.I)
+    t = re.sub(r'\b(35mm|70mm|16mm|4k|restoration|restored|dcp|q&a|in person|repertory|special screening|preview|staff picks|with live score|waverly midnights|imax|rpx|3d)\b', '', t, flags=re.I)
     if " - " in t: t = t.split(" - ")[0]
     if " – " in t: t = t.split(" – ")[0]
     return re.sub(r'\s+', ' ', t).strip()
@@ -226,26 +230,22 @@ def create_entry(title, theater, neighborhood, ticket_url, summary, fmt, showtim
     }
 
 # ---------------------------------------------------------------------------
-# 5. SerpApi Google Showtimes Ingestion
+# 5. Multi-Strategy SerpApi Showtime Extractor
 # ---------------------------------------------------------------------------
 def fetch_serpapi_showtimes():
-    if not SERPAPI_API_KEY:
-        print("[SerpApi Error] SERPAPI_API_KEY environment variable is not set.")
-        return []
-
     screenings_map = defaultdict(lambda: {
         'theater': None, 'neighborhood': None, 'ticket_url': None,
         'summary': '', 'format': 'DCP', 'showtimes': []
     })
 
-    # Query key NYC cinema hubs across Manhattan (uses only 2 API queries per run)
+    # High-density zip codes: 10023 (Lincoln Square / UWS), 10014 (West Village / IFC / Film Forum)
     search_queries = [
-        "movie showtimes Upper West Side Manhattan NYC",
-        "movie showtimes Greenwich Village Manhattan NYC"
+        "movie showtimes 10023",
+        "movie showtimes 10014"
     ]
 
     for q in search_queries:
-        print(f"[SerpApi] Requesting Google showtimes for: '{q}'...")
+        print(f"[SerpApi] Requesting Google showtimes for query: '{q}'...")
         params = {
             "engine": "google",
             "q": q,
@@ -259,14 +259,24 @@ def fetch_serpapi_showtimes():
             res = requests.get("https://serpapi.com/search.json", params=params, timeout=20)
             data = res.json()
             
-            showtimes_list = data.get("showtimes", [])
-            for theater_block in showtimes_list:
-                raw_theater_name = theater_block.get("theater_name", "").lower()
+            if "error" in data:
+                print(f"[SerpApi API Error]: {data['error']}")
+                continue
+
+            # Extract showtime arrays across multiple possible Google schema paths
+            theaters = data.get("showtimes", [])
+            if not theaters and "knowledge_graph" in data:
+                theaters = data["knowledge_graph"].get("movies_results", [])
                 
-                # Match to our tracked venues
+            print(f"[SerpApi] Received {len(theaters)} theater listings for '{q}'.")
+
+            for theater_block in theaters:
+                raw_theater_name = theater_block.get("name") or theater_block.get("theater_name") or theater_block.get("title", "")
+                raw_theater_lower = raw_theater_name.lower()
+                
                 matched_venue = None
                 for k, v in THEATER_MAP.items():
-                    if k in raw_theater_name:
+                    if k in raw_theater_lower:
                         matched_venue = v
                         break
                         
@@ -275,30 +285,31 @@ def fetch_serpapi_showtimes():
 
                 t_name, neigh, t_url = matched_venue
                 movies = theater_block.get("movies", [])
-                
+                if not movies and "showtimes" in theater_block:
+                    movies = theater_block.get("showtimes", [])
+
                 for m in movies:
-                    raw_title = m.get("name", "")
+                    raw_title = m.get("name") or m.get("title", "")
                     clean_t = clean_film_title(raw_title)
                     if len(clean_t) < 2:
                         continue
                     
-                    # Extract times and format
-                    st_list = m.get("showtimes", [])
+                    st_list = m.get("showtimes", []) or m.get("times", [])
                     time_strs = []
                     fmt = "Standard DCP"
                     
                     for st in st_list:
-                        tm = st.get("time")
-                        if tm:
-                            time_strs.append(f"Fri {fri_str}: {tm}")
-                        # Check format attributes if provided by Google
-                        fmt_type = st.get("type", "").lower()
-                        if "70mm" in fmt_type or "imax" in fmt_type:
-                            fmt = "70mm IMAX" if "70mm" in fmt_type else "IMAX Laser"
-                        elif "35mm" in fmt_type:
-                            fmt = "35mm Print"
-                        elif "3d" in fmt_type:
-                            fmt = "RealD 3D"
+                        if isinstance(st, str):
+                            time_strs.append(f"Fri {fri_str}: {st}")
+                        elif isinstance(st, dict):
+                            tm = st.get("time") or st.get("showtime")
+                            if tm:
+                                time_strs.append(f"Fri {fri_str}: {tm}")
+                            fmt_type = st.get("type", "").lower()
+                            if "70mm" in fmt_type or "imax" in fmt_type:
+                                fmt = "70mm IMAX" if "70mm" in fmt_type else "IMAX Laser"
+                            elif "35mm" in fmt_type:
+                                fmt = "35mm Print"
 
                     if not time_strs:
                         time_strs = [f"Fri {fri_str}: Check Schedule"]
@@ -310,7 +321,7 @@ def fetch_serpapi_showtimes():
                     entry['neighborhood'] = neigh
                     entry['ticket_url'] = t_url
                     entry['format'] = fmt
-                    entry['summary'] = f"Theatrical screening at {t_name}."
+                    entry['summary'] = f"Playing at {t_name}."
                     for ts in time_strs:
                         if ts not in entry['showtimes']:
                             entry['showtimes'].append(ts)
@@ -330,29 +341,27 @@ def fetch_serpapi_showtimes():
             showtimes=data['showtimes'][:4]
         ))
 
-    print(f"[SerpApi Engine] Ingested {len(results)} verified screenings across NYC multiplexes and indies.")
+    print(f"[SerpApi Engine] Total screenings extracted: {len(results)}")
     return results
 
 # ---------------------------------------------------------------------------
-# 6. Execute & Update index.html
+# 6. Execute & Write to index.html
 # ---------------------------------------------------------------------------
 final_dataset = fetch_serpapi_showtimes()
 
 if len(final_dataset) == 0:
-    print("[Engine Warning] 0 screenings retrieved from SerpApi. Check your SERPAPI_API_KEY.")
-    exit(0)
+    print("[Engine Notice] 0 screenings retrieved from SerpApi. Check your workflow logs to verify API response.")
+    exit(1)
 
 with open("index.html", "r", encoding="utf-8") as f:
     html_content = f.read()
 
-# Update Stats
 html_content = re.sub(
     r'<div>\d+\s*FILMS LOGGED\s*//\s*(?:MEAN|AVERAGE)\s*RATING:\s*[\d\.]+\s*★</div>',
     lambda _: f'<div>{total_films} FILMS LOGGED // AVERAGE RATING: {mean_rating} ★</div>',
     html_content
 )
 
-# Overwrite dataset with verified showtimes
 scraped_json = json.dumps(final_dataset, indent=4)
 html_content = re.sub(
     r'const dataset = \[.*?\];',
@@ -364,4 +373,4 @@ html_content = re.sub(
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html_content)
 
-print(f"[Engine] Successfully published {len(final_dataset)} verified live screenings to index.html.")
+print(f"[Engine] Successfully written {len(final_dataset)} screenings to index.html.")

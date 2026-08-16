@@ -39,9 +39,6 @@ THEATER_MAP = {
     "amc lincoln square": ("AMC Lincoln Square 13", "Upper West Side", "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"),
     "lincoln square 13": ("AMC Lincoln Square 13", "Upper West Side", "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"),
     "lincoln square": ("AMC Lincoln Square 13", "Upper West Side", "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"),
-    "regal e-walk": ("Regal Times Square", "Times Square", "https://www.regmovies.com/theatres/regal-e-walk-times-square"),
-    "regal times square": ("Regal Times Square", "Times Square", "https://www.regmovies.com/theatres/regal-e-walk-times-square"),
-    "times square": ("Regal Times Square", "Times Square", "https://www.regmovies.com/theatres/regal-e-walk-times-square"),
     "film forum": ("Film Forum", "Greenwich Village", "https://filmforum.org/now_playing"),
     "ifc center": ("IFC Center", "West Village", "https://www.ifccenter.com/"),
     "metrograph": ("Metrograph", "Lower East Side", "https://metrograph.com/nyc/"),
@@ -240,7 +237,7 @@ def create_entry(title, theater, neighborhood, ticket_url, summary, fmt, showtim
     }
 
 # ---------------------------------------------------------------------------
-# 5. Targeted SerpApi Ingestion Across All Tracked NYC Venues
+# 5. Targeted SerpApi Ingestion (Tracked Art-House & Repertory Venues)
 # ---------------------------------------------------------------------------
 def fetch_serpapi_showtimes():
     screenings_map = defaultdict(lambda: {
@@ -250,7 +247,6 @@ def fetch_serpapi_showtimes():
 
     search_queries = [
         "AMC Lincoln Square 13 showtimes",
-        "Regal Times Square showtimes",
         "IFC Center NYC showtimes",
         "Film Forum NYC showtimes",
         "Metrograph NYC showtimes",

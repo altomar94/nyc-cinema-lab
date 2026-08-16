@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Wong Kar-wai Palette: Nocturnal Midnight, HK Neon Red, Cheongsam Amber, Midnight Teal */
+      /* Wong Kar-wai Palette */
       --bg-main: #07080c;
       --bg-topbar: #0c0e17;
       --bg-card: #0f121a;
@@ -24,7 +24,7 @@
       --accent-vermilion: #ff2a4b; /* Electric Neon Red */
       --accent-vermilion-glow: rgba(255, 42, 75, 0.25);
       --accent-gold: #e5a93c; /* Cheongsam Amber */
-      --accent-teal: #00e5bc; /* Midnight Clockwork Teal */
+      --accent-teal: #00e5bc; /* Midnight Teal */
       
       --font-serif: 'Instrument Serif', Georgia, serif;
       --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
@@ -360,7 +360,7 @@
       <span class="dot-live"></span>
       <span>NYC Screenings</span>
     </div>
-    <div>226 FILMS LOGGED // AVERAGE RATING: 3.69 ★</div>
+    <div>224 FILMS LOGGED // AVERAGE RATING: 3.79 ★</div>
   </div>
 
   <main>
@@ -387,21 +387,19 @@
         <label>Weekend Schedule</label>
         <select id="weekendSelect">
           <option value="all" selected>All Upcoming Weekends</option>
-          <option value="current">Aug 14 – Aug 16 (This Weekend)</option>
-          <option value="aug14">Aug 14 – Aug 16</option>
-          <option value="aug21">Aug 21 – Aug 23 (Coppola Retrospective)</option>
+          <option value="current">Current Weekend</option>
         </select>
       </div>
 
-     <div class="filter-group">
+      <div class="filter-group">
         <label>Venue</label>
         <select id="theaterSelect">
           <option value="all" selected>All Venues</option>
           <option value="AMC Lincoln Square 13">AMC Lincoln Square 13 (UWS)</option>
           <option value="Regal Times Square">Regal Times Square (Midtown)</option>
+          <option value="Film Forum">Film Forum (Greenwich Village)</option>
           <option value="IFC Center">IFC Center (West Village)</option>
           <option value="Metrograph">Metrograph (Lower East Side)</option>
-          <option value="Film Forum">Film Forum (Greenwich Village)</option>
           <option value="Film at Lincoln Center">Film at Lincoln Center (UWS)</option>
           <option value="The Paris Theater">The Paris Theater (Midtown)</option>
           <option value="The Roxy Cinema">The Roxy Cinema (Tribeca)</option>
@@ -412,7 +410,7 @@
 
       <div class="filter-group">
         <label>Filter Title / Director</label>
-        <input type="text" id="searchInput" placeholder="Search Wong Kar-wai, Melville..." />
+        <input type="text" id="searchInput" placeholder="Search title or director..." />
       </div>
     </div>
 
@@ -428,146 +426,7 @@
   </main>
 
   <script>
-    const dataset = [
-    {
-        "title": "In the Mood for Love",
-        "director": "Wong Kar-wai",
-        "year": 2000,
-        "theater": "Metrograph",
-        "neighborhood": "Lower East Side",
-        "matchScore": 87,
-        "seen": true,
-        "weekend": "current",
-        "summary": "In 1962 Hong Kong, two neighbors form a delicate, unspoken bond after discovering their respective spouses are committing adultery.",
-        "format": "4K DCP",
-        "ticketUrl": "https://metrograph.com/nyc/",
-        "showtimes": [
-            "Sat Aug 22: 4:30 PM",
-            "Sun Aug 23: 2:00 PM"
-        ],
-        "poster": "https://image.tmdb.org/t/p/w500/iYypPT4bhqXfq1b6EnmxvRt6b2Y.jpg",
-        "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><polygon points=\"100,35 165,110 100,185 35,110\" fill=\"#00e5bc\" opacity=\"0.8\"/><circle cx=\"100\" cy=\"110\" r=\"25\" fill=\"#ff2a4b\"/><text x=\"100\" y=\"240\" font-family=\"Instrument Serif, serif\" font-size=\"16\" fill=\"#f3ebd7\" text-anchor=\"middle\" letter-spacing=\"1\">IN THE MOOD FOR LOVE</text><text x=\"100\" y=\"262\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\" letter-spacing=\"1.5\">WONG KAR-WAI // 2000</text></svg>"
-    },
-    {
-        "title": "Fallen Angels",
-        "director": "Wong Kar-wai",
-        "year": 1995,
-        "theater": "Metrograph",
-        "neighborhood": "Lower East Side",
-        "matchScore": 96,
-        "seen": true,
-        "weekend": "current",
-        "summary": "The interconnected nocturnal lives of a weary hitman, his glamorous handler, and a mute eccentric collide across neon-drenched Hong Kong.",
-        "format": "35mm Print",
-        "ticketUrl": "https://metrograph.com/nyc/",
-        "showtimes": [
-            "Fri Aug 21: 10:00 PM",
-            "Sat Aug 22: 9:30 PM",
-            "Sun Aug 23: 7:15 PM"
-        ],
-        "poster": "https://image.tmdb.org/t/p/w500/yyM9BPdwttK5LKZSLvHae7QPKo1.jpg",
-        "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><path d=\"M 0,220 L 140,40 L 170,40 L 30,220 Z\" fill=\"#e5a93c\" opacity=\"0.8\"/><line x1=\"20\" y1=\"20\" x2=\"180\" y2=\"240\" stroke=\"#ff2a4b\" stroke-width=\"1.5\"/><text x=\"100\" y=\"240\" font-family=\"Instrument Serif, serif\" font-size=\"16\" fill=\"#f3ebd7\" text-anchor=\"middle\" letter-spacing=\"1\">FALLEN ANGELS</text><text x=\"100\" y=\"262\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\" letter-spacing=\"1.5\">WONG KAR-WAI // 1995</text></svg>"
-    },
-    {
-        "title": "Le Samourai",
-        "director": "Jean-Pierre Melville",
-        "year": 1967,
-        "theater": "The Paris Theater",
-        "neighborhood": "Midtown",
-        "matchScore": 76,
-        "seen": false,
-        "weekend": "current",
-        "summary": "A methodical Parisian hitman executes a contract with icy precision, setting off a ruthless police hunt and underworld betrayal.",
-        "format": "4K Restoration",
-        "ticketUrl": "https://www.paristheaternyc.com/",
-        "showtimes": [
-            "Fri Aug 21: 8:00 PM",
-            "Sat Aug 22: 6:00 PM",
-            "Sun Aug 23: 3:30 PM"
-        ],
-        "poster": "https://image.tmdb.org/t/p/w500/5Fa6o5nfUPEatQ9b3OwEvdEdR7T.jpg",
-        "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><path d=\"M 0,220 L 140,40 L 170,40 L 30,220 Z\" fill=\"#e5a93c\" opacity=\"0.8\"/><line x1=\"20\" y1=\"20\" x2=\"180\" y2=\"240\" stroke=\"#ff2a4b\" stroke-width=\"1.5\"/><text x=\"100\" y=\"240\" font-family=\"Instrument Serif, serif\" font-size=\"16\" fill=\"#f3ebd7\" text-anchor=\"middle\" letter-spacing=\"1\">LE SAMOURAI</text><text x=\"100\" y=\"262\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\" letter-spacing=\"1.5\">JEAN-PIERRE MELVILLE // 1967</text></svg>"
-    },
-    {
-        "title": "Blow-Up",
-        "director": "Michelangelo Antonioni",
-        "year": 1966,
-        "theater": "Film Forum",
-        "neighborhood": "Greenwich Village",
-        "matchScore": 53,
-        "seen": false,
-        "weekend": "current",
-        "summary": "A mod London fashion photographer believes he has accidentally captured a murder in the background of a park photograph.",
-        "format": "35mm Print",
-        "ticketUrl": "https://filmforum.org/now_playing",
-        "showtimes": [
-            "Fri Aug 21: 6:30 PM",
-            "Sat Aug 22: 8:20 PM",
-            "Sun Aug 23: 4:10 PM"
-        ],
-        "poster": "https://image.tmdb.org/t/p/w500/zqqyRMPYWztUUdGL3298d5pBFn.jpg",
-        "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"65\" fill=\"#ff2a4b\" opacity=\"0.85\"/><circle cx=\"100\" cy=\"100\" r=\"40\" stroke=\"#00e5bc\" stroke-width=\"2\" fill=\"none\"/><text x=\"100\" y=\"240\" font-family=\"Instrument Serif, serif\" font-size=\"16\" fill=\"#f3ebd7\" text-anchor=\"middle\" letter-spacing=\"1\">BLOW-UP</text><text x=\"100\" y=\"262\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\" letter-spacing=\"1.5\">MICHELANGELO ANTONIONI // 1966</text></svg>"
-    },
-    {
-        "title": "Throne of Blood",
-        "director": "Akira Kurosawa",
-        "year": 1957,
-        "theater": "IFC Center",
-        "neighborhood": "West Village",
-        "matchScore": 62,
-        "seen": false,
-        "weekend": "current",
-        "summary": "A warrior is driven to betrayal and bloody ambition by a prophetic spirit and his ruthless wife in feudal Japan.",
-        "format": "4K Restoration",
-        "ticketUrl": "https://www.ifccenter.com/",
-        "showtimes": [
-            "Fri Aug 21: 7:00 PM",
-            "Sat Aug 22: 4:15 PM",
-            "Sun Aug 23: 6:30 PM"
-        ],
-        "poster": "https://image.tmdb.org/t/p/w500/zaZFMNxJST0TtPd68yF7fNt1he8.jpg",
-        "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><rect x=\"35\" y=\"45\" width=\"130\" height=\"130\" stroke=\"#ff2a4b\" stroke-width=\"1.5\" fill=\"none\"/><rect x=\"50\" y=\"60\" width=\"100\" height=\"100\" fill=\"#00e5bc\" opacity=\"0.75\"/><text x=\"100\" y=\"240\" font-family=\"Instrument Serif, serif\" font-size=\"16\" fill=\"#f3ebd7\" text-anchor=\"middle\" letter-spacing=\"1\">THRONE OF BLOOD</text><text x=\"100\" y=\"262\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\" letter-spacing=\"1.5\">AKIRA KUROSAWA // 1957</text></svg>"
-    },
-    {
-        "title": "Oppenheimer",
-        "director": "Christopher Nolan",
-        "year": 2023,
-        "theater": "AMC Lincoln Square 13",
-        "neighborhood": "Upper West Side",
-        "matchScore": 78,
-        "seen": true,
-        "weekend": "current",
-        "summary": "A biographical drama detailing theoretical physicist J. Robert Oppenheimer and the Manhattan Project.",
-        "format": "70mm IMAX",
-        "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13",
-        "showtimes": [
-            "Fri Aug 21: 6:45 PM",
-            "Sat Aug 22: 2:30 PM",
-            "Sun Aug 23: 7:15 PM"
-        ],
-        "poster": "https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
-        "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0a0a0d\"/><path d=\"M 0,220 L 140,40 L 170,40 L 30,220 Z\" fill=\"#f3ebd7\" opacity=\"0.8\"/><line x1=\"20\" y1=\"20\" x2=\"180\" y2=\"240\" stroke=\"#ff2a4b\" stroke-width=\"1.5\"/><text x=\"100\" y=\"240\" font-family=\"Instrument Serif, serif\" font-size=\"16\" fill=\"#f3ebd7\" text-anchor=\"middle\" letter-spacing=\"1\">OPPENHEIMER</text><text x=\"100\" y=\"262\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\" letter-spacing=\"1.5\">CHRISTOPHER NOLAN // 2023</text></svg>"
-    },
-    {
-        "title": "Heat",
-        "director": "Michael Mann",
-        "year": 1995,
-        "theater": "Regal Times Square",
-        "neighborhood": "Times Square",
-        "matchScore": 94,
-        "seen": true,
-        "weekend": "current",
-        "summary": "A methodical thief and a relentless LAPD homicide detective engage in a lethal cat-and-mouse confrontation across Los Angeles.",
-        "format": "4K Laser RPX",
-        "ticketUrl": "https://www.regmovies.com/theatres/regal-e-walk-times-square",
-        "showtimes": [
-            "Sat Aug 22: 8:30 PM",
-            "Sun Aug 23: 5:15 PM"
-        ],
-        "poster": "https://image.tmdb.org/t/p/w500/umSVjVdbVwtx5ryCA2QXL44Durm.jpg",
-        "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><rect x=\"35\" y=\"45\" width=\"130\" height=\"130\" stroke=\"#e5a93c\" stroke-width=\"1.5\" fill=\"none\"/><rect x=\"50\" y=\"60\" width=\"100\" height=\"100\" fill=\"#ff2a4b\" opacity=\"0.75\"/><text x=\"100\" y=\"240\" font-family=\"Instrument Serif, serif\" font-size=\"16\" fill=\"#f3ebd7\" text-anchor=\"middle\" letter-spacing=\"1\">HEAT</text><text x=\"100\" y=\"262\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\" letter-spacing=\"1.5\">MICHAEL MANN // 1995</text></svg>"
-    }
-];
+    const dataset = [];
 
     function renderCatalog() {
       const grid = document.getElementById('catalogGrid');
@@ -591,7 +450,7 @@
       document.getElementById('showingCount').textContent = `${filtered.length} DISCOVERIES CATALOGUED`;
 
       if (filtered.length === 0) {
-        grid.innerHTML = `<p style="grid-column: 1/-1; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.85rem; padding: 40px 0;">NO UNWATCHED SCREENINGS MATCH THE SPECIFIED CRITERIA.</p>`;
+        grid.innerHTML = `<p style="grid-column: 1/-1; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.85rem; padding: 40px 0;">NO SCREENINGS MATCH THE SPECIFIED CRITERIA.</p>`;
         return;
       }
 

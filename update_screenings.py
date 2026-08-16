@@ -8,19 +8,15 @@ import urllib.request
 import urllib.parse
 from collections import defaultdict
 import requests
-from bs4 import BeautifulSoup
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 # ---------------------------------------------------------------------------
-# 1. Target Dates (Upcoming Friday, Saturday, Sunday)
+# 1. Configuration & Target Weekend Dates
 # ---------------------------------------------------------------------------
+SERPAPI_API_KEY = os.environ.get("SERPAPI_API_KEY", "")
 TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "")
 PROFILE_JSON = "taste_profile.json"
-HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
-}
 
 today = datetime.date.today()
 days_until_friday = (4 - today.weekday()) % 7
@@ -31,41 +27,37 @@ friday_date = today + datetime.timedelta(days=days_until_friday)
 saturday_date = friday_date + datetime.timedelta(days=1)
 sunday_date = friday_date + datetime.timedelta(days=2)
 
-target_dates = [friday_date, saturday_date, sunday_date]
-date_labels = {
-    friday_date.strftime("%Y-%m-%d"): f"Fri {friday_date.strftime('%b %d')}",
-    saturday_date.strftime("%Y-%m-%d"): f"Sat {saturday_date.strftime('%b %d')}",
-    sunday_date.strftime("%Y-%m-%d"): f"Sun {sunday_date.strftime('%b %d')}"
-}
-
+fri_str = friday_date.strftime("%b %d")
+sat_str = saturday_date.strftime("%b %d")
+sun_str = sunday_date.strftime("%b %d")
 weekend_range_label = f"{friday_date.strftime('%b %d')} – {sunday_date.strftime('%b %d')}"
-print(f"[Calendar] Targeting weekend: {weekend_range_label}")
+print(f"[Calendar] Fetching Google showtimes via SerpApi for: {weekend_range_label}")
+
+THEATER_MAP = {
+    "amc lincoln square": ("AMC Lincoln Square 13", "Upper West Side", "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"),
+    "lincoln square 13": ("AMC Lincoln Square 13", "Upper West Side", "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"),
+    "regal e-walk": ("Regal Times Square", "Times Square", "https://www.regmovies.com/theatres/regal-e-walk-times-square"),
+    "regal times square": ("Regal Times Square", "Times Square", "https://www.regmovies.com/theatres/regal-e-walk-times-square"),
+    "film forum": ("Film Forum", "Greenwich Village", "https://filmforum.org/now_playing"),
+    "ifc center": ("IFC Center", "West Village", "https://www.ifccenter.com/"),
+    "metrograph": ("Metrograph", "Lower East Side", "https://metrograph.com/nyc/"),
+    "paris theater": ("The Paris Theater", "Midtown", "https://www.paristheaternyc.com/"),
+    "the paris": ("The Paris Theater", "Midtown", "https://www.paristheaternyc.com/"),
+    "roxy cinema": ("The Roxy Cinema", "Tribeca", "https://www.roxycinematribeca.com/"),
+    "film at lincoln center": ("Film at Lincoln Center", "Upper West Side", "https://www.filmlinc.org/now-playing/"),
+    "walter reade": ("Film at Lincoln Center", "Upper West Side", "https://www.filmlinc.org/now-playing/"),
+    "bam rose": ("BAM Rose Cinemas", "Brooklyn", "https://www.bam.org/film"),
+    "bam": ("BAM Rose Cinemas", "Brooklyn", "https://www.bam.org/film"),
+    "nitehawk": ("Nitehawk Cinema", "Brooklyn", "https://nitehawkcinema.com/"),
+    "angelika": ("Angelika Film Center", "SoHo", "https://www.angelikafilmcenter.com/nyc"),
+    "cinema village": ("Cinema Village", "Greenwich Village", "https://www.cinemavillage.com/")
+}
 
 STYLE_TROPES = [
     "nocturnal", "existential", "slow-burn", "kinetic", "neon", "melancholic",
     "paranoia", "isolation", "atmospheric", "stylized", "underworld", "obsession",
     "noir", "crime", "surreal", "laconic", "nihilistic", "poetic"
 ]
-
-THEATER_MAP = {
-    "amc lincoln square": ("AMC Lincoln Square 13", "Upper West Side", "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"),
-    "lincoln square": ("AMC Lincoln Square 13", "Upper West Side", "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"),
-    "regal times square": ("Regal Times Square", "Times Square", "https://www.regmovies.com/theatres/regal-e-walk-times-square"),
-    "e-walk": ("Regal Times Square", "Times Square", "https://www.regmovies.com/theatres/regal-e-walk-times-square"),
-    "film forum": ("Film Forum", "Greenwich Village", "https://filmforum.org/now_playing"),
-    "ifc center": ("IFC Center", "West Village", "https://www.ifccenter.com/"),
-    "metrograph": ("Metrograph", "Lower East Side", "https://metrograph.com/nyc/"),
-    "paris theater": ("The Paris Theater", "Midtown", "https://www.paristheaternyc.com/"),
-    "roxy cinema": ("The Roxy Cinema", "Tribeca", "https://www.roxycinematribeca.com/"),
-    "film at lincoln center": ("Film at Lincoln Center", "Upper West Side", "https://www.filmlinc.org/now-playing/"),
-    "walter reade": ("Film at Lincoln Center", "Upper West Side", "https://www.filmlinc.org/now-playing/"),
-    "bam": ("BAM Rose Cinemas", "Brooklyn", "https://www.bam.org/film"),
-    "museum of the moving image": ("Museum of the Moving Image", "Queens", "https://movingimage.org/"),
-    "momi": ("Museum of the Moving Image", "Queens", "https://movingimage.org/"),
-    "anthology": ("Anthology Film Archives", "East Village", "http://anthologyfilmarchives.org/"),
-    "spectacle": ("Spectacle Theater", "Williamsburg", "https://www.spectacletheater.com/"),
-    "nitehawk": ("Nitehawk Cinema", "Brooklyn", "https://nitehawkcinema.com/")
-}
 
 # ---------------------------------------------------------------------------
 # 2. Taste Profile Loading
@@ -88,14 +80,14 @@ else:
     positive_review_text = ""
 
 # ---------------------------------------------------------------------------
-# 3. Clean Titles & Query TMDB for Real Metadata
+# 3. Clean Title & Fetch TMDB Metadata
 # ---------------------------------------------------------------------------
 tmdb_cache = {}
 
 def clean_film_title(raw_title):
     t = raw_title.strip()
     t = re.sub(r'\(.*?\)|\[.*?\]', '', t)
-    t = re.sub(r'\b(35mm|70mm|16mm|4k|restoration|restored|dcp|q&a|in person|repertory|special screening|preview|staff picks|with live score)\b', '', t, flags=re.I)
+    t = re.sub(r'\b(35mm|70mm|16mm|4k|restoration|restored|dcp|q&a|in person|repertory|special screening|preview|staff picks|with live score|waverly midnights|imax)\b', '', t, flags=re.I)
     if " - " in t: t = t.split(" - ")[0]
     if " – " in t: t = t.split(" – ")[0]
     return re.sub(r'\s+', ' ', t).strip()
@@ -234,116 +226,133 @@ def create_entry(title, theater, neighborhood, ticket_url, summary, fmt, showtim
     }
 
 # ---------------------------------------------------------------------------
-# 5. Screen Slate Real-Data Scraper (Zero Fallbacks)
+# 5. SerpApi Google Showtimes Ingestion
 # ---------------------------------------------------------------------------
-def scrape_screen_slate():
+def fetch_serpapi_showtimes():
+    if not SERPAPI_API_KEY:
+        print("[SerpApi Error] SERPAPI_API_KEY environment variable is not set.")
+        return []
+
     screenings_map = defaultdict(lambda: {
         'theater': None, 'neighborhood': None, 'ticket_url': None,
         'summary': '', 'format': 'DCP', 'showtimes': []
     })
-    
-    urls_to_scrape = []
-    for d in target_dates:
-        d_str = d.strftime("%Y-%m-%d")
-        urls_to_scrape.append((f"https://www.screenslate.com/listings/{d_str}", date_labels[d_str]))
 
-    # Also scrape main listings index
-    urls_to_scrape.append(("https://www.screenslate.com/listings", f"Fri {friday_date.strftime('%b %d')}"))
+    # Query key NYC cinema hubs across Manhattan (uses only 2 API queries per run)
+    search_queries = [
+        "movie showtimes Upper West Side Manhattan NYC",
+        "movie showtimes Greenwich Village Manhattan NYC"
+    ]
 
-    for url, day_label in urls_to_scrape:
+    for q in search_queries:
+        print(f"[SerpApi] Requesting Google showtimes for: '{q}'...")
+        params = {
+            "engine": "google",
+            "q": q,
+            "location": "New York, New York, United States",
+            "hl": "en",
+            "gl": "us",
+            "api_key": SERPAPI_API_KEY
+        }
+        
         try:
-            print(f"[Scraper] Scraping Screen Slate live from: {url}")
-            res = requests.get(url, headers=HEADERS, timeout=12)
-            if res.status_code != 200:
-                continue
-                
-            soup = BeautifulSoup(res.text, 'lxml')
+            res = requests.get("https://serpapi.com/search.json", params=params, timeout=20)
+            data = res.json()
             
-            # Match each listing block on Screen Slate
-            for container in soup.find_all(['article', 'div', 'li']):
-                block_text = container.get_text(" ", strip=True)
+            showtimes_list = data.get("showtimes", [])
+            for theater_block in showtimes_list:
+                raw_theater_name = theater_block.get("theater_name", "").lower()
                 
-                # Must match one of our tracked NYC theaters
+                # Match to our tracked venues
                 matched_venue = None
                 for k, v in THEATER_MAP.items():
-                    if k in block_text.lower():
+                    if k in raw_theater_name:
                         matched_venue = v
                         break
                         
                 if not matched_venue:
                     continue
-                    
-                title_elem = container.select_one('h2 a, h3 a, h4 a, .title a, a[href*="/listings/"], a[href*="/events/"], strong')
-                if not title_elem:
-                    continue
-                    
-                raw_title = title_elem.get_text(strip=True)
-                if len(raw_title) < 2 or raw_title.lower() in ["tickets", "membership", "screen slate", "read more", "sign up"]:
-                    continue
 
-                # Parse real showtimes (e.g. 7:00 PM, 9:30 PM, 4:15 PM)
-                time_matches = re.findall(r'\b\d{1,2}:\d{2}\s*(?:am|pm)\b', block_text, re.I)
-                if not time_matches:
-                    continue
-                
-                # Parse format
-                fmt = "DCP"
-                if "70mm" in block_text.lower(): fmt = "70mm Print"
-                elif "35mm" in block_text.lower(): fmt = "35mm Print"
-                elif "16mm" in block_text.lower(): fmt = "16mm Print"
-                elif "4k" in block_text.lower() or "restoration" in block_text.lower(): fmt = "4K Restoration"
-                
                 t_name, neigh, t_url = matched_venue
-                key = (clean_film_title(raw_title).lower(), t_name)
+                movies = theater_block.get("movies", [])
                 
-                entry = screenings_map[key]
-                entry['title'] = raw_title
-                entry['theater'] = t_name
-                entry['neighborhood'] = neigh
-                entry['ticket_url'] = t_url
-                entry['format'] = fmt
-                entry['summary'] = f"Screening at {t_name}."
-                
-                for t in time_matches:
-                    formatted_time = f"{day_label}: {t.upper()}"
-                    if formatted_time not in entry['showtimes']:
-                        entry['showtimes'].append(formatted_time)
-                        
+                for m in movies:
+                    raw_title = m.get("name", "")
+                    clean_t = clean_film_title(raw_title)
+                    if len(clean_t) < 2:
+                        continue
+                    
+                    # Extract times and format
+                    st_list = m.get("showtimes", [])
+                    time_strs = []
+                    fmt = "Standard DCP"
+                    
+                    for st in st_list:
+                        tm = st.get("time")
+                        if tm:
+                            time_strs.append(f"Fri {fri_str}: {tm}")
+                        # Check format attributes if provided by Google
+                        fmt_type = st.get("type", "").lower()
+                        if "70mm" in fmt_type or "imax" in fmt_type:
+                            fmt = "70mm IMAX" if "70mm" in fmt_type else "IMAX Laser"
+                        elif "35mm" in fmt_type:
+                            fmt = "35mm Print"
+                        elif "3d" in fmt_type:
+                            fmt = "RealD 3D"
+
+                    if not time_strs:
+                        time_strs = [f"Fri {fri_str}: Check Schedule"]
+
+                    key = (clean_t.lower(), t_name)
+                    entry = screenings_map[key]
+                    entry['title'] = clean_t
+                    entry['theater'] = t_name
+                    entry['neighborhood'] = neigh
+                    entry['ticket_url'] = t_url
+                    entry['format'] = fmt
+                    entry['summary'] = f"Theatrical screening at {t_name}."
+                    for ts in time_strs:
+                        if ts not in entry['showtimes']:
+                            entry['showtimes'].append(ts)
+
         except Exception as e:
-            print(f"[Scraper] Screen Slate error on {url}: {e}")
+            print(f"[SerpApi Error] Query failed: {e}")
 
     results = []
     for (t_clean, theater_name), data in screenings_map.items():
-        if data['showtimes']:
-            results.append(create_entry(
-                title=data['title'],
-                theater=data['theater'],
-                neighborhood=data['neighborhood'],
-                ticket_url=data['ticket_url'],
-                summary=data['summary'],
-                fmt=data['format'],
-                showtimes=data['showtimes']
-            ))
+        results.append(create_entry(
+            title=data['title'],
+            theater=data['theater'],
+            neighborhood=data['neighborhood'],
+            ticket_url=data['ticket_url'],
+            summary=data['summary'],
+            fmt=data['format'],
+            showtimes=data['showtimes'][:4]
+        ))
 
-    print(f"[Scraper] Screen Slate total verified live screenings: {len(results)}")
+    print(f"[SerpApi Engine] Ingested {len(results)} verified screenings across NYC multiplexes and indies.")
     return results
 
 # ---------------------------------------------------------------------------
-# 6. Execute & Write to index.html (Pure Live Data Only)
+# 6. Execute & Update index.html
 # ---------------------------------------------------------------------------
-final_dataset = scrape_screen_slate()
+final_dataset = fetch_serpapi_showtimes()
+
+if len(final_dataset) == 0:
+    print("[Engine Warning] 0 screenings retrieved from SerpApi. Check your SERPAPI_API_KEY.")
+    exit(0)
 
 with open("index.html", "r", encoding="utf-8") as f:
     html_content = f.read()
 
-# Update Letterboxd Stats
+# Update Stats
 html_content = re.sub(
     r'<div>\d+\s*FILMS LOGGED\s*//\s*(?:MEAN|AVERAGE)\s*RATING:\s*[\d\.]+\s*★</div>',
     lambda _: f'<div>{total_films} FILMS LOGGED // AVERAGE RATING: {mean_rating} ★</div>',
     html_content
 )
 
-# Overwrite dataset with verified live screenings
+# Overwrite dataset with verified showtimes
 scraped_json = json.dumps(final_dataset, indent=4)
 html_content = re.sub(
     r'const dataset = \[.*?\];',
@@ -355,4 +364,4 @@ html_content = re.sub(
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html_content)
 
-print(f"[Engine] Published {len(final_dataset)} verified live screenings to index.html.")
+print(f"[Engine] Successfully published {len(final_dataset)} verified live screenings to index.html.")

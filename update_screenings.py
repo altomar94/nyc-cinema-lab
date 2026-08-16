@@ -248,13 +248,15 @@ FALLBACK_SCREENINGS = [
 with open("index.html", "r", encoding="utf-8") as f:
     html = f.read()
 
-# Update Header Stats
-html = re.sub(r'<div>\d+\s*FILMS LOGGED\s*//\s*MEAN RATING:\s*[\d\.]+\s*★</div>', f'<div>{total_films} FILMS LOGGED // MEAN RATING: {mean_rating} ★</div>', html)
-html = re.sub(r'<span>LOGGED:\s*<strong>\d+\s*FILMS</strong></span>', f'<span>LOGGED: <strong>{total_films} FILMS</strong></span>', html)
-html = re.sub(r'<span>MEAN:\s*<strong>[\d\.]+\s*★</strong></span>', f'<span>MEAN: <strong>{mean_rating} ★</strong></span>', html)
+# Update Top Bar Live Stats
+html = re.sub(
+    r'<div>\d+\s*FILMS LOGGED\s*//\s*(?:MEAN|AVERAGE)\s*RATING:\s*[\d\.]+\s*★</div>',
+    f'<div>{total_films} FILMS LOGGED // AVERAGE RATING: {mean_rating} ★</div>',
+    html
+)
 
 # Inject screening dataset
-scraped_json = json.dumps(FALLBACK_SCREENINGS, indent=4)
+scraped_json = json.dumps(final_dataset, indent=4)
 html = re.sub(r'const dataset = \[.*?\];', f'const dataset = {scraped_json};', html, flags=re.DOTALL)
 
 with open("index.html", "w", encoding="utf-8") as f:

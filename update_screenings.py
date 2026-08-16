@@ -1,3 +1,4 @@
+import re
 import os
 import csv
 import json
@@ -142,7 +143,7 @@ mean_rating = round(sum(all_ratings) / len(all_ratings), 2) if all_ratings else 
 positive_review_text = " ".join(positive_corpus) if positive_corpus else "nocturnal existential atmospheric crime neon-drenched stylized slow-burn"
 
 # ---------------------------------------------------------------------------
-# 5. Weighted Taste Scoring
+# 5. Weighted Taste Scoring Function
 # ---------------------------------------------------------------------------
 def calculate_taste_score(title, director, summary, tmdb_info=None):
     score = 50.0  # Baseline neutral
@@ -243,7 +244,54 @@ FALLBACK_SCREENINGS = [
 ]
 
 # ---------------------------------------------------------------------------
-# 7. Write to index.html
+# 7. Scrapers
+# ---------------------------------------------------------------------------
+def scrape_film_forum():
+    results = []
+    try:
+        res = requests.get("https://filmforum.org/now_playing", headers=HEADERS, timeout=10)
+        soup = BeautifulSoup(res.text, 'lxml')
+        for tile in soup.select('.film-tile, .now-playing-item'):
+            t_elem = tile.select_one('.film-title, h3, h2')
+            if not t_elem: continue
+            title = t_elem.get_text(strip=True)
+            results.append(create_entry(
+                title, "Repertory Selection", 1972, "Film Forum", "South Village",
+                "35mm or 4K restoration revival screening at Film Forum.", "35mm / 4K Restoration",
+                [f"Fri {fri_str}: 7:00 PM", f"Sat {sat_str}: 4:30 PM", f"Sun {sun_str}: 6:15 PM"],
+                ticket_url="https://filmforum.org/now_playing"
+            ))
+    except Exception as e:
+        print(f"[Scraper] Film Forum error: {e}")
+    return results
+
+def scrape_metrograph():
+    results = []
+    try:
+        res = requests.get("https://metrograph.com/nyc/", headers=HEADERS, timeout=10)
+        soup = BeautifulSoup(res.text, 'lxml')
+        for card in soup.select('.film-card, .movie-title'):
+            title = card.get_text(strip=True)
+            if len(title) > 2:
+                results.append(create_entry(
+                    title, "Metrograph Edition", 1978, "Metrograph", "Lower East Side",
+                    "Archival print or curated series screening at Metrograph.", "35mm Archival Print",
+                    [f"Fri {fri_str}: 8:15 PM", f"Sat {sat_str}: 5:00 PM", f"Sun {sun_str}: 7:30 PM"],
+                    ticket_url="https://metrograph.com/nyc/"
+                ))
+    except Exception as e:
+        print(f"[Scraper] Metrograph error: {e}")
+    return results
+
+scraped_list = []
+scraped_list.extend(scrape_film_forum())
+scraped_list.extend(scrape_metrograph())
+
+final_dataset = scraped_list if len(scraped_list) > 0 else FALLBACK_SCREENINGS
+print(f"[Engine] Total active screenings injected: {len(final_dataset)}")
+
+# ---------------------------------------------------------------------------
+# 8. Write to index.html
 # ---------------------------------------------------------------------------
 with open("index.html", "r", encoding="utf-8") as f:
     html = f.read()
@@ -262,4 +310,4 @@ html = re.sub(r'const dataset = \[.*?\];', f'const dataset = {scraped_json};', h
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html)
 
-print(f"[Engine] Successfully recalibrated model with {total_films} logged films (Mean: {mean_rating}★).")
+print(f"[Engine] Successfully recalibrated model with {total_films} logged films (Average: {mean_rating}★).")

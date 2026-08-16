@@ -39,7 +39,7 @@ date_labels = {
 }
 
 weekend_range_label = f"{friday_date.strftime('%b %d')} – {sunday_date.strftime('%b %d')}"
-print(f"[Calendar] Scraping Screen Slate for: {weekend_range_label}")
+print(f"[Calendar] Targeting weekend: {weekend_range_label}")
 
 STYLE_TROPES = [
     "nocturnal", "existential", "slow-burn", "kinetic", "neon", "melancholic",
@@ -71,25 +71,24 @@ THEATER_MAP = {
 # 2. Taste Profile Loading
 # ---------------------------------------------------------------------------
 if os.path.exists(PROFILE_JSON):
-    print(f"[Taste Engine] Loading profile from {PROFILE_JSON}...")
     with open(PROFILE_JSON, "r", encoding="utf-8") as f:
         profile = json.load(f)
-    total_films = profile.get("total_films", 224)
-    mean_rating = profile.get("mean_rating", 3.79)
+    total_films = profile.get("total_films", 0)
+    mean_rating = profile.get("mean_rating", 0.0)
     watched_titles = set(profile.get("watched_titles", []))
     director_affinity = profile.get("director_affinity", {})
     dp_affinity = profile.get("dp_affinity", {})
     positive_review_text = profile.get("positive_review_text", "")
 else:
-    total_films = 224
-    mean_rating = 3.79
+    total_films = 0
+    mean_rating = 0.0
     watched_titles = set()
-    director_affinity = {"wong kar-wai": 6.0, "jean-pierre melville": 4.0, "akira kurosawa": 3.0}
-    dp_affinity = {"christopher doyle": 5.0}
-    positive_review_text = "nocturnal existential atmospheric crime neon-drenched stylized slow-burn"
+    director_affinity = {}
+    dp_affinity = {}
+    positive_review_text = ""
 
 # ---------------------------------------------------------------------------
-# 3. TMDB Metadata Fetcher
+# 3. Clean Titles & Query TMDB for Real Metadata
 # ---------------------------------------------------------------------------
 tmdb_cache = {}
 
@@ -101,7 +100,7 @@ def clean_film_title(raw_title):
     if " – " in t: t = t.split(" – ")[0]
     return re.sub(r'\s+', ' ', t).strip()
 
-def fetch_real_tmdb_metadata(film_title, known_director=None, known_year=None):
+def fetch_real_tmdb_metadata(film_title):
     clean_search = clean_film_title(film_title)
     clean_key = clean_search.lower()
     
@@ -112,18 +111,8 @@ def fetch_real_tmdb_metadata(film_title, known_director=None, known_year=None):
         return None
     try:
         search_url = f"https://api.themoviedb.org/3/search/movie?api_key={TMDB_API_KEY}&query={urllib.parse.quote(clean_search)}"
-        if known_year and str(known_year).isdigit():
-            search_url += f"&year={known_year}"
-            
         res = requests.get(search_url, timeout=5).json()
         results = res.get('results', [])
-        
-        # Fallback search without year constraint if no direct hit
-        if not results and known_year:
-            search_url = f"https://api.themoviedb.org/3/search/movie?api_key={TMDB_API_KEY}&query={urllib.parse.quote(clean_search)}"
-            res = requests.get(search_url, timeout=5).json()
-            results = res.get('results', [])
-
         if not results:
             tmdb_cache[clean_key] = None
             return None
@@ -131,7 +120,7 @@ def fetch_real_tmdb_metadata(film_title, known_director=None, known_year=None):
         movie = results[0]
         movie_id = movie['id']
         release_date = movie.get('release_date', '')
-        year = int(release_date.split('-')[0]) if (release_date and release_date.split('-')[0].isdigit()) else known_year
+        year = int(release_date.split('-')[0]) if (release_date and release_date.split('-')[0].isdigit()) else None
         poster_url = f"https://image.tmdb.org/t/p/w500{movie.get('poster_path')}" if movie.get('poster_path') else None
         
         credits_res = requests.get(f"https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key={TMDB_API_KEY}", timeout=5).json()
@@ -146,7 +135,7 @@ def fetch_real_tmdb_metadata(film_title, known_director=None, known_year=None):
         corpus = f"{overview} {' '.join(keywords)} {' '.join(reviews)}"
         data = {
             'title': movie.get('title', clean_search),
-            'director': directors[0] if directors else (known_director or 'Repertory Selection'),
+            'director': directors[0] if directors else 'Unknown',
             'directors': [d.lower() for d in directors],
             'dps': [dp.lower() for dp in dps],
             'year': year,
@@ -181,11 +170,12 @@ def calculate_taste_score(title, director, summary, tmdb_info=None):
         
     screening_text = f"{summary} {tmdb_info['corpus'] if (tmdb_info and 'corpus' in tmdb_info) else ''}"
     try:
-        tfidf = TfidfVectorizer().fit_transform([positive_review_text, screening_text])
-        sim = cosine_similarity(tfidf[0:1], tfidf[1:2])[0][0]
-        score += round(sim * 14)
+        if positive_review_text.strip():
+            tfidf = TfidfVectorizer().fit_transform([positive_review_text, screening_text])
+            sim = cosine_similarity(tfidf[0:1], tfidf[1:2])[0][0]
+            score += round(sim * 14)
     except Exception:
-        score += 4
+        pass
         
     trope_count = sum(1 for trope in STYLE_TROPES if trope in screening_text.lower())
     score += min(round(trope_count * 2.5), 10)
@@ -215,21 +205,21 @@ def generate_poster_svg(title, director, year):
         f'</svg>'
     )
 
-def create_entry(title, director, year, theater, neighborhood, ticket_url, summary, fmt, showtimes):
+def create_entry(title, theater, neighborhood, ticket_url, summary, fmt, showtimes):
     clean_t = clean_film_title(title)
-    tmdb_info = fetch_real_tmdb_metadata(clean_t, known_director=director, known_year=year)
+    tmdb_info = fetch_real_tmdb_metadata(clean_t)
     
     display_title = tmdb_info['title'] if (tmdb_info and tmdb_info.get('title')) else clean_t
-    final_director = tmdb_info['director'] if (tmdb_info and tmdb_info.get('director')) else (director or 'Repertory Selection')
-    final_year = tmdb_info['year'] if (tmdb_info and tmdb_info.get('year')) else (year or 'Classic')
+    director = tmdb_info['director'] if (tmdb_info and tmdb_info.get('director')) else 'Unknown'
+    year = tmdb_info['year'] if (tmdb_info and tmdb_info.get('year')) else 'Classic'
     final_summary = tmdb_info['overview'] if (tmdb_info and tmdb_info.get('overview')) else summary
     poster = tmdb_info.get('poster') if tmdb_info else None
-    match_score = calculate_taste_score(display_title, final_director, final_summary, tmdb_info)
+    match_score = calculate_taste_score(display_title, director, final_summary, tmdb_info)
     
     return {
         "title": display_title,
-        "director": final_director,
-        "year": final_year,
+        "director": director,
+        "year": year,
         "theater": theater,
         "neighborhood": neighborhood,
         "matchScore": match_score,
@@ -240,122 +230,108 @@ def create_entry(title, director, year, theater, neighborhood, ticket_url, summa
         "ticketUrl": ticket_url,
         "showtimes": showtimes,
         "poster": poster,
-        "svg": generate_poster_svg(display_title, final_director, final_year)
+        "svg": generate_poster_svg(display_title, director, year)
     }
 
 # ---------------------------------------------------------------------------
-# 5. Screen Slate Weekend Scraper
+# 5. Screen Slate Real-Data Scraper (Zero Fallbacks)
 # ---------------------------------------------------------------------------
 def scrape_screen_slate():
-    """Scrapes Screen Slate daily calendar listings for target weekend dates."""
     screenings_map = defaultdict(lambda: {
-        'director': None, 'year': None, 'theater': None,
-        'neighborhood': None, 'ticket_url': None, 'summary': None,
-        'format': 'DCP', 'showtimes': []
+        'theater': None, 'neighborhood': None, 'ticket_url': None,
+        'summary': '', 'format': 'DCP', 'showtimes': []
     })
     
-    # Scrape each target date (e.g. 2026-08-21, 2026-08-22, 2026-08-23)
-    urls_to_scrape = [
-        ("https://www.screenslate.com/listings", "Today")
-    ]
+    urls_to_scrape = []
     for d in target_dates:
         d_str = d.strftime("%Y-%m-%d")
         urls_to_scrape.append((f"https://www.screenslate.com/listings/{d_str}", date_labels[d_str]))
 
+    # Also scrape main listings index
+    urls_to_scrape.append(("https://www.screenslate.com/listings", f"Fri {friday_date.strftime('%b %d')}"))
+
     for url, day_label in urls_to_scrape:
         try:
-            print(f"[Scraper] Querying {url}...")
+            print(f"[Scraper] Scraping Screen Slate live from: {url}")
             res = requests.get(url, headers=HEADERS, timeout=12)
             if res.status_code != 200:
                 continue
                 
             soup = BeautifulSoup(res.text, 'lxml')
             
-            # Find venue sections or listing blocks
-            venues = soup.select('.venue-section, .views-row, article, .daily-listing')
-            if not venues:
-                venues = [soup]
-
-            current_venue_info = None
-
-            for elem in soup.find_all(['h2', 'h3', 'h4', 'article', 'li', 'div']):
-                text = elem.get_text(" ", strip=True)
+            # Match each listing block on Screen Slate
+            for container in soup.find_all(['article', 'div', 'li']):
+                block_text = container.get_text(" ", strip=True)
                 
-                # Check for venue header
+                # Must match one of our tracked NYC theaters
+                matched_venue = None
                 for k, v in THEATER_MAP.items():
-                    if k in text.lower() and len(text) < 60:
-                        current_venue_info = v
+                    if k in block_text.lower():
+                        matched_venue = v
                         break
                         
-                if not current_venue_info:
+                if not matched_venue:
                     continue
-
-                # Match film title & details inside this venue section
-                title_elem = elem.select_one('a[href*="/film/"], a[href*="/event/"], strong, .title')
+                    
+                title_elem = container.select_one('h2 a, h3 a, h4 a, .title a, a[href*="/listings/"], a[href*="/events/"], strong')
                 if not title_elem:
                     continue
                     
-                raw_title = clean_film_title(title_elem.get_text(strip=True))
-                if len(raw_title) < 2 or raw_title.lower() in ["read more", "buy tickets", "tickets", "membership"]:
+                raw_title = title_elem.get_text(strip=True)
+                if len(raw_title) < 2 or raw_title.lower() in ["tickets", "membership", "screen slate", "read more", "sign up"]:
+                    continue
+
+                # Parse real showtimes (e.g. 7:00 PM, 9:30 PM, 4:15 PM)
+                time_matches = re.findall(r'\b\d{1,2}:\d{2}\s*(?:am|pm)\b', block_text, re.I)
+                if not time_matches:
                     continue
                 
-                # Format detection
+                # Parse format
                 fmt = "DCP"
-                if "70mm" in text.lower(): fmt = "70mm Print"
-                elif "35mm" in text.lower(): fmt = "35mm Print"
-                elif "16mm" in text.lower(): fmt = "16mm Print"
-                elif "4k" in text.lower() or "restoration" in text.lower(): fmt = "4K Restoration"
+                if "70mm" in block_text.lower(): fmt = "70mm Print"
+                elif "35mm" in block_text.lower(): fmt = "35mm Print"
+                elif "16mm" in block_text.lower(): fmt = "16mm Print"
+                elif "4k" in block_text.lower() or "restoration" in block_text.lower(): fmt = "4K Restoration"
                 
-                # Times extraction (e.g. 7:00pm, 9:30pm)
-                time_matches = re.findall(r'\b\d{1,2}:\d{2}\s*(?:am|pm)\b', text, re.I)
-                times = [f"{day_label}: {t.upper()}" for t in time_matches] if time_matches else [f"{day_label}: See Schedule"]
-                
-                # Year extraction if present
-                year_match = re.search(r'\b(19\d\d|20[0-2]\d)\b', text)
-                year = int(year_match.group(1)) if year_match else None
-                
-                # Store entry
-                t_name, neigh, t_url = current_venue_info
-                key = (raw_title.lower(), t_name)
+                t_name, neigh, t_url = matched_venue
+                key = (clean_film_title(raw_title).lower(), t_name)
                 
                 entry = screenings_map[key]
                 entry['title'] = raw_title
                 entry['theater'] = t_name
                 entry['neighborhood'] = neigh
                 entry['ticket_url'] = t_url
-                entry['year'] = year or entry['year']
                 entry['format'] = fmt
-                entry['summary'] = f"Playing at {t_name}."
-                for t in times:
-                    if t not in entry['showtimes']:
-                        entry['showtimes'].append(t)
+                entry['summary'] = f"Screening at {t_name}."
+                
+                for t in time_matches:
+                    formatted_time = f"{day_label}: {t.upper()}"
+                    if formatted_time not in entry['showtimes']:
+                        entry['showtimes'].append(formatted_time)
                         
         except Exception as e:
-            print(f"[Scraper] Error scraping {url}: {e}")
+            print(f"[Scraper] Screen Slate error on {url}: {e}")
 
     results = []
     for (t_clean, theater_name), data in screenings_map.items():
         if data['showtimes']:
             results.append(create_entry(
                 title=data['title'],
-                director=data['director'],
-                year=data['year'],
                 theater=data['theater'],
                 neighborhood=data['neighborhood'],
                 ticket_url=data['ticket_url'],
                 summary=data['summary'],
                 fmt=data['format'],
-                showtimes=data['showtimes'][:4]
+                showtimes=data['showtimes']
             ))
 
-    print(f"[Scraper] Screen Slate: {len(results)} verified NYC screenings gathered.")
+    print(f"[Scraper] Screen Slate total verified live screenings: {len(results)}")
     return results
 
 # ---------------------------------------------------------------------------
-# 6. Execute & Write to index.html
+# 6. Execute & Write to index.html (Pure Live Data Only)
 # ---------------------------------------------------------------------------
 final_dataset = scrape_screen_slate()
-print(f"[Engine] Total active screenings catalogued: {len(final_dataset)}")
 
 with open("index.html", "r", encoding="utf-8") as f:
     html_content = f.read()
@@ -367,7 +343,7 @@ html_content = re.sub(
     html_content
 )
 
-# Inject verified dataset
+# Overwrite dataset with verified live screenings
 scraped_json = json.dumps(final_dataset, indent=4)
 html_content = re.sub(
     r'const dataset = \[.*?\];',
@@ -379,4 +355,4 @@ html_content = re.sub(
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html_content)
 
-print(f"[Engine] Successfully published {len(final_dataset)} screenings to index.html.")
+print(f"[Engine] Published {len(final_dataset)} verified live screenings to index.html.")

@@ -69,22 +69,18 @@ STYLE_TROPES = [
 if os.path.exists(PROFILE_JSON):
     with open(PROFILE_JSON, "r", encoding="utf-8") as f:
         profile = json.load(f)
-    total_films = profile.get("total_films", 0)
-    mean_rating = profile.get("mean_rating", 0.0)
     watched_titles = set(profile.get("watched_titles", []))
     director_affinity = profile.get("director_affinity", {})
     dp_affinity = profile.get("dp_affinity", {})
     positive_review_text = profile.get("positive_review_text", "")
 else:
-    total_films = 0
-    mean_rating = 0.0
     watched_titles = set()
     director_affinity = {}
     dp_affinity = {}
     positive_review_text = ""
 
 # ---------------------------------------------------------------------------
-# 3. TMDB Metadata Fetcher
+# 3. Clean Title & Smart Summary Trimming
 # ---------------------------------------------------------------------------
 tmdb_cache = {}
 
@@ -95,6 +91,18 @@ def clean_film_title(raw_title):
     if " - " in t: t = t.split(" - ")[0]
     if " – " in t: t = t.split(" – ")[0]
     return re.sub(r'\s+', ' ', t).strip()
+
+def trim_summary(text, max_chars=130):
+    if not text:
+        return ""
+    text = text.strip()
+    sentences = re.split(r'(?<=[.!?])\s+', text)
+    if sentences and 25 <= len(sentences[0]) <= max_chars:
+        return sentences[0]
+    if len(text) > max_chars:
+        truncated = text[:max_chars].rsplit(' ', 1)[0]
+        return truncated.rstrip('.,;:-') + '...'
+    return text
 
 def fetch_real_tmdb_metadata(film_title):
     clean_search = clean_film_title(film_title)
@@ -145,7 +153,7 @@ def fetch_real_tmdb_metadata(film_title):
         return None
 
 # ---------------------------------------------------------------------------
-# 4. Pure Taste Score & Posters
+# 4. Taste Scoring & Poster SVG Fallback
 # ---------------------------------------------------------------------------
 def calculate_taste_score(title, director, summary, tmdb_info=None):
     score = 50.0
@@ -208,9 +216,11 @@ def create_entry(title, theater, neighborhood, ticket_url, summary, fmt, showtim
     display_title = tmdb_info['title'] if (tmdb_info and tmdb_info.get('title')) else clean_t
     director = tmdb_info['director'] if (tmdb_info and tmdb_info.get('director')) else 'Unknown'
     year = tmdb_info['year'] if (tmdb_info and tmdb_info.get('year')) else 'Classic'
-    final_summary = tmdb_info['overview'] if (tmdb_info and tmdb_info.get('overview')) else summary
+    raw_summary = tmdb_info['overview'] if (tmdb_info and tmdb_info.get('overview')) else summary
+    clean_summary = trim_summary(raw_summary)
+    
     poster = tmdb_info.get('poster') if tmdb_info else None
-    match_score = calculate_taste_score(display_title, director, final_summary, tmdb_info)
+    match_score = calculate_taste_score(display_title, director, clean_summary, tmdb_info)
     
     return {
         "title": display_title,
@@ -221,7 +231,7 @@ def create_entry(title, theater, neighborhood, ticket_url, summary, fmt, showtim
         "matchScore": match_score,
         "seen": display_title.lower() in watched_titles or clean_t.lower() in watched_titles,
         "weekend": "current",
-        "summary": final_summary[:180] + "..." if len(final_summary) > 180 else final_summary,
+        "summary": clean_summary,
         "format": fmt,
         "ticketUrl": ticket_url,
         "showtimes": showtimes,
@@ -230,7 +240,7 @@ def create_entry(title, theater, neighborhood, ticket_url, summary, fmt, showtim
     }
 
 # ---------------------------------------------------------------------------
-# 5. Robust SerpApi Showtimes Ingestion (60s Timeout + Targeted Queries)
+# 5. Targeted SerpApi Ingestion Across All Tracked NYC Venues
 # ---------------------------------------------------------------------------
 def fetch_serpapi_showtimes():
     screenings_map = defaultdict(lambda: {
@@ -238,13 +248,19 @@ def fetch_serpapi_showtimes():
         'summary': '', 'format': 'DCP', 'showtimes': []
     })
 
-    # High-yield cinema queries in Manhattan
     search_queries = [
-        "movies in theaters Manhattan NYC",
         "AMC Lincoln Square 13 showtimes",
+        "Regal Times Square showtimes",
         "IFC Center NYC showtimes",
         "Film Forum NYC showtimes",
-        "Metrograph NYC showtimes"
+        "Metrograph NYC showtimes",
+        "Film at Lincoln Center showtimes",
+        "The Paris Theater NYC showtimes",
+        "Roxy Cinema Tribeca showtimes",
+        "Angelika Film Center NYC showtimes",
+        "Nitehawk Cinema Brooklyn showtimes",
+        "BAM Rose Cinemas showtimes",
+        "Cinema Village NYC showtimes"
     ]
 
     for q in search_queries:
@@ -259,7 +275,6 @@ def fetch_serpapi_showtimes():
         }
         
         try:
-            # 60-second read timeout accommodates Google's JavaScript rendering
             res = requests.get("https://serpapi.com/search.json", params=params, timeout=60)
             data = res.json()
             
@@ -267,25 +282,18 @@ def fetch_serpapi_showtimes():
                 print(f"[SerpApi API Error]: {data['error']}")
                 continue
 
-            # Case A: Theater-grouped showtimes
             showtimes_blocks = data.get("showtimes", [])
-            
-            # Case B: Knowledge Graph / Movies results
             if not showtimes_blocks and "knowledge_graph" in data:
                 kg = data["knowledge_graph"]
                 showtimes_blocks = kg.get("movies_results", []) or kg.get("theaters", [])
 
-            # Case C: Organic / Inline results
             if not showtimes_blocks:
                 showtimes_blocks = data.get("movies_results", []) or data.get("local_results", [])
-
-            print(f"[SerpApi] Parsed {len(showtimes_blocks)} result blocks for '{q}'.")
 
             for block in showtimes_blocks:
                 raw_theater_name = block.get("name") or block.get("theater_name") or block.get("title", "")
                 raw_theater_lower = raw_theater_name.lower()
                 
-                # Check for matching venue
                 matched_venue = None
                 for k, v in THEATER_MAP.items():
                     if k in raw_theater_lower or k in q.lower():
@@ -298,7 +306,6 @@ def fetch_serpapi_showtimes():
                 t_name, neigh, t_url = matched_venue
                 movies = block.get("movies", [])
                 
-                # If the block itself represents a single movie at a theater
                 if not movies and ("showtimes" in block or "times" in block):
                     movies = [block]
 
@@ -335,7 +342,7 @@ def fetch_serpapi_showtimes():
                     entry['neighborhood'] = neigh
                     entry['ticket_url'] = t_url
                     entry['format'] = fmt
-                    entry['summary'] = f"Theatrical screening at {t_name}."
+                    entry['summary'] = f"Playing at {t_name}."
                     for ts in time_strs:
                         if ts not in entry['showtimes']:
                             entry['showtimes'].append(ts)
@@ -369,12 +376,6 @@ if len(final_dataset) == 0:
 
 with open("index.html", "r", encoding="utf-8") as f:
     html_content = f.read()
-
-html_content = re.sub(
-    r'<div>\d+\s*FILMS LOGGED\s*//\s*(?:MEAN|AVERAGE)\s*RATING:\s*[\d\.]+\s*★</div>',
-    lambda _: f'<div>{total_films} FILMS LOGGED // AVERAGE RATING: {mean_rating} ★</div>',
-    html_content
-)
 
 scraped_json = json.dumps(final_dataset, indent=4)
 html_content = re.sub(

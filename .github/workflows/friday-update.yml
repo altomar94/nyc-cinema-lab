@@ -1,10 +1,10 @@
-name: Weekend Repertory Auto-Update
+name: Repertory Auto-Update
 
 on:
   schedule:
-    # Runs at 10:00 AM UTC (6:00 AM EDT) every Wednesday and Friday
-    - cron: '0 10 * * 3,5'
-  workflow_dispatch: # Allows manual run anytime from the Actions tab
+    # Runs at 11:00 AM UTC (7:00 AM EDT) every Thursday
+    - cron: '0 11 * * 4'
+  workflow_dispatch:
 
 permissions:
   contents: write

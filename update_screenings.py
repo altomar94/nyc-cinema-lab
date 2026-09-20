@@ -355,7 +355,7 @@ def generate_poster_svg(title, director, year):
     )
 
 
-def create_entry(title, theater, neighborhood, ticket_url, summary, fmt,
+def create_entry(title, theater, neighborhood, ticket_url, summary, format,
                  showtimes):
     clean_t = clean_film_title(title)
     tmdb_info = tmdb.fetch_movie(clean_t)
@@ -379,7 +379,7 @@ def create_entry(title, theater, neighborhood, ticket_url, summary, fmt,
                  or clean_t.lower() in watched_titles),
         "weekend": "current",
         "summary": clean_summary,
-        "format": fmt,
+        "format": format,
         "ticketUrl": ticket_url,
         "showtimes": showtimes[:6],
         "poster": tmdb_info.get("poster") if tmdb_info else None,

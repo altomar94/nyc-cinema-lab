@@ -13,7 +13,15 @@ export + TMDB metadata. Live at **nycfilmscreenings.com** (GitHub Pages).
 2. **`update_screenings.py`** (runs every Friday morning via GitHub Actions)
    scrapes Google showtimes for 11 tracked NYC venues through SerpApi,
    enriches each film with TMDB, scores it against your taste profile, and
-   writes **`screenings.json`**.
+   writes **`screenings.json`**. Scoring (base 50, clamped 30–98):
+   - **Director affinity** (±14): Letterboxd-rating-weighted, exact
+     normalized name match — no substring false positives.
+   - **Cinematographer affinity** (±10): same idea, smaller weight.
+   - **Text similarity** (±14): one batch TF-IDF fit over all candidate
+     listings; cosine to the liked-film centroid *minus* cosine to the
+     disliked-film centroid, so films you hated actively push scores down.
+   - **Style prior** (+10 max): hand-picked trope keywords
+     ("noir", "slow-burn", …).
 3. **`index.html`** is a static page that fetches `screenings.json` and
    renders filterable film cards (score, venue, watched/unwatched, search).
 

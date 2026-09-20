@@ -49,7 +49,8 @@ def build_profile():
     all_ratings = []
     director_affinity = defaultdict(float)
     dp_affinity = defaultdict(float)
-    positive_corpus = []
+    positive_docs = []   # per-film corpus text for 4.0+ rated films
+    negative_docs = []   # per-film corpus text for 2.5- rated films
 
     print(f"[1/3] Reading {CSV_PATH}...")
     with open(CSV_PATH, mode="r", encoding="utf-8") as f:
@@ -81,7 +82,9 @@ def build_profile():
                 for dp in meta["dps"]:
                     dp_affinity[dp] += weight
                 if weight > 0:
-                    positive_corpus.append(meta["corpus"])
+                    positive_docs.append(meta["corpus"])
+                elif stars <= 2.5:
+                    negative_docs.append(meta["corpus"])
             time.sleep(0.05)  # polite rate-limiting buffer
 
         if idx % 25 == 0 or idx == len(rows):
@@ -99,8 +102,13 @@ def build_profile():
         "watched_titles": sorted(set(watched_titles)),
         "director_affinity": dict(director_affinity),
         "dp_affinity": dict(dp_affinity),
-        # Fallback vibe keywords if the corpus came back empty.
-        "positive_review_text": (" ".join(positive_corpus) if positive_corpus
+        # Per-film documents so the weekly run can compute real IDF
+        # statistics over them instead of TF-IDF on two documents.
+        "positive_corpus_docs": positive_docs,
+        "negative_corpus_docs": negative_docs,
+        # Joined corpus kept for backward compatibility; empty-corpus
+        # fallback is a hand-written style prior, not real data.
+        "positive_review_text": (" ".join(positive_docs) if positive_docs
                                  else "nocturnal existential atmospheric "
                                       "crime neon-drenched stylized slow-burn"),
     }

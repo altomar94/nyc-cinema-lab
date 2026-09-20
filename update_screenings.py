@@ -18,6 +18,7 @@ import sys
 import zlib
 from collections import defaultdict
 
+import numpy as np
 import requests
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -99,6 +100,38 @@ tmdb = TMDBClient(TMDB_API_KEY)
 if not tmdb.configured:
     print("[Warning] TMDB_API_KEY not set: enrichment and scoring will be "
           "limited to SerpApi data.")
+
+# ---------------------------------------------------------------------------
+# 2b. Normalized affinity lookups + taste corpora
+#
+# Names are normalized (lowercased, punctuation stripped) and matched
+# exactly — the old substring test ("kubrick" in name) could match
+# unrelated directors sharing a syllable.
+# ---------------------------------------------------------------------------
+FALLBACK_CORPUS = ("nocturnal existential atmospheric crime neon-drenched "
+                   "stylized slow-burn")
+
+
+def _norm_name(name):
+    return re.sub(r"[^a-z0-9]+", " ", str(name).lower()).strip()
+
+
+director_lookup = {_norm_name(d): w for d, w in director_affinity.items()
+                   if _norm_name(d)}
+dp_lookup = {_norm_name(d): w for d, w in dp_affinity.items()
+             if _norm_name(d)}
+
+if (positive_review_text.strip()
+        and positive_review_text.strip() != FALLBACK_CORPUS):
+    # Prefer per-film documents (real IDF statistics); fall back to the
+    # legacy joined corpus for profiles built before per-film docs existed.
+    positive_docs = (profile.get("positive_corpus_docs")
+                     or [positive_review_text])
+else:
+    # No real corpus (TMDB was unavailable at build time): skip text
+    # similarity and let the explicit style prior below carry the weight.
+    positive_docs = []
+negative_docs = profile.get("negative_corpus_docs") or []
 
 # ---------------------------------------------------------------------------
 # 3. SerpApi ingestion with defensive parsing
@@ -345,38 +378,61 @@ def fetch_serpapi_showtimes():
 
 # ---------------------------------------------------------------------------
 # 4. Taste scoring & poster SVG fallback
+#
+# Score = 50 base + director affinity (exact name match, +/-14)
+#               + DP affinity (exact name match, +/-10)
+#               + text similarity to liked films minus similarity to
+#                 disliked films (+/-14, single batch TF-IDF over all
+#                 candidate texts so IDF means something)
+#               + explicit style-trope prior (+10 max), clamped to 30..98.
 # ---------------------------------------------------------------------------
-def calculate_taste_score(title, director, summary, tmdb_info=None):
-    score = 50.0
-    dir_clean = str(director).lower().strip()
+def _affinity_component(names, lookup, per_point, cap):
+    """Sum affinity weights for exactly-matched names, clamped."""
+    total, seen = 0.0, set()
+    for name in names or []:
+        key = _norm_name(name)
+        if key and key not in seen and key in lookup:
+            seen.add(key)
+            total += lookup[key] * per_point
+    return max(-cap, min(cap, total))
 
-    dir_score = 0.0
-    for d, weight in director_affinity.items():
-        if d in dir_clean or dir_clean in d:
-            dir_score += weight * 3.5
-    score += max(-14.0, min(14.0, dir_score))
 
-    if tmdb_info:
-        dp_score = sum(dp_affinity.get(dp, 0.0) * 2.5
-                       for dp in tmdb_info.get("dps", []))
-        score += max(-10.0, min(10.0, dp_score))
+def trope_component(text):
+    """Hand-tuned style prior: +2.5 per matched trope keyword, capped."""
+    count = sum(1 for trope in STYLE_TROPES if trope in text.lower())
+    return min(round(count * 2.5), 10)
 
-    screening_text = (f"{summary} "
-                      f"{tmdb_info.get('corpus', '') if tmdb_info else ''}")
+
+def compute_text_scores(screening_texts):
+    """Batch text similarity for every screening at once.
+
+    Fits one TF-IDF vectorizer over the liked-film docs, disliked-film
+    docs, and all screening texts, then scores each screening by its
+    cosine similarity to the liked centroid minus its similarity to the
+    disliked centroid. Returns a list of score deltas parallel to
+    screening_texts.
+    """
+    n = len(screening_texts)
+    if n == 0 or not positive_docs:
+        return [0.0] * n
     try:
-        if positive_review_text.strip():
-            tfidf = TfidfVectorizer().fit_transform(
-                [positive_review_text, screening_text])
-            sim = cosine_similarity(tfidf[0:1], tfidf[1:2])[0][0]
-            score += round(sim * 14)
-    except Exception:
-        pass
+        tfidf = TfidfVectorizer(
+            stop_words="english", ngram_range=(1, 2),
+            min_df=1, max_features=5000,
+        ).fit_transform(positive_docs + negative_docs + screening_texts)
+    except ValueError:
+        return [0.0] * n  # empty vocabulary
 
-    trope_count = sum(1 for trope in STYLE_TROPES
-                      if trope in screening_text.lower())
-    score += min(round(trope_count * 2.5), 10)
-
-    return max(30, min(int(score), 98))
+    n_pos, n_neg = len(positive_docs), len(negative_docs)
+    pos_centroid = np.asarray(tfidf[:n_pos].mean(axis=0))
+    screen = tfidf[n_pos + n_neg:]
+    pos_sim = cosine_similarity(screen, pos_centroid).ravel()
+    if n_neg:
+        neg_centroid = np.asarray(tfidf[n_pos:n_pos + n_neg].mean(axis=0))
+        neg_sim = cosine_similarity(screen, neg_centroid).ravel()
+    else:
+        neg_sim = [0.0] * n
+    return [round(float(p - q) * 14, 1) for p, q in zip(pos_sim, neg_sim)]
 
 
 def generate_poster_svg(title, director, year):
@@ -416,14 +472,27 @@ def create_entry(title, theater, neighborhood, ticket_url, summary, format,
                    and tmdb_info.get("overview") else summary)
     clean_summary = trim_summary(raw_summary)
 
+    directors = (tmdb_info.get("directors", []) if tmdb_info
+                 else [director])
+    dps = tmdb_info.get("dps", []) if tmdb_info else []
+    screening_text = (f"{clean_summary} "
+                      f"{tmdb_info.get('corpus', '') if tmdb_info else ''}")
+
+    # Base score: affinities + style prior. The batch text-similarity
+    # component is added in main() once all screenings are known.
+    base_score = (50.0
+                  + _affinity_component(directors, director_lookup, 3.5, 14.0)
+                  + _affinity_component(dps, dp_lookup, 2.5, 10.0)
+                  + trope_component(screening_text))
+
     return {
         "title": display_title,
         "director": director,
         "year": year,
         "theater": theater,
         "neighborhood": neighborhood,
-        "matchScore": calculate_taste_score(display_title, director,
-                                            clean_summary, tmdb_info),
+        "matchScore": base_score,  # text component added in main()
+        "_text": screening_text,   # popped before writing screenings.json
         "seen": (display_title.lower() in watched_titles
                  or clean_t.lower() in watched_titles),
         "weekend": "current",
@@ -451,6 +520,14 @@ def main():
         print("[Engine Notice] 0 screenings retrieved. "
               "Verify API responses in the logs above.")
         sys.exit(1)
+
+    # Batch text-similarity scoring: one TF-IDF fit over every screening
+    # so IDF statistics are meaningful, then fold the deltas into the
+    # base scores and clamp to the published 30..98 range.
+    texts = [entry.pop("_text", "") for entry in final_dataset]
+    text_deltas = compute_text_scores(texts)
+    for entry, delta in zip(final_dataset, text_deltas):
+        entry["matchScore"] = max(30, min(98, int(entry["matchScore"] + delta)))
 
     # Sort: unwatched first, then by score descending, so the best
     # recommendations surface at the top.

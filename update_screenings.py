@@ -23,7 +23,7 @@ import requests
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-from tmdb_client import TMDBClient, clean_film_title, trim_summary
+from tmdb_client import TMDBClient, clean_film_title
 
 # ---------------------------------------------------------------------------
 # 1. Configuration & target weekend
@@ -484,7 +484,7 @@ def create_entry(title, theater, neighborhood, ticket_url, summary, format,
     year = tmdb_info["year"] if tmdb_info and tmdb_info.get("year") else "Classic"
     raw_summary = (tmdb_info["overview"] if tmdb_info
                    and tmdb_info.get("overview") else summary)
-    clean_summary = trim_summary(raw_summary)
+    clean_summary = (raw_summary or "").strip()
 
     directors = (tmdb_info.get("directors", []) if tmdb_info
                  else [director])

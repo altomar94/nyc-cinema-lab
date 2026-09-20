@@ -384,23 +384,37 @@ def fetch_serpapi_showtimes():
 #               + text similarity to liked films minus similarity to
 #                 disliked films (+/-14, single batch TF-IDF over all
 #                 candidate texts so IDF means something)
-#               + explicit style-trope prior (+10 max), clamped to 30..98.
+#               + explicit style-trope prior (+10 max).
+# Displayed output is a ranked top-10 of unique films (no percentages);
+# the raw score is used for ordering only.
 # ---------------------------------------------------------------------------
-def _affinity_component(names, lookup, per_point, cap):
-    """Sum affinity weights for exactly-matched names, clamped."""
-    total, seen = 0.0, set()
+def _affinity_matches(names, lookup, per_point, cap):
+    """Return (clamped total, [(name, weight), ...]) for exact matches.
+
+    `names` keep their display case; `lookup` is keyed by normalized name.
+    Matches are sorted by weight descending.
+    """
+    total, matches, seen = 0.0, [], set()
     for name in names or []:
         key = _norm_name(name)
         if key and key not in seen and key in lookup:
             seen.add(key)
-            total += lookup[key] * per_point
-    return max(-cap, min(cap, total))
+            weight = lookup[key]
+            total += weight * per_point
+            matches.append((name, weight))
+    matches.sort(key=lambda m: -m[1])
+    return max(-cap, min(cap, total)), matches
+
+
+def trope_matches(text):
+    """Style keywords found in the text, in STYLE_TROPES order."""
+    lowered = text.lower()
+    return [trope for trope in STYLE_TROPES if trope in lowered]
 
 
 def trope_component(text):
     """Hand-tuned style prior: +2.5 per matched trope keyword, capped."""
-    count = sum(1 for trope in STYLE_TROPES if trope in text.lower())
-    return min(round(count * 2.5), 10)
+    return min(round(len(trope_matches(text)) * 2.5), 10)
 
 
 def compute_text_scores(screening_texts):
@@ -480,10 +494,24 @@ def create_entry(title, theater, neighborhood, ticket_url, summary, format,
 
     # Base score: affinities + style prior. The batch text-similarity
     # component is added in main() once all screenings are known.
-    base_score = (50.0
-                  + _affinity_component(directors, director_lookup, 3.5, 14.0)
-                  + _affinity_component(dps, dp_lookup, 2.5, 10.0)
-                  + trope_component(screening_text))
+    dir_total, dir_matches = _affinity_matches(
+        directors, director_lookup, 3.5, 14.0)
+    dp_total, dp_matches = _affinity_matches(dps, dp_lookup, 2.5, 10.0)
+    tropes = trope_matches(screening_text)
+    base_score = 50.0 + dir_total + dp_total + trope_component(screening_text)
+
+    # One-line "why": top liked director, else DP, plus up to 2 tropes.
+    why_parts = []
+    for name, weight in dir_matches:
+        if weight > 0:
+            why_parts.append(name)
+            break
+    for name, weight in dp_matches:
+        if weight > 0 and all(name != part for part in why_parts):
+            why_parts.append("shot by " + name)
+            break
+    why_parts.extend(tropes[:2])
+    why = " \u00b7 ".join(why_parts[:3])
 
     return {
         "title": display_title,
@@ -491,8 +519,10 @@ def create_entry(title, theater, neighborhood, ticket_url, summary, format,
         "year": year,
         "theater": theater,
         "neighborhood": neighborhood,
-        "matchScore": base_score,  # text component added in main()
+        "_key": f"{_norm_name(display_title)}|{year}",  # dedupe key
+        "_raw": base_score,  # text component added in main(); rank only
         "_text": screening_text,   # popped before writing screenings.json
+        "why": why,
         "seen": (display_title.lower() in watched_titles
                  or clean_t.lower() in watched_titles),
         "weekend": "current",
@@ -523,26 +553,65 @@ def main():
 
     # Batch text-similarity scoring: one TF-IDF fit over every screening
     # so IDF statistics are meaningful, then fold the deltas into the
-    # base scores and clamp to the published 30..98 range.
+    # raw scores used for ranking.
     texts = [entry.pop("_text", "") for entry in final_dataset]
     text_deltas = compute_text_scores(texts)
     for entry, delta in zip(final_dataset, text_deltas):
-        entry["matchScore"] = max(30, min(98, int(entry["matchScore"] + delta)))
+        entry["_raw"] = entry["_raw"] + delta
 
-    # Sort: unwatched first, then by score descending, so the best
-    # recommendations surface at the top.
-    final_dataset.sort(key=lambda e: (e["seen"], -e["matchScore"]))
+    # Dedupe to unique films, merging every venue's showtimes into one card.
+    films = {}
+    for entry in final_dataset:
+        key = entry.pop("_key")
+        venue = {
+            "theater": entry["theater"],
+            "neighborhood": entry["neighborhood"],
+            "format": entry["format"],
+            "showtimes": entry["showtimes"],
+            "ticketUrl": entry["ticketUrl"],
+        }
+        if key not in films:
+            films[key] = {
+                "title": entry["title"],
+                "director": entry["director"],
+                "year": entry["year"],
+                "summary": entry["summary"],
+                "poster": entry["poster"],
+                "svg": entry["svg"],
+                "why": entry["why"],
+                "seen": entry["seen"],
+                "_raw": entry["_raw"],
+                "venues": [venue],
+            }
+        else:
+            film = films[key]
+            film["_raw"] = max(film["_raw"], entry["_raw"])
+            film["seen"] = film["seen"] or entry["seen"]
+            for existing in film["venues"]:
+                if existing["theater"] == venue["theater"]:
+                    merged = existing["showtimes"] + venue["showtimes"]
+                    existing["showtimes"] = list(dict.fromkeys(merged))
+                    break
+            else:
+                film["venues"].append(venue)
+
+    # Rank: unwatched first, then by raw score descending. The page shows
+    # the top 10; scores never leave this script.
+    ranked = sorted(films.values(), key=lambda f: (f["seen"], -f["_raw"]))
+    for rank, film in enumerate(ranked, 1):
+        film["rank"] = rank
+        del film["_raw"]
 
     payload = {
         "generated_at": datetime.datetime.now(
             datetime.timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
         "weekend": weekend_label,
-        "screenings": final_dataset,
+        "films": ranked,
     }
     with open(OUTPUT_JSON, "w", encoding="utf-8") as f:
         json.dump(payload, f, indent=2, ensure_ascii=False)
 
-    print(f"[Engine] Wrote {len(final_dataset)} screenings to {OUTPUT_JSON}.")
+    print(f"[Engine] Wrote {len(ranked)} unique films to {OUTPUT_JSON}.")
 
 
 if __name__ == "__main__":

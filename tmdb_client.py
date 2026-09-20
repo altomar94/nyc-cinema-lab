@@ -75,8 +75,8 @@ class TMDBClient:
     def fetch_movie(self, title, year=None):
         """Return enriched metadata for a film title, or None.
 
-        Result keys: title, director, directors (lowercased list), dps
-        (lowercased list), year, overview, corpus, poster.
+        Result keys: title, director, directors (list), dps (list),
+        year, overview, corpus, poster.
         """
         clean_search = clean_film_title(title)
         if not self.configured or len(clean_search) < 2:
@@ -121,8 +121,8 @@ class TMDBClient:
             data = {
                 "title": movie.get("title", clean_search),
                 "director": directors[0] if directors else "Unknown",
-                "directors": [d.lower() for d in directors],
-                "dps": [dp.lower() for dp in dps],
+                "directors": directors,
+                "dps": dps,
                 "year": year_out,
                 "overview": overview,
                 "corpus": f"{overview} {' '.join(keywords)} {' '.join(reviews)}",

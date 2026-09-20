@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+debug_serpapi*.json
+.DS_Store

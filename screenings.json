@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20 15:49 UTC",
+  "generated_at": "2026-09-20 17:38 UTC",
   "weekend": "Sep 25 – Sep 27",
   "screenings": [
     {
@@ -8,7 +8,7 @@
       "year": 1999,
       "theater": "Metrograph",
       "neighborhood": "Lower East Side",
-      "matchScore": 81,
+      "matchScore": 71,
       "seen": false,
       "weekend": "current",
       "summary": "A rare book dealer finds himself at the heart of a string of paranormal events when he is hired to find the last two copies of a...",
@@ -26,7 +26,7 @@
       "year": 1958,
       "theater": "The Paris Theater",
       "neighborhood": "Midtown",
-      "matchScore": 74,
+      "matchScore": 63,
       "seen": false,
       "weekend": "current",
       "summary": "A self-assured businessman murders his employer, husband of his mistress, which unintentionally provokes an ill-fated chain of...",
@@ -44,7 +44,7 @@
       "year": 1997,
       "theater": "Metrograph",
       "neighborhood": "Lower East Side",
-      "matchScore": 71,
+      "matchScore": 62,
       "seen": false,
       "weekend": "current",
       "summary": "Two hundred years after Lt.",
@@ -62,7 +62,7 @@
       "year": 2000,
       "theater": "The Paris Theater",
       "neighborhood": "Midtown",
-      "matchScore": 70,
+      "matchScore": 60,
       "seen": false,
       "weekend": "current",
       "summary": "In the spring of 1999, a group of old friends gather to celebrate their 20 year reunion.",
@@ -80,7 +80,7 @@
       "year": 2011,
       "theater": "The Paris Theater",
       "neighborhood": "Midtown",
-      "matchScore": 69,
+      "matchScore": 59,
       "seen": false,
       "weekend": "current",
       "summary": "The impressionistic story of a Texas family in the 1950s.",
@@ -98,7 +98,7 @@
       "year": 1989,
       "theater": "IFC Center",
       "neighborhood": "West Village",
-      "matchScore": 67,
+      "matchScore": 58,
       "seen": false,
       "weekend": "current",
       "summary": "A young beautician, newly arrived in a small Louisiana town, finds work at the local salon, where a small group of women share a...",
@@ -112,12 +112,30 @@
       "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">STEEL MAGNOLIAS</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">HERBERT ROSS // 1989</text></svg>"
     },
     {
+      "title": "Rebels of the Neon God",
+      "director": "Tsai Ming-liang",
+      "year": 1994,
+      "theater": "Metrograph",
+      "neighborhood": "Lower East Side",
+      "matchScore": 58,
+      "seen": false,
+      "weekend": "current",
+      "summary": "In Taipei, four youths face alienation, loneliness, and moments of existential crisis amidst a series of minor crimes.",
+      "format": "Standard DCP",
+      "ticketUrl": "https://metrograph.com/nyc/",
+      "showtimes": [
+        "Sat Sep 26: 11:00pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/eVNOoFSpRnaCNSJwerAD0KkeibD.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">REBELS OF THE NEON GOD</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">TSAI MING-LIANG // 1994</text></svg>"
+    },
+    {
       "title": "The Double",
       "director": "Richard Ayoade",
       "year": 2014,
       "theater": "Metrograph",
       "neighborhood": "Lower East Side",
-      "matchScore": 67,
+      "matchScore": 58,
       "seen": false,
       "weekend": "current",
       "summary": "An awkward office drone becomes increasingly unhinged after a charismatic and confident look-alike takes a job at his workplace...",
@@ -130,12 +148,30 @@
       "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE DOUBLE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">RICHARD AYOADE // 2014</text></svg>"
     },
     {
+      "title": "Speed Racer",
+      "director": "Lana Wachowski",
+      "year": 2008,
+      "theater": "The Paris Theater",
+      "neighborhood": "Midtown",
+      "matchScore": 58,
+      "seen": false,
+      "weekend": "current",
+      "summary": "Speed Racer is a young and brilliant racing driver.",
+      "format": "Standard DCP",
+      "ticketUrl": "https://www.paristheaternyc.com/",
+      "showtimes": [
+        "Sat Sep 26: 10:35pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/rVNpkV6ksY1hqjkun1WCTxqyK9v.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">SPEED RACER</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">LANA WACHOWSKI // 2008</text></svg>"
+    },
+    {
       "title": "The Last Boy Scout",
       "director": "Tony Scott",
       "year": 1991,
       "theater": "Film Forum",
       "neighborhood": "Greenwich Village",
-      "matchScore": 66,
+      "matchScore": 55,
       "seen": false,
       "weekend": "current",
       "summary": "Somewhere in Los Angeles, the city of broken dreams, a stripper is murdered.",
@@ -158,7 +194,7 @@
       "year": 2026,
       "theater": "Cinema Village",
       "neighborhood": "Greenwich Village",
-      "matchScore": 66,
+      "matchScore": 55,
       "seen": false,
       "weekend": "current",
       "summary": "A 19-year-old Anthony Bourdain travels to Provincetown and stumbles into the chaotic world of a restaurant kitchen, setting off a...",
@@ -176,57 +212,12 @@
       "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">TONY</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">MATT JOHNSON // 2026</text></svg>"
     },
     {
-      "title": "The Incomer",
-      "director": "Louis Paxton",
-      "year": 2026,
-      "theater": "IFC Center",
-      "neighborhood": "West Village",
-      "matchScore": 64,
-      "seen": false,
-      "weekend": "current",
-      "summary": "On an Orkney isle, siblings Isla and Sandy survive by hunting seabirds, retelling the stories of their ancestors, and defending...",
-      "format": "Standard DCP",
-      "ticketUrl": "https://www.ifccenter.com/",
-      "showtimes": [
-        "Fri Sep 25: 10:45am",
-        "Fri Sep 25: 2:00pm",
-        "Fri Sep 25: 4:35pm",
-        "Fri Sep 25: 7:10pm",
-        "Sat Sep 26: 10:45am",
-        "Sat Sep 26: 2:00pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/iccroKK1eUTdCnLfmp7I3YXwAKF.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE INCOMER</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">LOUIS PAXTON // 2026</text></svg>"
-    },
-    {
-      "title": "Avengers: Endgame",
-      "director": "Anthony Russo",
-      "year": 2019,
-      "theater": "AMC Lincoln Square 13",
-      "neighborhood": "Upper West Side",
-      "matchScore": 63,
-      "seen": false,
-      "weekend": "current",
-      "summary": "After the devastating events of Avengers: Infinity War, the universe is in ruins due to the efforts of the Mad Titan, Thanos.",
-      "format": "Dolby Cinema",
-      "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13",
-      "showtimes": [
-        "Fri Sep 25: 7:00pm",
-        "Fri Sep 25: 12:00pm",
-        "Fri Sep 25: 4:00pm",
-        "Sat Sep 26: 12:00pm",
-        "Sat Sep 26: 4:00pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/ulzhLuWrPK07P1YkdWQLZnQh1JL.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">AVENGERS: ENDGAME</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">ANTHONY RUSSO // 2019</text></svg>"
-    },
-    {
       "title": "Paprika",
       "director": "Satoshi Kon",
       "year": 2006,
       "theater": "Metrograph",
       "neighborhood": "Lower East Side",
-      "matchScore": 63,
+      "matchScore": 53,
       "seen": false,
       "weekend": "current",
       "summary": "Dr. Atsuko Chiba is a research psychologist who uses a device called the DC Mini to enter her patients' dreams, wherein she...",
@@ -244,7 +235,7 @@
       "year": 2010,
       "theater": "The Paris Theater",
       "neighborhood": "Midtown",
-      "matchScore": 63,
+      "matchScore": 53,
       "seen": false,
       "weekend": "current",
       "summary": "As bass guitarist for a garage-rock band, Scott Pilgrim has never had trouble getting a girlfriend; usually, the problem is...",
@@ -257,236 +248,45 @@
       "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">SCOTT PILGRIM VS. THE WORLD</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">EDGAR WRIGHT // 2010</text></svg>"
     },
     {
-      "title": "Speed Racer",
-      "director": "Lana Wachowski",
-      "year": 2008,
-      "theater": "The Paris Theater",
-      "neighborhood": "Midtown",
-      "matchScore": 63,
-      "seen": false,
-      "weekend": "current",
-      "summary": "Speed Racer is a young and brilliant racing driver.",
-      "format": "Standard DCP",
-      "ticketUrl": "https://www.paristheaternyc.com/",
-      "showtimes": [
-        "Sat Sep 26: 10:35pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/rVNpkV6ksY1hqjkun1WCTxqyK9v.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">SPEED RACER</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">LANA WACHOWSKI // 2008</text></svg>"
-    },
-    {
-      "title": "The Great Mouse Detective",
-      "director": "Burny Mattinson",
-      "year": 1986,
-      "theater": "Nitehawk Cinema",
-      "neighborhood": "Brooklyn",
-      "matchScore": 63,
-      "seen": false,
-      "weekend": "current",
-      "summary": "When the diabolical Professor Ratigan kidnaps London's master toymaker, the brilliant master of disguise Basil of Baker Street...",
-      "format": "Standard DCP",
-      "ticketUrl": "https://nitehawkcinema.com/",
-      "showtimes": [
-        "Sat Sep 26: 11:15am"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/9uDr7vfjCFr39KGCcqrk44Cg7fQ.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE GREAT MOUSE DETECTIVE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">BURNY MATTINSON // 1986</text></svg>"
-    },
-    {
-      "title": "The Invite",
-      "director": "Olivia Wilde",
+      "title": "The Incomer",
+      "director": "Louis Paxton",
       "year": 2026,
-      "theater": "Cinema Village",
-      "neighborhood": "Greenwich Village",
-      "matchScore": 63,
-      "seen": false,
-      "weekend": "current",
-      "summary": "Joe and Angela's marriage is on thin ice.",
-      "format": "Standard DCP",
-      "ticketUrl": "https://www.cinemavillage.com/",
-      "showtimes": [
-        "Fri Sep 25: 2:00pm",
-        "Fri Sep 25: 4:15pm",
-        "Fri Sep 25: 6:30pm",
-        "Fri Sep 25: 8:45pm",
-        "Sat Sep 26: 2:00pm",
-        "Sat Sep 26: 4:15pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/b7Dr8Chzse8VagexAporUu2RtLx.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE INVITE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">OLIVIA WILDE // 2026</text></svg>"
-    },
-    {
-      "title": "The Wedding Banquet",
-      "director": "Andrew Ahn",
-      "year": 2025,
-      "theater": "Metrograph",
-      "neighborhood": "Lower East Side",
-      "matchScore": 62,
-      "seen": false,
-      "weekend": "current",
-      "summary": "Frustrated with his commitment-phobic boyfriend Chris and running out of time, Min makes a proposal: a green-card marriage with...",
-      "format": "35mm Print",
-      "ticketUrl": "https://metrograph.com/nyc/",
-      "showtimes": [
-        "Fri Sep 25: 2:45pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/48scEvAG0H4PBWTt86sJeazExpN.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE WEDDING BANQUET</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">ANDREW AHN // 2025</text></svg>"
-    },
-    {
-      "title": "The Warriors",
-      "director": "Walter Hill",
-      "year": 1979,
-      "theater": "Metrograph",
-      "neighborhood": "Lower East Side",
-      "matchScore": 62,
-      "seen": false,
-      "weekend": "current",
-      "summary": "Prominent gang leader Cyrus calls a meeting of New York's gangs to set aside their turf wars and take over the city.",
-      "format": "35mm Print",
-      "ticketUrl": "https://metrograph.com/nyc/",
-      "showtimes": [
-        "Sat Sep 26: 12:00pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/d6YZpBq4BhQr1K985J3CuL1cA8J.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE WARRIORS</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">WALTER HILL // 1979</text></svg>"
-    },
-    {
-      "title": "The Sound of Music",
-      "director": "Robert Wise",
-      "year": 1965,
-      "theater": "The Paris Theater",
-      "neighborhood": "Midtown",
-      "matchScore": 61,
-      "seen": false,
-      "weekend": "current",
-      "summary": "In the years before World War II, a tomboyish postulant at an Austrian abbey is hired as a governess in the home of a widowed...",
-      "format": "70mm",
-      "ticketUrl": "https://www.paristheaternyc.com/",
-      "showtimes": [
-        "Sat Sep 26: 12:00pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/c6CrUZypAsBCaRWX0M3RVRDbhNS.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE SOUND OF MUSIC</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">ROBERT WISE // 1965</text></svg>"
-    },
-    {
-      "title": "Return to Silent Hill",
-      "director": "Christophe Gans",
-      "year": 2026,
-      "theater": "Nitehawk Cinema",
-      "neighborhood": "Brooklyn",
-      "matchScore": 61,
-      "seen": false,
-      "weekend": "current",
-      "summary": "When James receives a mysterious letter from his lost love Mary, he is drawn to Silent Hill—a once-familiar town now consumed by...",
-      "format": "Standard DCP",
-      "ticketUrl": "https://nitehawkcinema.com/",
-      "showtimes": [
-        "Fri Sep 25: 11:55pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/mdw7bSnE11WpwWf3ViXtnavuqiT.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">RETURN TO SILENT HILL</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">CHRISTOPHE GANS // 2026</text></svg>"
-    },
-    {
-      "title": "Romancing the Stone",
-      "director": "Robert Zemeckis",
-      "year": 1984,
-      "theater": "Nitehawk Cinema",
-      "neighborhood": "Brooklyn",
-      "matchScore": 61,
-      "seen": false,
-      "weekend": "current",
-      "summary": "Though she can spin wild tales of passionate romance, novelist Joan Wilder has no life of her own.",
-      "format": "Standard DCP",
-      "ticketUrl": "https://nitehawkcinema.com/",
-      "showtimes": [
-        "Sat Sep 26: 11:00am"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/qfIlVOYZH5RiZ0ndFKUpr5Zn2Bx.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">ROMANCING THE STONE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">ROBERT ZEMECKIS // 1984</text></svg>"
-    },
-    {
-      "title": "Heart of the Beast",
-      "director": "David Ayer",
-      "year": 2026,
-      "theater": "AMC Lincoln Square 13",
-      "neighborhood": "Upper West Side",
-      "matchScore": 60,
-      "seen": false,
-      "weekend": "current",
-      "summary": "After a harrowing plane crash, Special Forces officer James Belmont and his combat dog, Odin, find themselves stranded deep in...",
-      "format": "Standard DCP",
-      "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13",
-      "showtimes": [
-        "Fri Sep 25: 10:15am",
-        "Fri Sep 25: 1:15pm",
-        "Fri Sep 25: 4:15pm",
-        "Fri Sep 25: 7:15pm",
-        "Fri Sep 25: 10:15pm",
-        "Sat Sep 26: 10:15am"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/1ApfSA8JTqeha3GTFEY8syV4auq.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">HEART OF THE BEAST</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">DAVID AYER // 2026</text></svg>"
-    },
-    {
-      "title": "Rebels of the Neon God",
-      "director": "Tsai Ming-liang",
-      "year": 1994,
-      "theater": "Metrograph",
-      "neighborhood": "Lower East Side",
-      "matchScore": 60,
-      "seen": false,
-      "weekend": "current",
-      "summary": "In Taipei, four youths face alienation, loneliness, and moments of existential crisis amidst a series of minor crimes.",
-      "format": "Standard DCP",
-      "ticketUrl": "https://metrograph.com/nyc/",
-      "showtimes": [
-        "Sat Sep 26: 11:00pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/eVNOoFSpRnaCNSJwerAD0KkeibD.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">REBELS OF THE NEON GOD</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">TSAI MING-LIANG // 1994</text></svg>"
-    },
-    {
-      "title": "Buddy",
-      "director": "Casper Kelly",
-      "year": 2026,
-      "theater": "Cinema Village",
-      "neighborhood": "Greenwich Village",
-      "matchScore": 59,
-      "seen": false,
-      "weekend": "current",
-      "summary": "A magical, singing orange unicorn holds his cast hostage in a surreal TV-show dimension, as he becomes more and more demented.",
-      "format": "Standard DCP",
-      "ticketUrl": "https://www.cinemavillage.com/",
-      "showtimes": [
-        "Fri Sep 25: 2:30pm",
-        "Fri Sep 25: 6:40pm",
-        "Fri Sep 25: 8:50pm",
-        "Sat Sep 26: 2:30pm",
-        "Sat Sep 26: 6:40pm",
-        "Sat Sep 26: 8:50pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/szMG36D2cIxeQ7i5zRQbq0DnNDe.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">BUDDY</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">CASPER KELLY // 2026</text></svg>"
-    },
-    {
-      "title": "Nine to Five",
-      "director": "Colin Higgins",
-      "year": 1980,
       "theater": "IFC Center",
       "neighborhood": "West Village",
-      "matchScore": 58,
+      "matchScore": 52,
       "seen": false,
       "weekend": "current",
-      "summary": "Three female employees of a sexist, egotistical, lying, hypocritical bigot find a way to turn the tables on him.",
+      "summary": "On an Orkney isle, siblings Isla and Sandy survive by hunting seabirds, retelling the stories of their ancestors, and defending...",
       "format": "Standard DCP",
       "ticketUrl": "https://www.ifccenter.com/",
       "showtimes": [
-        "Fri Sep 25: 6:45pm",
-        "Sat Sep 26: 1:15pm"
+        "Fri Sep 25: 10:45am",
+        "Fri Sep 25: 2:00pm",
+        "Fri Sep 25: 4:35pm",
+        "Fri Sep 25: 7:10pm",
+        "Sat Sep 26: 10:45am",
+        "Sat Sep 26: 2:00pm"
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/wndwKY8WnSfhCUn7iSXI37dE7yo.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">NINE TO FIVE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">COLIN HIGGINS // 1980</text></svg>"
+      "poster": "https://image.tmdb.org/t/p/w500/iccroKK1eUTdCnLfmp7I3YXwAKF.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE INCOMER</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">LOUIS PAXTON // 2026</text></svg>"
+    },
+    {
+      "title": "7 Dogs",
+      "director": "Adil El Arbi",
+      "year": 2026,
+      "theater": "Metrograph",
+      "neighborhood": "Lower East Side",
+      "matchScore": 52,
+      "seen": false,
+      "weekend": "current",
+      "summary": "Interpol agent Khalid Al-Azzazi joins forces with Ghali Abu Dawood from the 7 Dogs crime syndicate to fight drug trafficking.",
+      "format": "35mm Print",
+      "ticketUrl": "https://metrograph.com/nyc/",
+      "showtimes": [
+        "Fri Sep 25: 7:10pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/qK0l8mzBwiMV6N2lHTFccRVddLN.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">7 DOGS</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">ADIL EL ARBI // 2026</text></svg>"
     },
     {
       "title": "A Better Tomorrow III: Love and Death in Saigon",
@@ -494,7 +294,7 @@
       "year": 1989,
       "theater": "Metrograph",
       "neighborhood": "Lower East Side",
-      "matchScore": 58,
+      "matchScore": 52,
       "seen": false,
       "weekend": "current",
       "summary": "Before the events of A Better Tomorrow (1986), Mark 'Gor' Lee heads to Saigon during the Vietnam War to bring home his uncle and...",
@@ -507,202 +307,12 @@
       "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">A BETTER TOMORROW III: LOVE AND DEATH IN SAIGON</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">TSUI HARK // 1989</text></svg>"
     },
     {
-      "title": "Tokyo MER: Mobile Emergency Room - The Movie",
-      "director": "Aya Matsuki",
-      "year": 2023,
-      "theater": "Metrograph",
-      "neighborhood": "Lower East Side",
-      "matchScore": 58,
-      "seen": false,
-      "weekend": "current",
-      "summary": "The individuals that comprise the Tokyo MER team rush to on-site disasters and accidents, performing life-saving treatment thanks...",
-      "format": "Standard DCP",
-      "ticketUrl": "https://metrograph.com/nyc/",
-      "showtimes": [
-        "Sat Sep 26: 4:10pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/sWQPPw3dbhiRdTXuV3918FKhw4d.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">TOKYO MER: MOBILE EMERGENCY ROOM - THE MOVIE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">AYA MATSUKI // 2023</text></svg>"
-    },
-    {
-      "title": "Electra, My Love",
-      "director": "Miklós Jancsó",
-      "year": 1974,
-      "theater": "Metrograph",
-      "neighborhood": "Lower East Side",
-      "matchScore": 57,
-      "seen": false,
-      "weekend": "current",
-      "summary": "It has been fifteen years since the death of her father, Agamemnon, and Elektra still burns with hatred for Aegisztosz, who...",
-      "format": "Standard DCP",
-      "ticketUrl": "https://metrograph.com/nyc/",
-      "showtimes": [
-        "Sat Sep 26: 4:45pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/8dvDFx9R6KWtWEPeTZCq0DfMWbK.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">ELECTRA, MY LOVE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">MIKLÓS JANCSÓ // 1974</text></svg>"
-    },
-    {
-      "title": "Forgotten Island",
-      "director": "Januel Mercado",
-      "year": 2026,
-      "theater": "AMC Lincoln Square 13",
-      "neighborhood": "Upper West Side",
-      "matchScore": 56,
-      "seen": false,
-      "weekend": "current",
-      "summary": "While celebrating their last night together, high school graduates and best friends Jo and Raissa stumble upon a mysterious...",
-      "format": "Standard DCP",
-      "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13",
-      "showtimes": [
-        "Fri Sep 25: 10:00am",
-        "Fri Sep 25: 12:45pm",
-        "Fri Sep 25: 3:30pm",
-        "Fri Sep 25: 6:30pm",
-        "Sat Sep 26: 10:00am",
-        "Sat Sep 26: 12:45pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/Lr0Ng7Gg02RW1AyfYEL6P0WUvd.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">FORGOTTEN ISLAND</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">JANUEL MERCADO // 2026</text></svg>"
-    },
-    {
-      "title": "Four Adventures of Reinette and Mirabelle",
-      "director": "Éric Rohmer",
-      "year": 1987,
-      "theater": "Metrograph",
-      "neighborhood": "Lower East Side",
-      "matchScore": 56,
-      "seen": false,
-      "weekend": "current",
-      "summary": "Two young girls meet, Reinette from the countryside and Mirabelle from Paris, and decide to take a flat together in Paris where...",
-      "format": "Standard DCP",
-      "ticketUrl": "https://metrograph.com/nyc/",
-      "showtimes": [
-        "Fri Sep 25: 2:35pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/iXydrbtUGX7CUutomhtMtlUd3Cb.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">FOUR ADVENTURES OF REINETTE AND MIRABELLE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">ÉRIC ROHMER // 1987</text></svg>"
-    },
-    {
-      "title": "Iphigenia",
-      "director": "Mihalis Kakogiannis",
-      "year": 1977,
-      "theater": "Metrograph",
-      "neighborhood": "Lower East Side",
-      "matchScore": 56,
-      "seen": false,
-      "weekend": "current",
-      "summary": "The Greek army is about to set sail to a great battle, but the winds refuse to blow.",
-      "format": "Standard DCP",
-      "ticketUrl": "https://metrograph.com/nyc/",
-      "showtimes": [
-        "Sat Sep 26: 2:15pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/5DcgIrPtg8VKcGqkddjUJt5jdA2.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">IPHIGENIA</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">MIHALIS KAKOGIANNIS // 1977</text></svg>"
-    },
-    {
-      "title": "Day & Night",
-      "director": "Teddy Newton",
-      "year": 2010,
-      "theater": "The Roxy Cinema",
-      "neighborhood": "Tribeca",
-      "matchScore": 56,
-      "seen": false,
-      "weekend": "current",
-      "summary": "When Day, a sunny fellow, encounters Night, a stranger of distinctly darker moods, sparks fly!",
-      "format": "35mm Print",
-      "ticketUrl": "https://www.roxycinematribeca.com/",
-      "showtimes": [
-        "Sat Sep 26: 2:30pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/hn2tOtidoYZ0D56jR4yknpdP1mU.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">DAY &amp; NIGHT</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">TEDDY NEWTON // 2010</text></svg>"
-    },
-    {
-      "title": "Paint Me a Road Out of Here",
-      "director": "Catherine Gund",
-      "year": 2024,
-      "theater": "The Roxy Cinema",
-      "neighborhood": "Tribeca",
-      "matchScore": 56,
-      "seen": false,
-      "weekend": "current",
-      "summary": "In 1971, underestimated artist Faith Ringgold made a monumental painting for the women incarcerated at Rikers Island jail called...",
-      "format": "Standard DCP",
-      "ticketUrl": "https://www.roxycinematribeca.com/",
-      "showtimes": [
-        "Sat Sep 26: 4:45pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/zHlZeDFI5mNjiUF0lOdbb7cnGDV.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">PAINT ME A ROAD OUT OF HERE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">CATHERINE GUND // 2024</text></svg>"
-    },
-    {
-      "title": "Your Mother Your Mother Your Mother",
-      "director": "Bassam Tariq",
-      "year": 2026,
-      "theater": "AMC Lincoln Square 13",
-      "neighborhood": "Upper West Side",
-      "matchScore": 55,
-      "seen": false,
-      "weekend": "current",
-      "summary": "Latif, a devoutly religious hitman, struggles to balance work, faith and fatherhood.",
-      "format": "Standard DCP",
-      "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13",
-      "showtimes": [
-        "Fri Sep 25: 10:45am",
-        "Fri Sep 25: 1:45pm",
-        "Fri Sep 25: 4:00pm",
-        "Fri Sep 25: 4:45pm",
-        "Fri Sep 25: 7:45pm",
-        "Fri Sep 25: 10:45pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/4KaPZSKnInnArErTTgy9Oy14leR.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">YOUR MOTHER YOUR MOTHER YOUR MOTHER</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">BASSAM TARIQ // 2026</text></svg>"
-    },
-    {
-      "title": "Ryuichi Sakamoto: Diaries",
-      "director": "Kensho Omori",
-      "year": 2025,
-      "theater": "Metrograph",
-      "neighborhood": "Lower East Side",
-      "matchScore": 55,
-      "seen": false,
-      "weekend": "current",
-      "summary": "Ryuichi Sakamoto was an extraordinary musician who passed away in March 2023.",
-      "format": "Standard DCP",
-      "ticketUrl": "https://metrograph.com/nyc/",
-      "showtimes": [
-        "Sat Sep 26: 5:45pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/btXkHsBrpA2xKnKcF2RotDdQgT4.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">RYUICHI SAKAMOTO: DIARIES</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">KENSHO OMORI // 2025</text></svg>"
-    },
-    {
-      "title": "Her Will Be Done",
-      "director": "Julia Kowalski",
-      "year": 2025,
-      "theater": "The Roxy Cinema",
-      "neighborhood": "Tribeca",
-      "matchScore": 55,
-      "seen": false,
-      "weekend": "current",
-      "summary": "Nawojka, 20, dreams of escaping her harsh life working at the family farm.",
-      "format": "Standard DCP",
-      "ticketUrl": "https://www.roxycinematribeca.com/",
-      "showtimes": [
-        "Fri Sep 25: 4:30pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/vzA6JzicjTypzskMCUUw4H8NKys.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">HER WILL BE DONE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">JULIA KOWALSKI // 2025</text></svg>"
-    },
-    {
       "title": "Ha-Chan, Shake Your Booty!",
       "director": "Josef Kubota Wladyka",
       "year": 2026,
       "theater": "Angelika Film Center",
       "neighborhood": "SoHo",
-      "matchScore": 55,
+      "matchScore": 52,
       "seen": false,
       "weekend": "current",
       "summary": "Haru and Luis love competing in Tokyo’s ballroom dance scene, but after tragedy strikes, Haru withdraws into isolation.",
@@ -720,105 +330,250 @@
       "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">HA-CHAN, SHAKE YOUR BOOTY!</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">JOSEF KUBOTA WLADYKA // 2026</text></svg>"
     },
     {
+      "title": "The Great Mouse Detective",
+      "director": "Burny Mattinson",
+      "year": 1986,
+      "theater": "Nitehawk Cinema",
+      "neighborhood": "Brooklyn",
+      "matchScore": 52,
+      "seen": false,
+      "weekend": "current",
+      "summary": "When the diabolical Professor Ratigan kidnaps London's master toymaker, the brilliant master of disguise Basil of Baker Street...",
+      "format": "Standard DCP",
+      "ticketUrl": "https://nitehawkcinema.com/",
+      "showtimes": [
+        "Sat Sep 26: 11:15am"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/9uDr7vfjCFr39KGCcqrk44Cg7fQ.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE GREAT MOUSE DETECTIVE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">BURNY MATTINSON // 1986</text></svg>"
+    },
+    {
+      "title": "Buddy",
+      "director": "Casper Kelly",
+      "year": 2026,
+      "theater": "Cinema Village",
+      "neighborhood": "Greenwich Village",
+      "matchScore": 52,
+      "seen": false,
+      "weekend": "current",
+      "summary": "A magical, singing orange unicorn holds his cast hostage in a surreal TV-show dimension, as he becomes more and more demented.",
+      "format": "Standard DCP",
+      "ticketUrl": "https://www.cinemavillage.com/",
+      "showtimes": [
+        "Fri Sep 25: 2:30pm",
+        "Fri Sep 25: 6:40pm",
+        "Fri Sep 25: 8:50pm",
+        "Sat Sep 26: 2:30pm",
+        "Sat Sep 26: 6:40pm",
+        "Sat Sep 26: 8:50pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/szMG36D2cIxeQ7i5zRQbq0DnNDe.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">BUDDY</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">CASPER KELLY // 2026</text></svg>"
+    },
+    {
+      "title": "Avengers: Endgame",
+      "director": "Anthony Russo",
+      "year": 2019,
+      "theater": "AMC Lincoln Square 13",
+      "neighborhood": "Upper West Side",
+      "matchScore": 51,
+      "seen": false,
+      "weekend": "current",
+      "summary": "After the devastating events of Avengers: Infinity War, the universe is in ruins due to the efforts of the Mad Titan, Thanos.",
+      "format": "Dolby Cinema",
+      "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13",
+      "showtimes": [
+        "Fri Sep 25: 7:00pm",
+        "Fri Sep 25: 12:00pm",
+        "Fri Sep 25: 4:00pm",
+        "Sat Sep 26: 12:00pm",
+        "Sat Sep 26: 4:00pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/ulzhLuWrPK07P1YkdWQLZnQh1JL.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">AVENGERS: ENDGAME</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">ANTHONY RUSSO // 2019</text></svg>"
+    },
+    {
+      "title": "The Warriors",
+      "director": "Walter Hill",
+      "year": 1979,
+      "theater": "Metrograph",
+      "neighborhood": "Lower East Side",
+      "matchScore": 51,
+      "seen": false,
+      "weekend": "current",
+      "summary": "Prominent gang leader Cyrus calls a meeting of New York's gangs to set aside their turf wars and take over the city.",
+      "format": "35mm Print",
+      "ticketUrl": "https://metrograph.com/nyc/",
+      "showtimes": [
+        "Sat Sep 26: 12:00pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/d6YZpBq4BhQr1K985J3CuL1cA8J.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE WARRIORS</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">WALTER HILL // 1979</text></svg>"
+    },
+    {
+      "title": "The Sound of Music",
+      "director": "Robert Wise",
+      "year": 1965,
+      "theater": "The Paris Theater",
+      "neighborhood": "Midtown",
+      "matchScore": 51,
+      "seen": false,
+      "weekend": "current",
+      "summary": "In the years before World War II, a tomboyish postulant at an Austrian abbey is hired as a governess in the home of a widowed...",
+      "format": "70mm",
+      "ticketUrl": "https://www.paristheaternyc.com/",
+      "showtimes": [
+        "Sat Sep 26: 12:00pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/c6CrUZypAsBCaRWX0M3RVRDbhNS.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE SOUND OF MUSIC</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">ROBERT WISE // 1965</text></svg>"
+    },
+    {
+      "title": "Return to Silent Hill",
+      "director": "Christophe Gans",
+      "year": 2026,
+      "theater": "Nitehawk Cinema",
+      "neighborhood": "Brooklyn",
+      "matchScore": 51,
+      "seen": false,
+      "weekend": "current",
+      "summary": "When James receives a mysterious letter from his lost love Mary, he is drawn to Silent Hill—a once-familiar town now consumed by...",
+      "format": "Standard DCP",
+      "ticketUrl": "https://nitehawkcinema.com/",
+      "showtimes": [
+        "Fri Sep 25: 11:55pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/mdw7bSnE11WpwWf3ViXtnavuqiT.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">RETURN TO SILENT HILL</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">CHRISTOPHE GANS // 2026</text></svg>"
+    },
+    {
+      "title": "Romancing the Stone",
+      "director": "Robert Zemeckis",
+      "year": 1984,
+      "theater": "Nitehawk Cinema",
+      "neighborhood": "Brooklyn",
+      "matchScore": 51,
+      "seen": false,
+      "weekend": "current",
+      "summary": "Though she can spin wild tales of passionate romance, novelist Joan Wilder has no life of her own.",
+      "format": "Standard DCP",
+      "ticketUrl": "https://nitehawkcinema.com/",
+      "showtimes": [
+        "Sat Sep 26: 11:00am"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/qfIlVOYZH5RiZ0ndFKUpr5Zn2Bx.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">ROMANCING THE STONE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">ROBERT ZEMECKIS // 1984</text></svg>"
+    },
+    {
+      "title": "Forgotten Island",
+      "director": "Januel Mercado",
+      "year": 2026,
+      "theater": "AMC Lincoln Square 13",
+      "neighborhood": "Upper West Side",
+      "matchScore": 50,
+      "seen": false,
+      "weekend": "current",
+      "summary": "While celebrating their last night together, high school graduates and best friends Jo and Raissa stumble upon a mysterious...",
+      "format": "Standard DCP",
+      "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13",
+      "showtimes": [
+        "Fri Sep 25: 10:00am",
+        "Fri Sep 25: 12:45pm",
+        "Fri Sep 25: 3:30pm",
+        "Fri Sep 25: 6:30pm",
+        "Sat Sep 26: 10:00am",
+        "Sat Sep 26: 12:45pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/Lr0Ng7Gg02RW1AyfYEL6P0WUvd.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">FORGOTTEN ISLAND</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">JANUEL MERCADO // 2026</text></svg>"
+    },
+    {
+      "title": "Heart of the Beast",
+      "director": "David Ayer",
+      "year": 2026,
+      "theater": "AMC Lincoln Square 13",
+      "neighborhood": "Upper West Side",
+      "matchScore": 50,
+      "seen": false,
+      "weekend": "current",
+      "summary": "After a harrowing plane crash, Special Forces officer James Belmont and his combat dog, Odin, find themselves stranded deep in...",
+      "format": "Standard DCP",
+      "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13",
+      "showtimes": [
+        "Fri Sep 25: 10:15am",
+        "Fri Sep 25: 1:15pm",
+        "Fri Sep 25: 4:15pm",
+        "Fri Sep 25: 7:15pm",
+        "Fri Sep 25: 10:15pm",
+        "Sat Sep 26: 10:15am"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/1ApfSA8JTqeha3GTFEY8syV4auq.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">HEART OF THE BEAST</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">DAVID AYER // 2026</text></svg>"
+    },
+    {
+      "title": "Primetime",
+      "director": "Lance Oppenheim",
+      "year": 2026,
+      "theater": "AMC Lincoln Square 13",
+      "neighborhood": "Upper West Side",
+      "matchScore": 50,
+      "seen": false,
+      "weekend": "current",
+      "summary": "In 2006, To Catch a Predator host Chris Hansen sets out to make television history.",
+      "format": "Standard DCP",
+      "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13",
+      "showtimes": [
+        "Fri Sep 25: 10:30am",
+        "Fri Sep 25: 1:30pm",
+        "Fri Sep 25: 4:30pm",
+        "Fri Sep 25: 6:30pm",
+        "Fri Sep 25: 7:30pm",
+        "Fri Sep 25: 9:30pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/lmrulvLbmaejTix1YaMxo1oGhH1.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">PRIMETIME</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">LANCE OPPENHEIM // 2026</text></svg>"
+    },
+    {
       "title": "Your Mother Your Mother Your Mother",
       "director": "Bassam Tariq",
       "year": 2026,
-      "theater": "Angelika Film Center",
-      "neighborhood": "SoHo",
-      "matchScore": 55,
+      "theater": "AMC Lincoln Square 13",
+      "neighborhood": "Upper West Side",
+      "matchScore": 50,
       "seen": false,
       "weekend": "current",
       "summary": "Latif, a devoutly religious hitman, struggles to balance work, faith and fatherhood.",
-      "format": "35mm Print",
-      "ticketUrl": "https://www.angelikafilmcenter.com/nyc",
+      "format": "Standard DCP",
+      "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13",
       "showtimes": [
-        "Fri Sep 25: 12:00pm",
-        "Fri Sep 25: 2:40pm",
-        "Fri Sep 25: 5:20pm",
-        "Fri Sep 25: 8:00pm",
-        "Fri Sep 25: 11:00am",
-        "Fri Sep 25: 1:40pm"
+        "Fri Sep 25: 10:45am",
+        "Fri Sep 25: 1:45pm",
+        "Fri Sep 25: 4:00pm",
+        "Fri Sep 25: 4:45pm",
+        "Fri Sep 25: 7:45pm",
+        "Fri Sep 25: 10:45pm"
       ],
       "poster": "https://image.tmdb.org/t/p/w500/4KaPZSKnInnArErTTgy9Oy14leR.jpg",
       "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">YOUR MOTHER YOUR MOTHER YOUR MOTHER</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">BASSAM TARIQ // 2026</text></svg>"
     },
     {
-      "title": "Unzipped",
-      "director": "Douglas Keeve",
-      "year": 1995,
-      "theater": "Film Forum",
-      "neighborhood": "Greenwich Village",
-      "matchScore": 54,
+      "title": "Nine to Five",
+      "director": "Colin Higgins",
+      "year": 1980,
+      "theater": "IFC Center",
+      "neighborhood": "West Village",
+      "matchScore": 50,
       "seen": false,
       "weekend": "current",
-      "summary": "Isaac Mizrahi, one of the most successful designers in high fashion, plans his fall 1994 collection.",
+      "summary": "Three female employees of a sexist, egotistical, lying, hypocritical bigot find a way to turn the tables on him.",
       "format": "Standard DCP",
-      "ticketUrl": "https://filmforum.org/now_playing",
+      "ticketUrl": "https://www.ifccenter.com/",
       "showtimes": [
-        "Fri Sep 25: 12:30pm",
-        "Fri Sep 25: 2:15pm",
-        "Fri Sep 25: 4:00pm",
-        "Fri Sep 25: 6:00pm",
-        "Fri Sep 25: 8:00pm",
-        "Sat Sep 26: 12:30pm"
+        "Fri Sep 25: 6:45pm",
+        "Sat Sep 26: 1:15pm"
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/dnIzv4rXr9FXkqW880E3rStYQA7.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">UNZIPPED</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">DOUGLAS KEEVE // 1995</text></svg>"
-    },
-    {
-      "title": "7 Dogs",
-      "director": "Adil El Arbi",
-      "year": 2026,
-      "theater": "Metrograph",
-      "neighborhood": "Lower East Side",
-      "matchScore": 54,
-      "seen": false,
-      "weekend": "current",
-      "summary": "Interpol agent Khalid Al-Azzazi joins forces with Ghali Abu Dawood from the 7 Dogs crime syndicate to fight drug trafficking.",
-      "format": "35mm Print",
-      "ticketUrl": "https://metrograph.com/nyc/",
-      "showtimes": [
-        "Fri Sep 25: 7:10pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/qK0l8mzBwiMV6N2lHTFccRVddLN.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">7 DOGS</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">ADIL EL ARBI // 2026</text></svg>"
-    },
-    {
-      "title": "The Blade",
-      "director": "Tsui Hark",
-      "year": 1995,
-      "theater": "Metrograph",
-      "neighborhood": "Lower East Side",
-      "matchScore": 54,
-      "seen": false,
-      "weekend": "current",
-      "summary": "Adopted by a renowned swordsmith, a young man discovers that his biological father was killed by a powerful bandit called Lung.",
-      "format": "Standard DCP",
-      "ticketUrl": "https://metrograph.com/nyc/",
-      "showtimes": [
-        "Fri Sep 25: 5:00pm",
-        "Sat Sep 26: 2:00pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/jLH5MxiYXtGiS96rl13Rz8TIPaG.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE BLADE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">TSUI HARK // 1995</text></svg>"
-    },
-    {
-      "title": "Daughter's Daughter",
-      "director": "Huang Xi",
-      "year": 2024,
-      "theater": "Metrograph",
-      "neighborhood": "Lower East Side",
-      "matchScore": 54,
-      "seen": false,
-      "weekend": "current",
-      "summary": "Jin is in her 60s. Her husband gone, her concern is for daughter Zuer, in New York trying out IVF with her partner Michelle. When...",
-      "format": "Standard DCP",
-      "ticketUrl": "https://metrograph.com/nyc/",
-      "showtimes": [
-        "Fri Sep 25: 4:40pm"
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/AeEmC8pIFfzB65LjoAgbA94yFld.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">DAUGHTER&#x27;S DAUGHTER</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">HUANG XI // 2024</text></svg>"
+      "poster": "https://image.tmdb.org/t/p/w500/wndwKY8WnSfhCUn7iSXI37dE7yo.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">NINE TO FIVE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">COLIN HIGGINS // 1980</text></svg>"
     },
     {
       "title": "Take Me Home",
@@ -826,7 +581,7 @@
       "year": 2026,
       "theater": "IFC Center",
       "neighborhood": "West Village",
-      "matchScore": 53,
+      "matchScore": 50,
       "seen": false,
       "weekend": "current",
       "summary": "Anna (Anna Sargent making her acting debut), a middle-aged Korean adoptee with a cognitive disability, cares for her aging...",
@@ -849,7 +604,7 @@
       "year": 1982,
       "theater": "IFC Center",
       "neighborhood": "West Village",
-      "matchScore": 53,
+      "matchScore": 50,
       "seen": false,
       "weekend": "current",
       "summary": "When a Conservative TV crusader threatens to shut down beloved brothel The Chicken Ranch, proprietress Miss Mona Stangley and her...",
@@ -863,27 +618,113 @@
       "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE BEST LITTLE WHOREHOUSE IN TEXAS</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">COLIN HIGGINS // 1982</text></svg>"
     },
     {
-      "title": "Primetime",
-      "director": "Lance Oppenheim",
-      "year": 2026,
-      "theater": "AMC Lincoln Square 13",
-      "neighborhood": "Upper West Side",
-      "matchScore": 52,
+      "title": "The Blade",
+      "director": "Tsui Hark",
+      "year": 1995,
+      "theater": "Metrograph",
+      "neighborhood": "Lower East Side",
+      "matchScore": 50,
       "seen": false,
       "weekend": "current",
-      "summary": "In 2006, To Catch a Predator host Chris Hansen sets out to make television history.",
+      "summary": "Adopted by a renowned swordsmith, a young man discovers that his biological father was killed by a powerful bandit called Lung.",
       "format": "Standard DCP",
-      "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13",
+      "ticketUrl": "https://metrograph.com/nyc/",
       "showtimes": [
-        "Fri Sep 25: 10:30am",
-        "Fri Sep 25: 1:30pm",
-        "Fri Sep 25: 4:30pm",
-        "Fri Sep 25: 6:30pm",
-        "Fri Sep 25: 7:30pm",
-        "Fri Sep 25: 9:30pm"
+        "Fri Sep 25: 5:00pm",
+        "Sat Sep 26: 2:00pm"
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/lmrulvLbmaejTix1YaMxo1oGhH1.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">PRIMETIME</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">LANCE OPPENHEIM // 2026</text></svg>"
+      "poster": "https://image.tmdb.org/t/p/w500/jLH5MxiYXtGiS96rl13Rz8TIPaG.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE BLADE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">TSUI HARK // 1995</text></svg>"
+    },
+    {
+      "title": "The Wedding Banquet",
+      "director": "Andrew Ahn",
+      "year": 2025,
+      "theater": "Metrograph",
+      "neighborhood": "Lower East Side",
+      "matchScore": 50,
+      "seen": false,
+      "weekend": "current",
+      "summary": "Frustrated with his commitment-phobic boyfriend Chris and running out of time, Min makes a proposal: a green-card marriage with...",
+      "format": "35mm Print",
+      "ticketUrl": "https://metrograph.com/nyc/",
+      "showtimes": [
+        "Fri Sep 25: 2:45pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/48scEvAG0H4PBWTt86sJeazExpN.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE WEDDING BANQUET</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">ANDREW AHN // 2025</text></svg>"
+    },
+    {
+      "title": "Daughter's Daughter",
+      "director": "Huang Xi",
+      "year": 2024,
+      "theater": "Metrograph",
+      "neighborhood": "Lower East Side",
+      "matchScore": 50,
+      "seen": false,
+      "weekend": "current",
+      "summary": "Jin is in her 60s. Her husband gone, her concern is for daughter Zuer, in New York trying out IVF with her partner Michelle. When...",
+      "format": "Standard DCP",
+      "ticketUrl": "https://metrograph.com/nyc/",
+      "showtimes": [
+        "Fri Sep 25: 4:40pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/AeEmC8pIFfzB65LjoAgbA94yFld.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">DAUGHTER&#x27;S DAUGHTER</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">HUANG XI // 2024</text></svg>"
+    },
+    {
+      "title": "Four Adventures of Reinette and Mirabelle",
+      "director": "Éric Rohmer",
+      "year": 1987,
+      "theater": "Metrograph",
+      "neighborhood": "Lower East Side",
+      "matchScore": 50,
+      "seen": false,
+      "weekend": "current",
+      "summary": "Two young girls meet, Reinette from the countryside and Mirabelle from Paris, and decide to take a flat together in Paris where...",
+      "format": "Standard DCP",
+      "ticketUrl": "https://metrograph.com/nyc/",
+      "showtimes": [
+        "Fri Sep 25: 2:35pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/iXydrbtUGX7CUutomhtMtlUd3Cb.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">FOUR ADVENTURES OF REINETTE AND MIRABELLE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">ÉRIC ROHMER // 1987</text></svg>"
+    },
+    {
+      "title": "Tokyo MER: Mobile Emergency Room - The Movie",
+      "director": "Aya Matsuki",
+      "year": 2023,
+      "theater": "Metrograph",
+      "neighborhood": "Lower East Side",
+      "matchScore": 50,
+      "seen": false,
+      "weekend": "current",
+      "summary": "The individuals that comprise the Tokyo MER team rush to on-site disasters and accidents, performing life-saving treatment thanks...",
+      "format": "Standard DCP",
+      "ticketUrl": "https://metrograph.com/nyc/",
+      "showtimes": [
+        "Sat Sep 26: 4:10pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/sWQPPw3dbhiRdTXuV3918FKhw4d.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">TOKYO MER: MOBILE EMERGENCY ROOM - THE MOVIE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">AYA MATSUKI // 2023</text></svg>"
+    },
+    {
+      "title": "Ryuichi Sakamoto: Diaries",
+      "director": "Kensho Omori",
+      "year": 2025,
+      "theater": "Metrograph",
+      "neighborhood": "Lower East Side",
+      "matchScore": 50,
+      "seen": false,
+      "weekend": "current",
+      "summary": "Ryuichi Sakamoto was an extraordinary musician who passed away in March 2023.",
+      "format": "Standard DCP",
+      "ticketUrl": "https://metrograph.com/nyc/",
+      "showtimes": [
+        "Sat Sep 26: 5:45pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/btXkHsBrpA2xKnKcF2RotDdQgT4.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">RYUICHI SAKAMOTO: DIARIES</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">KENSHO OMORI // 2025</text></svg>"
     },
     {
       "title": "Time and Tide",
@@ -891,7 +732,7 @@
       "year": 2000,
       "theater": "Metrograph",
       "neighborhood": "Lower East Side",
-      "matchScore": 52,
+      "matchScore": 50,
       "seen": false,
       "weekend": "current",
       "summary": "A streetwise young man becomes a bodyguard to score quick cash.",
@@ -904,12 +745,125 @@
       "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">TIME AND TIDE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">TSUI HARK // 2000</text></svg>"
     },
     {
+      "title": "Electra, My Love",
+      "director": "Miklós Jancsó",
+      "year": 1974,
+      "theater": "Metrograph",
+      "neighborhood": "Lower East Side",
+      "matchScore": 50,
+      "seen": false,
+      "weekend": "current",
+      "summary": "It has been fifteen years since the death of her father, Agamemnon, and Elektra still burns with hatred for Aegisztosz, who...",
+      "format": "Standard DCP",
+      "ticketUrl": "https://metrograph.com/nyc/",
+      "showtimes": [
+        "Sat Sep 26: 4:45pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/8dvDFx9R6KWtWEPeTZCq0DfMWbK.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">ELECTRA, MY LOVE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">MIKLÓS JANCSÓ // 1974</text></svg>"
+    },
+    {
+      "title": "Iphigenia",
+      "director": "Mihalis Kakogiannis",
+      "year": 1977,
+      "theater": "Metrograph",
+      "neighborhood": "Lower East Side",
+      "matchScore": 50,
+      "seen": false,
+      "weekend": "current",
+      "summary": "The Greek army is about to set sail to a great battle, but the winds refuse to blow.",
+      "format": "Standard DCP",
+      "ticketUrl": "https://metrograph.com/nyc/",
+      "showtimes": [
+        "Sat Sep 26: 2:15pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/5DcgIrPtg8VKcGqkddjUJt5jdA2.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">IPHIGENIA</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">MIHALIS KAKOGIANNIS // 1977</text></svg>"
+    },
+    {
+      "title": "Her Will Be Done",
+      "director": "Julia Kowalski",
+      "year": 2025,
+      "theater": "The Roxy Cinema",
+      "neighborhood": "Tribeca",
+      "matchScore": 50,
+      "seen": false,
+      "weekend": "current",
+      "summary": "Nawojka, 20, dreams of escaping her harsh life working at the family farm.",
+      "format": "Standard DCP",
+      "ticketUrl": "https://www.roxycinematribeca.com/",
+      "showtimes": [
+        "Fri Sep 25: 4:30pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/vzA6JzicjTypzskMCUUw4H8NKys.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">HER WILL BE DONE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">JULIA KOWALSKI // 2025</text></svg>"
+    },
+    {
+      "title": "Day & Night",
+      "director": "Teddy Newton",
+      "year": 2010,
+      "theater": "The Roxy Cinema",
+      "neighborhood": "Tribeca",
+      "matchScore": 50,
+      "seen": false,
+      "weekend": "current",
+      "summary": "When Day, a sunny fellow, encounters Night, a stranger of distinctly darker moods, sparks fly!",
+      "format": "35mm Print",
+      "ticketUrl": "https://www.roxycinematribeca.com/",
+      "showtimes": [
+        "Sat Sep 26: 2:30pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/hn2tOtidoYZ0D56jR4yknpdP1mU.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">DAY &amp; NIGHT</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">TEDDY NEWTON // 2010</text></svg>"
+    },
+    {
+      "title": "Paint Me a Road Out of Here",
+      "director": "Catherine Gund",
+      "year": 2024,
+      "theater": "The Roxy Cinema",
+      "neighborhood": "Tribeca",
+      "matchScore": 50,
+      "seen": false,
+      "weekend": "current",
+      "summary": "In 1971, underestimated artist Faith Ringgold made a monumental painting for the women incarcerated at Rikers Island jail called...",
+      "format": "Standard DCP",
+      "ticketUrl": "https://www.roxycinematribeca.com/",
+      "showtimes": [
+        "Sat Sep 26: 4:45pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/zHlZeDFI5mNjiUF0lOdbb7cnGDV.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">PAINT ME A ROAD OUT OF HERE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">CATHERINE GUND // 2024</text></svg>"
+    },
+    {
+      "title": "Your Mother Your Mother Your Mother",
+      "director": "Bassam Tariq",
+      "year": 2026,
+      "theater": "Angelika Film Center",
+      "neighborhood": "SoHo",
+      "matchScore": 50,
+      "seen": false,
+      "weekend": "current",
+      "summary": "Latif, a devoutly religious hitman, struggles to balance work, faith and fatherhood.",
+      "format": "35mm Print",
+      "ticketUrl": "https://www.angelikafilmcenter.com/nyc",
+      "showtimes": [
+        "Fri Sep 25: 12:00pm",
+        "Fri Sep 25: 2:40pm",
+        "Fri Sep 25: 5:20pm",
+        "Fri Sep 25: 8:00pm",
+        "Fri Sep 25: 11:00am",
+        "Fri Sep 25: 1:40pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/4KaPZSKnInnArErTTgy9Oy14leR.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">YOUR MOTHER YOUR MOTHER YOUR MOTHER</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">BASSAM TARIQ // 2026</text></svg>"
+    },
+    {
       "title": "Never After Dark",
       "director": "Dave Boyle",
       "year": 2026,
       "theater": "Angelika Film Center",
       "neighborhood": "SoHo",
-      "matchScore": 51,
+      "matchScore": 50,
       "seen": false,
       "weekend": "current",
       "summary": "A traveling psychic who helps lost souls cross over encounters a powerful entity at a remote house.",
@@ -927,12 +881,58 @@
       "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">NEVER AFTER DARK</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">DAVE BOYLE // 2026</text></svg>"
     },
     {
+      "title": "The Invite",
+      "director": "Olivia Wilde",
+      "year": 2026,
+      "theater": "Cinema Village",
+      "neighborhood": "Greenwich Village",
+      "matchScore": 50,
+      "seen": false,
+      "weekend": "current",
+      "summary": "Joe and Angela's marriage is on thin ice.",
+      "format": "Standard DCP",
+      "ticketUrl": "https://www.cinemavillage.com/",
+      "showtimes": [
+        "Fri Sep 25: 2:00pm",
+        "Fri Sep 25: 4:15pm",
+        "Fri Sep 25: 6:30pm",
+        "Fri Sep 25: 8:45pm",
+        "Sat Sep 26: 2:00pm",
+        "Sat Sep 26: 4:15pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/b7Dr8Chzse8VagexAporUu2RtLx.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE INVITE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">OLIVIA WILDE // 2026</text></svg>"
+    },
+    {
+      "title": "Unzipped",
+      "director": "Douglas Keeve",
+      "year": 1995,
+      "theater": "Film Forum",
+      "neighborhood": "Greenwich Village",
+      "matchScore": 49,
+      "seen": false,
+      "weekend": "current",
+      "summary": "Isaac Mizrahi, one of the most successful designers in high fashion, plans his fall 1994 collection.",
+      "format": "Standard DCP",
+      "ticketUrl": "https://filmforum.org/now_playing",
+      "showtimes": [
+        "Fri Sep 25: 12:30pm",
+        "Fri Sep 25: 2:15pm",
+        "Fri Sep 25: 4:00pm",
+        "Fri Sep 25: 6:00pm",
+        "Fri Sep 25: 8:00pm",
+        "Sat Sep 26: 12:30pm"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/dnIzv4rXr9FXkqW880E3rStYQA7.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">UNZIPPED</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">DOUGLAS KEEVE // 1995</text></svg>"
+    },
+    {
       "title": "The Odyssey",
       "director": "Christopher Nolan",
       "year": 2026,
       "theater": "AMC Lincoln Square 13",
       "neighborhood": "Upper West Side",
-      "matchScore": 78,
+      "matchScore": 68,
       "seen": true,
       "weekend": "current",
       "summary": "Odysseus, the legendary King of Ithaca, embarks on a long and perilous journey home following the Trojan War.",
@@ -955,7 +955,7 @@
       "year": 2025,
       "theater": "Metrograph",
       "neighborhood": "Lower East Side",
-      "matchScore": 75,
+      "matchScore": 64,
       "seen": true,
       "weekend": "current",
       "summary": "In May of 2020, a standoff between a small-town sheriff and mayor sparks a powder keg as neighbor is pitted against neighbor in...",
@@ -973,7 +973,7 @@
       "year": 2015,
       "theater": "The Paris Theater",
       "neighborhood": "Midtown",
-      "matchScore": 61,
+      "matchScore": 53,
       "seen": true,
       "weekend": "current",
       "summary": "An apocalyptic story set in the furthest reaches of our planet, in a stark desert landscape where humanity is broken, and most...",

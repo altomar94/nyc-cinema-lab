@@ -39,7 +39,6 @@ friday_date = today + datetime.timedelta(days=days_until_friday)
 saturday_date = friday_date + datetime.timedelta(days=1)
 sunday_date = friday_date + datetime.timedelta(days=2)
 
-fri_str = friday_date.strftime("%b %d")
 weekend_label = (f"{friday_date.strftime('%b %d')} \u2013 "
                  f"{sunday_date.strftime('%b %d')}")
 print(f"[Calendar] Targeting weekend: {weekend_label}")
@@ -107,17 +106,43 @@ if not tmdb.configured:
 TIME_RE = re.compile(r"\b\d{1,2}:\d{2}\s*(?:AM|PM|am|pm)\b")
 SKIP_TITLES = {"tickets", "directions", "website", "showtimes"}
 
+WEEKDAYS = {"mon": 0, "tue": 1, "wed": 2, "thu": 3, "fri": 4, "sat": 5,
+            "sun": 6}
+WEEKEND_DATES = {friday_date, saturday_date, sunday_date}
+
+
+def resolve_day(day_label):
+    """Map a SerpApi day label to a real date.
+
+    Google returns day-grouped blocks labeled 'Today', 'Tomorrow', or a
+    weekday name ('Fri', 'Saturday', ...). Returns a datetime.date, or None
+    when the label is missing/unrecognized.
+    """
+    if not day_label:
+        return None
+    key = day_label.strip().lower()
+    if key == "today":
+        return today
+    if key == "tomorrow":
+        return today + datetime.timedelta(days=1)
+    if key[:3] in WEEKDAYS:
+        delta = (WEEKDAYS[key[:3]] - today.weekday()) % 7
+        return today + datetime.timedelta(days=delta)
+    return None
+
 
 def _as_list(value):
     return value if isinstance(value, list) else []
 
 
 def iter_movie_blocks(data):
-    """Yield (raw_theater_name, movie_dict) from a SerpApi response.
+    """Yield (raw_theater_name, day_label, movie_dict) from a SerpApi response.
 
-    Google showtimes come back in several shapes depending on the query, so
-    this tries the known layouts in order: top-level "showtimes", then the
-    knowledge-graph variants, then movies/local results.
+    Google's live shape is day-grouped: data["showtimes"] is a list of
+    {"day": "Today"|"Fri"|..., "movies": [{"name": ..., "showing": [...]}]}.
+    Older/alternate shapes (knowledge-graph variants, movies/local results)
+    are still handled. The day label rides along so showtimes can later be
+    pinned to real dates.
     """
     blocks = []
     if isinstance(data.get("showtimes"), list):
@@ -133,21 +158,41 @@ def iter_movie_blocks(data):
             continue
         theater_raw = (block.get("theater_name") or block.get("name")
                        or block.get("title", ""))
+        day = block.get("day")
         movies = _as_list(block.get("movies"))
-        if not movies and any(k in block for k in ("showtimes", "times", "showtime")):
+        if not movies and any(k in block for k in ("showtimes", "times",
+                                                   "showtime", "showing")):
             movies = [block]  # the block itself describes one movie
         for movie in movies:
             if isinstance(movie, dict):
-                yield theater_raw, movie
+                yield theater_raw, day, movie
+
+
+def _format_rank(format_type):
+    """Return (label, rank) for a SerpApi showing type string."""
+    fl = (format_type or "").lower()
+    if "70mm" in fl:
+        return "70mm", 5
+    if "imax" in fl:
+        return "IMAX", 4
+    if "35mm" in fl:
+        return "35mm Print", 3
+    if "dolby" in fl:
+        return "Dolby Cinema", 2
+    if fl.strip() and "standard" not in fl:
+        return format_type.strip(), 1
+    return "Standard DCP", 1
 
 
 def extract_times(movie):
     """Return (times, format_label) from a SerpApi movie dict.
 
-    times is a list of (day_or_None, time_string). Handles string times,
-    {"time","type"} dicts, and day-grouped dicts.
+    times is a list of (day_label_or_None, time_string). Handles the live
+    shape — {"showing": [{"time": ["11:30am", ...], "type": "Standard"}]} —
+    plus string times, {"time","type"} dicts, and day-grouped dicts.
     """
-    raw = movie.get("showtimes") or movie.get("times") or movie.get("showtime")
+    raw = (movie.get("showing") or movie.get("showtimes")
+           or movie.get("times") or movie.get("showtime"))
     pairs = []
     if isinstance(raw, dict):
         # Possibly grouped by day: {"Friday": [...], ...}
@@ -163,26 +208,27 @@ def extract_times(movie):
             pairs.append((None, item))
 
     times = []
-    fmt = "Standard DCP"
+    best_fmt, best_rank = "Standard DCP", 0
     for day, item in pairs:
         if isinstance(item, str):
-            time_str, ftype, item_day = item.strip(), "", None
+            chunks, ftype, item_day = [item], "", None
         elif isinstance(item, dict):
-            time_str = (item.get("time") or item.get("showtime") or "").strip()
-            ftype = (item.get("type") or "").lower()
+            t = item.get("time") or item.get("showtime") or ""
+            chunks = t if isinstance(t, list) else [t]
+            ftype = item.get("type") or ""
             item_day = item.get("day")
         else:
             continue
-        if not time_str or not TIME_RE.search(time_str):
-            continue
-        if "70mm" in ftype:
-            fmt = "70mm"
-        elif "imax" in ftype:
-            fmt = "IMAX"
-        elif "35mm" in ftype:
-            fmt = "35mm Print"
-        times.append((day or item_day, TIME_RE.search(time_str).group(0)))
-    return times, fmt
+        fmt_label, rank = _format_rank(ftype)
+        if rank > best_rank:
+            best_fmt, best_rank = fmt_label, rank
+        for chunk in chunks:
+            if not isinstance(chunk, str):
+                continue
+            m = TIME_RE.search(chunk)
+            if m:
+                times.append((day or item_day, m.group(0)))
+    return times, best_fmt
 
 
 def match_theater(raw_name, query):
@@ -191,13 +237,6 @@ def match_theater(raw_name, query):
         if any(key in h for h in haystacks):
             return venue
     return None
-
-
-def label_showtime(day, time_str):
-    """Render a chip label, preferring SerpApi's day when present."""
-    if day:
-        return f"{day}: {time_str}"
-    return f"Fri {fri_str}: {time_str}"
 
 
 def fetch_serpapi_showtimes():
@@ -249,7 +288,7 @@ def fetch_serpapi_showtimes():
             continue
 
         n_movies = n_times = 0
-        for theater_raw, movie in iter_movie_blocks(data):
+        for theater_raw, block_day, movie in iter_movie_blocks(data):
             venue = match_theater(theater_raw, q)
             if not venue:
                 continue
@@ -260,13 +299,23 @@ def fetch_serpapi_showtimes():
 
             times, fmt = extract_times(movie)
             n_movies += 1
-            n_times += len(times)
             if not times:
                 zero_time_movies += 1
 
-            labels = [label_showtime(day, t) for day, t in times[:6]]
-            if not labels:
-                labels = [f"Fri {fri_str}: check venue site"]
+            # Pin each showtime to a real date; keep only the target
+            # Fri-Sun weekend. Entries with no weekend showtimes are
+            # dropped instead of getting placeholder chips.
+            dated = []
+            for day_label, tstr in times:
+                d = resolve_day(day_label or block_day)
+                if d is not None and d in WEEKEND_DATES:
+                    dated.append((d, tstr))
+            n_times += len(dated)
+            if not dated:
+                continue
+
+            labels = [f"{d.strftime('%a %b %d')}: {t}"
+                      for d, t in dated[:6]]
 
             t_name, neigh, t_url = venue
             key = (clean_t.lower(), t_name)

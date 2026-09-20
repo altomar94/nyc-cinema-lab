@@ -140,18 +140,35 @@
       letter-spacing: 0.04em;
     }
 
-    .why-line {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--accent);
-      letter-spacing: 0.03em;
-    }
-
     .film-summary {
       font-size: 0.85rem;
       color: #b3bac9;
       line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
+
+    .film-summary.expanded {
+      display: block;
+      -webkit-line-clamp: unset;
+      overflow: visible;
+    }
+
+    .summary-toggle {
+      background: none;
+      border: none;
+      padding: 0;
+      margin-top: 0.3rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      cursor: pointer;
+    }
+
+    .summary-toggle:hover { text-decoration: underline; }
 
     .venues {
       display: flex;
@@ -286,10 +303,7 @@
         films = (payload.films || []).slice(0, 10);
         const metaLine = document.getElementById('metaLine');
         if (metaLine) {
-          const parts = [];
-          if (payload.weekend) parts.push('Weekend of ' + payload.weekend);
-          if (payload.generated_at) parts.push('updated ' + payload.generated_at);
-          metaLine.textContent = parts.join(' \u00b7 ');
+          metaLine.textContent = payload.weekend ? 'Weekend of ' + payload.weekend : '';
         }
       } catch (e) {
         listElem.innerHTML = '<div class="empty-state">[ SCREENING DATA UNAVAILABLE \u2014 CHECK BACK LATER ]</div>';
@@ -326,13 +340,26 @@
             <div class="card-body">
               <h2 class="film-title">${esc(film.title)}</h2>
               <div class="film-meta">${esc(film.director || 'Unknown')} // ${esc(film.year || '')}</div>
-              ${film.why ? `<div class="why-line">${esc(film.why)}</div>` : ''}
               ${film.seen ? `<span class="seen-tag">WATCHED</span>` : ''}
               ${film.summary ? `<p class="film-summary">${esc(film.summary)}</p>` : ''}
               <div class="venues">${venuesMarkup}</div>
             </div>
           </article>`;
       }).join('');
+
+      // Add "More"/"Less" toggles only where the summary is actually truncated.
+      listElem.querySelectorAll('.film-summary').forEach(el => {
+        if (el.scrollHeight > el.clientHeight + 2) {
+          const btn = document.createElement('button');
+          btn.className = 'summary-toggle';
+          btn.textContent = 'MORE';
+          btn.addEventListener('click', () => {
+            const open = el.classList.toggle('expanded');
+            btn.textContent = open ? 'LESS' : 'MORE';
+          });
+          el.after(btn);
+        }
+      });
     }
 
     load();

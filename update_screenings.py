@@ -497,21 +497,7 @@ def create_entry(title, theater, neighborhood, ticket_url, summary, format,
     dir_total, dir_matches = _affinity_matches(
         directors, director_lookup, 3.5, 14.0)
     dp_total, dp_matches = _affinity_matches(dps, dp_lookup, 2.5, 10.0)
-    tropes = trope_matches(screening_text)
     base_score = 50.0 + dir_total + dp_total + trope_component(screening_text)
-
-    # One-line "why": top liked director, else DP, plus up to 2 tropes.
-    why_parts = []
-    for name, weight in dir_matches:
-        if weight > 0:
-            why_parts.append(name)
-            break
-    for name, weight in dp_matches:
-        if weight > 0 and all(name != part for part in why_parts):
-            why_parts.append("shot by " + name)
-            break
-    why_parts.extend(tropes[:2])
-    why = " \u00b7 ".join(why_parts[:3])
 
     return {
         "title": display_title,
@@ -522,7 +508,6 @@ def create_entry(title, theater, neighborhood, ticket_url, summary, format,
         "_key": f"{_norm_name(display_title)}|{year}",  # dedupe key
         "_raw": base_score,  # text component added in main(); rank only
         "_text": screening_text,   # popped before writing screenings.json
-        "why": why,
         "seen": (display_title.lower() in watched_titles
                  or clean_t.lower() in watched_titles),
         "weekend": "current",
@@ -578,7 +563,6 @@ def main():
                 "summary": entry["summary"],
                 "poster": entry["poster"],
                 "svg": entry["svg"],
-                "why": entry["why"],
                 "seen": entry["seen"],
                 "_raw": entry["_raw"],
                 "venues": [venue],

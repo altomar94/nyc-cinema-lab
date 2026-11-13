@@ -1,7 +1,28 @@
 {
-  "generated_at": "2026-11-06 17:53 UTC",
-  "weekend": "Nov 06 – Nov 08",
+  "generated_at": "2026-11-13 18:28 UTC",
+  "weekend": "Nov 13 – Nov 15",
   "films": [
+    {
+      "title": "The Insider",
+      "director": "Michael Mann",
+      "year": 1999,
+      "summary": "A research chemist comes under personal and professional attack when he decides to appear in a 60 Minutes exposé on Big Tobacco.",
+      "poster": "https://image.tmdb.org/t/p/w500/3BYhikNhkWALAbpAdoL0rcBrl5A.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE INSIDER</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">MICHAEL MANN // 1999</text></svg>",
+      "seen": false,
+      "venues": [
+        {
+          "theater": "The Paris Theater",
+          "neighborhood": "Midtown",
+          "format": "35mm Print",
+          "showtimes": [
+            "Sat Nov 14: 2:30pm"
+          ],
+          "ticketUrl": "https://www.paristheaternyc.com/"
+        }
+      ],
+      "rank": 1
+    },
     {
       "title": "Lost Highway",
       "director": "David Lynch",
@@ -16,34 +37,33 @@
           "neighborhood": "Lower East Side",
           "format": "Standard DCP",
           "showtimes": [
-            "Fri Nov 06: 11:00pm",
-            "Sun Nov 08: 9:20pm"
-          ],
-          "ticketUrl": "https://metrograph.com/nyc/"
-        }
-      ],
-      "rank": 1
-    },
-    {
-      "title": "Bram Stoker's Dracula",
-      "director": "Francis Ford Coppola",
-      "year": 1992,
-      "summary": "Count Dracula, a 15th-century prince, is condemned to live off the blood of the living for eternity. Young lawyer Jonathan Harker is sent to Dracula's castle to finalise a land deal, but when the Count sees a photo of Harker's fiancée, Mina, the spitting image of his dead wife, he imprisons him and sets off for London to track her down.",
-      "poster": "https://image.tmdb.org/t/p/w500/wpRrdm6g8zWtJnzVqME5QwSKkn7.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">BRAM STOKER&#x27;S DRACULA</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">FRANCIS FORD COPPOLA // 1992</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "Metrograph",
-          "neighborhood": "Lower East Side",
-          "format": "35mm Print",
-          "showtimes": [
-            "Fri Nov 06: 1:30pm"
+            "Sat Nov 14: 10:35pm"
           ],
           "ticketUrl": "https://metrograph.com/nyc/"
         }
       ],
       "rank": 2
+    },
+    {
+      "title": "Nightcrawler",
+      "director": "Dan Gilroy",
+      "year": 2014,
+      "summary": "When Lou Bloom, desperate for work, muscles into the world of L.A. crime journalism, he blurs the line between observer and participant to become the star of his own story. Aiding him in his effort is Nina, a TV-news veteran.",
+      "poster": "https://image.tmdb.org/t/p/w500/j9HrX8f7GbZQm1BrBiR40uFQZSb.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">NIGHTCRAWLER</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">DAN GILROY // 2014</text></svg>",
+      "seen": false,
+      "venues": [
+        {
+          "theater": "The Paris Theater",
+          "neighborhood": "Midtown",
+          "format": "Standard DCP",
+          "showtimes": [
+            "Fri Nov 13: 9:50pm"
+          ],
+          "ticketUrl": "https://www.paristheaternyc.com/"
+        }
+      ],
+      "rank": 3
     },
     {
       "title": "Possible Love",
@@ -59,13 +79,35 @@
           "neighborhood": "West Village",
           "format": "Standard DCP",
           "showtimes": [
-            "Sat Nov 07: 2:00pm",
-            "Sun Nov 08: 2:00pm"
+            "Fri Nov 13: 1:20pm",
+            "Sat Nov 14: 1:20pm",
+            "Sun Nov 15: 1:20pm"
           ],
           "ticketUrl": "https://www.ifccenter.com/"
         }
       ],
-      "rank": 3
+      "rank": 4
+    },
+    {
+      "title": "Somewhere in the Night",
+      "director": "Joseph L. Mankiewicz",
+      "year": 1946,
+      "summary": "George Taylor returns from WWII with amnesia. Back home in Los Angeles, while trying to track down his old identity, he stumbles onto a three year old murder case and a hunt for a missing $2 million.",
+      "poster": "https://image.tmdb.org/t/p/w500/ygJHtg34113MJPqYSgeOsoB33iE.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">SOMEWHERE IN THE NIGHT</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">JOSEPH L. MANKIEWICZ // 1946</text></svg>",
+      "seen": false,
+      "venues": [
+        {
+          "theater": "Metrograph",
+          "neighborhood": "Lower East Side",
+          "format": "35mm Print",
+          "showtimes": [
+            "Sun Nov 15: 3:40pm"
+          ],
+          "ticketUrl": "https://metrograph.com/nyc/"
+        }
+      ],
+      "rank": 5
     },
     {
       "title": "Detour",
@@ -81,12 +123,12 @@
           "neighborhood": "Lower East Side",
           "format": "Standard DCP",
           "showtimes": [
-            "Sat Nov 07: 2:10pm"
+            "Sun Nov 15: 8:00pm"
           ],
           "ticketUrl": "https://metrograph.com/nyc/"
         }
       ],
-      "rank": 4
+      "rank": 6
     },
     {
       "title": "The Devils",
@@ -102,128 +144,93 @@
           "neighborhood": "West Village",
           "format": "35mm Print",
           "showtimes": [
-            "Fri Nov 06: 9:40pm",
-            "Fri Nov 06: 11:10pm",
-            "Sat Nov 07: 7:25pm",
-            "Sat Nov 07: 9:50pm",
-            "Sat Nov 07: 11:10pm",
-            "Sun Nov 08: 7:25pm"
+            "Fri Nov 13: 4:35pm",
+            "Fri Nov 13: 7:25pm",
+            "Fri Nov 13: 9:15pm",
+            "Fri Nov 13: 11:50pm",
+            "Sat Nov 14: 11:00am",
+            "Sat Nov 14: 4:35pm"
           ],
           "ticketUrl": "https://www.ifccenter.com/"
-        },
-        {
-          "theater": "Nitehawk Cinema",
-          "neighborhood": "Brooklyn",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Sat Nov 07: 11:00am",
-            "Sun Nov 08: 11:00am"
-          ],
-          "ticketUrl": "https://nitehawkcinema.com/"
-        }
-      ],
-      "rank": 5
-    },
-    {
-      "title": "Clayface",
-      "director": "James Watkins",
-      "year": 2026,
-      "summary": "Matt Hagen's meteoric rise from Gotham street kid to Hollywood leading man is tragically cut short when a local crime boss's actions leave him horribly disfigured. Abandoned by his team and with nothing left, Matt seeks out a cutting edge treatment that miraculously returns him to his former self… but also unexpectedly affects his grip on reality, spiraling him down a destructive path of all-consuming revenge.",
-      "poster": "https://image.tmdb.org/t/p/w500/9l1NuFjel2j89hiuiJbsxfblqjy.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">CLAYFACE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">JAMES WATKINS // 2026</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "AMC Lincoln Square 13",
-          "neighborhood": "Upper West Side",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Fri Nov 06: 1:45pm",
-            "Fri Nov 06: 3:15pm",
-            "Fri Nov 06: 7:45pm",
-            "Fri Nov 06: 10:45pm",
-            "Sat Nov 07: 12:50pm",
-            "Sat Nov 07: 5:00pm"
-          ],
-          "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"
-        }
-      ],
-      "rank": 6
-    },
-    {
-      "title": "Chinese Roulette",
-      "director": "Rainer Werner Fassbinder",
-      "year": 1977,
-      "summary": "Ariane and Gerhard Christ, a wealthy Munich couple, plan for the weekend on separate trips, lying to the other about their trysts. However, their itineraries are complicated when they both arrive at the family's country home with their respective lovers.",
-      "poster": "https://image.tmdb.org/t/p/w500/9I0YkoGDM8nqHZcEsrGMcy9WhVy.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">CHINESE ROULETTE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">RAINER WERNER FASSBI // 1977</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "Metrograph",
-          "neighborhood": "Lower East Side",
-          "format": "35mm Print",
-          "showtimes": [
-            "Fri Nov 06: 8:50pm"
-          ],
-          "ticketUrl": "https://metrograph.com/nyc/"
         }
       ],
       "rank": 7
     },
     {
-      "title": "Scott Pilgrim vs. the World",
-      "director": "Edgar Wright",
-      "year": 2010,
-      "summary": "As bass guitarist for a garage-rock band, Scott Pilgrim has never had trouble getting a girlfriend; usually, the problem is getting rid of them. But when Ramona Flowers skates into his heart, he finds she has the most troublesome baggage of all: an army of ex-boyfriends who will stop at nothing to eliminate him from her list of suitors.",
-      "poster": "https://image.tmdb.org/t/p/w500/g5IoYeudx9XBEfwNL0fHvSckLBz.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">SCOTT PILGRIM VS. THE WORLD</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">EDGAR WRIGHT // 2010</text></svg>",
+      "title": "Network",
+      "director": "Sidney Lumet",
+      "year": 1976,
+      "summary": "When veteran anchorman Howard Beale is forced to retire his 25-year post because of his age, he announces to viewers that he will kill himself during his farewell broadcast. Network executives rethink their decision when his fanatical tirade results in a spike in ratings.",
+      "poster": "https://image.tmdb.org/t/p/w500/qZomlHsaALUtkFeMDwdYmwS2Pbo.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">NETWORK</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">SIDNEY LUMET // 1976</text></svg>",
       "seen": false,
       "venues": [
         {
-          "theater": "The Roxy Cinema",
-          "neighborhood": "Tribeca",
+          "theater": "The Paris Theater",
+          "neighborhood": "Midtown",
           "format": "Standard DCP",
           "showtimes": [
-            "Fri Nov 06: 9:30pm"
+            "Sun Nov 15: 9:05pm"
           ],
-          "ticketUrl": "https://www.roxycinematribeca.com/"
+          "ticketUrl": "https://www.paristheaternyc.com/"
         }
       ],
       "rank": 8
     },
     {
-      "title": "Godzilla Minus Zero",
-      "director": "Takashi Yamazaki",
+      "title": "Bitter Christmas",
+      "director": "Pedro Almodóvar",
       "year": 2026,
-      "summary": "War reduced Japan to zero, and Godzilla plunged it into minus. Two years have passed since then, and the country has faced agonizing struggles to achieve recovery and finally reclaim its daily life. Just as humanity managed to cling to a hard-won peace, a new threat strikes, crushing hope in an instant. There is no third time. Everything ends here.",
-      "poster": "https://image.tmdb.org/t/p/w500/hSmIJluOJmTWvJs4d7kHRxjc8s8.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">GODZILLA MINUS ZERO</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">TAKASHI YAMAZAKI // 2026</text></svg>",
+      "summary": "During a long December holiday weekend, a woman, whose mother has recently died, throws herself into work as a form of escape. Her relentless pace is interrupted when a panic attack forces her to take a break.",
+      "poster": "https://image.tmdb.org/t/p/w500/kiPGcHX0YT49nrab76G0bqw3gHW.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">BITTER CHRISTMAS</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">PEDRO ALMODÓVAR // 2026</text></svg>",
       "seen": false,
       "venues": [
         {
-          "theater": "AMC Lincoln Square 13",
-          "neighborhood": "Upper West Side",
-          "format": "IMAX",
+          "theater": "Angelika Film Center",
+          "neighborhood": "SoHo",
+          "format": "Standard DCP",
           "showtimes": [
-            "Fri Nov 06: 1:15pm",
-            "Fri Nov 06: 4:30pm",
-            "Fri Nov 06: 7:45pm",
-            "Fri Nov 06: 11:00pm",
-            "Sat Nov 07: 10:00am",
-            "Sat Nov 07: 1:15pm"
+            "Fri Nov 13: 1:45pm",
+            "Fri Nov 13: 4:30pm",
+            "Fri Nov 13: 7:10pm",
+            "Fri Nov 13: 9:50pm",
+            "Sat Nov 14: 1:45pm",
+            "Sat Nov 14: 11:00am"
           ],
-          "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"
+          "ticketUrl": "https://www.angelikafilmcenter.com/nyc"
         }
       ],
       "rank": 9
+    },
+    {
+      "title": "The Landlord",
+      "director": "Hal Ashby",
+      "year": 1970,
+      "summary": "At the age of twenty-nine, Elgar Enders \"runs away\" from home. This running away consists of buying a building in a black ghetto in the Park Slope section of Brooklyn. Initially, his intention is to evict the black tenants and convert the building into a posh flat. But Elgar is not one to be bound by yesterday's urges, and soon he has other thoughts on his mind.",
+      "poster": "https://image.tmdb.org/t/p/w500/DoDKRMIRki2ft2D9bZGa1zzgVx.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE LANDLORD</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">HAL ASHBY // 1970</text></svg>",
+      "seen": false,
+      "venues": [
+        {
+          "theater": "The Roxy Cinema",
+          "neighborhood": "Tribeca",
+          "format": "35mm Print",
+          "showtimes": [
+            "Fri Nov 13: 9:30pm",
+            "Sat Nov 14: 7:00pm"
+          ],
+          "ticketUrl": "https://www.roxycinematribeca.com/"
+        }
+      ],
+      "rank": 10
     },
     {
       "title": "The Holy Mountain",
       "director": "Alejandro Jodorowsky",
       "year": 1973,
       "summary": "The Alchemist assembles together a group of people from all walks of life to represent the planets in the solar system. The occult adept's intention is to put his recruits through strange mystical rites and divest them of their worldly baggage before embarking on a trip to Lotus Island. There they ascend the Holy Mountain to displace the immortal gods who secretly rule the universe.",
-      "poster": "https://image.tmdb.org/t/p/w500/mP5FGQbNjFkrjcZ6AVHrvokPRe5.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/7mRD6D7t4Mq6A7O1FSj7wWypxQd.jpg",
       "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE HOLY MOUNTAIN</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">ALEJANDRO JODOROWSKY // 1973</text></svg>",
       "seen": false,
       "venues": [
@@ -232,13 +239,55 @@
           "neighborhood": "West Village",
           "format": "Standard DCP",
           "showtimes": [
-            "Fri Nov 06: 11:55pm",
-            "Sat Nov 07: 11:55pm"
+            "Fri Nov 13: 11:59pm",
+            "Sat Nov 14: 11:59pm"
           ],
           "ticketUrl": "https://www.ifccenter.com/"
         }
       ],
-      "rank": 10
+      "rank": 11
+    },
+    {
+      "title": "The Celebration",
+      "director": "Thomas Vinterberg",
+      "year": 1998,
+      "summary": "The family of a wealthy businessman gather to celebrate his 60th birthday. During the course of the party, his eldest son presents a speech that reveals a devastating secret that turns the night into a battle of truth and denial.",
+      "poster": "https://image.tmdb.org/t/p/w500/2LRzNq41yrY8EjCnD1S8sCCPvKk.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE CELEBRATION</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">THOMAS VINTERBERG // 1998</text></svg>",
+      "seen": false,
+      "venues": [
+        {
+          "theater": "Metrograph",
+          "neighborhood": "Lower East Side",
+          "format": "Standard DCP",
+          "showtimes": [
+            "Sun Nov 15: 7:40pm"
+          ],
+          "ticketUrl": "https://metrograph.com/nyc/"
+        }
+      ],
+      "rank": 12
+    },
+    {
+      "title": "Primetime",
+      "director": "Lance Oppenheim",
+      "year": 2026,
+      "summary": "In 2006, To Catch a Predator host Chris Hansen sets out to make television history. When a high stakes operation goes fatally wrong, his veneered dream of fame curdles into a nightmare of performative justice.",
+      "poster": "https://image.tmdb.org/t/p/w500/lmrulvLbmaejTix1YaMxo1oGhH1.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">PRIMETIME</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">LANCE OPPENHEIM // 2026</text></svg>",
+      "seen": false,
+      "venues": [
+        {
+          "theater": "The Roxy Cinema",
+          "neighborhood": "Tribeca",
+          "format": "Standard DCP",
+          "showtimes": [
+            "Fri Nov 13: 4:45pm"
+          ],
+          "ticketUrl": "https://www.roxycinematribeca.com/"
+        }
+      ],
+      "rank": 13
     },
     {
       "title": "You Can See Everything",
@@ -250,102 +299,18 @@
       "seen": false,
       "venues": [
         {
-          "theater": "AMC Lincoln Square 13",
-          "neighborhood": "Upper West Side",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Fri Nov 06: 2:30pm",
-            "Fri Nov 06: 3:30pm",
-            "Fri Nov 06: 6:30pm",
-            "Fri Nov 06: 7:30pm",
-            "Fri Nov 06: 8:15pm",
-            "Fri Nov 06: 9:30pm"
-          ],
-          "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"
-        },
-        {
           "theater": "Nitehawk Cinema",
           "neighborhood": "Brooklyn",
           "format": "Standard DCP",
           "showtimes": [
-            "Fri Nov 06: 3:10pm",
-            "Fri Nov 06: 3:35pm",
-            "Fri Nov 06: 5:35pm",
-            "Fri Nov 06: 7:15pm",
-            "Fri Nov 06: 9:30pm",
-            "Fri Nov 06: 11:00pm"
+            "Fri Nov 13: 3:15pm",
+            "Fri Nov 13: 6:15pm",
+            "Fri Nov 13: 9:50pm",
+            "Sat Nov 14: 2:00pm",
+            "Sat Nov 14: 4:00pm",
+            "Sat Nov 14: 5:45pm"
           ],
           "ticketUrl": "https://nitehawkcinema.com/"
-        }
-      ],
-      "rank": 11
-    },
-    {
-      "title": "On the Road",
-      "director": "Walter Salles",
-      "year": 2012,
-      "summary": "Sal Paradise is a young writer whose life is shaken and ultimately redefined by the arrival of Dean Moriarty, a free-spirited, fearless, fast talking Westerner and his girl, Marylou. Traveling cross-country, Sal and Dean venture out on a personal quest for freedom from the conformity and conservatism engulfing them in search of the unknown, themselves, and the pursuit of “it” -- the pure essence of experience.",
-      "poster": "https://image.tmdb.org/t/p/w500/k7LQteD02p3VHixbS6NXHkFdFwT.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">ON THE ROAD</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">WALTER SALLES // 2012</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "IFC Center",
-          "neighborhood": "West Village",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Fri Nov 06: 12:30pm",
-            "Fri Nov 06: 9:05pm",
-            "Sat Nov 07: 12:30pm",
-            "Sat Nov 07: 9:05pm",
-            "Sun Nov 08: 12:30pm",
-            "Sun Nov 08: 9:05pm"
-          ],
-          "ticketUrl": "https://www.ifccenter.com/"
-        }
-      ],
-      "rank": 12
-    },
-    {
-      "title": "Suzhou River",
-      "director": "Lou Ye",
-      "year": 2000,
-      "summary": "After getting out of prison, small-time crook Mardar stumbles upon a woman who looks exactly like his long-lost lover, who he attempted to kidnap 3 years ago.",
-      "poster": "https://image.tmdb.org/t/p/w500/npmg7vTFvmFmxZsiThHFwWE86hA.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">SUZHOU RIVER</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">LOU YE // 2000</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "Metrograph",
-          "neighborhood": "Lower East Side",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Fri Nov 06: 9:10pm",
-            "Sun Nov 08: 4:00pm"
-          ],
-          "ticketUrl": "https://metrograph.com/nyc/"
-        }
-      ],
-      "rank": 13
-    },
-    {
-      "title": "Far from Heaven",
-      "director": "Todd Haynes",
-      "year": 2002,
-      "summary": "In 1950s Connecticut, a housewife's life is upended by a marital crisis and mounting racial tensions in society.",
-      "poster": "https://image.tmdb.org/t/p/w500/9gQuvFDRPLx39smUvyafm36tp0d.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">FAR FROM HEAVEN</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">TODD HAYNES // 2002</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "Metrograph",
-          "neighborhood": "Lower East Side",
-          "format": "35mm Print",
-          "showtimes": [
-            "Fri Nov 06: 4:15pm",
-            "Sat Nov 07: 12:00pm"
-          ],
-          "ticketUrl": "https://metrograph.com/nyc/"
         }
       ],
       "rank": 14
@@ -360,30 +325,16 @@
       "seen": false,
       "venues": [
         {
-          "theater": "AMC Lincoln Square 13",
-          "neighborhood": "Upper West Side",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Fri Nov 06: 12:50pm",
-            "Fri Nov 06: 3:30pm",
-            "Fri Nov 06: 10:30pm",
-            "Sat Nov 07: 9:00am",
-            "Sat Nov 07: 3:30pm",
-            "Sat Nov 07: 6:00pm"
-          ],
-          "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"
-        },
-        {
           "theater": "Angelika Film Center",
           "neighborhood": "SoHo",
           "format": "Standard DCP",
           "showtimes": [
-            "Fri Nov 06: 1:15pm",
-            "Fri Nov 06: 3:30pm",
-            "Fri Nov 06: 5:45pm",
-            "Fri Nov 06: 8:00pm",
-            "Fri Nov 06: 10:15pm",
-            "Sat Nov 07: 10:00am"
+            "Fri Nov 13: 3:00pm",
+            "Fri Nov 13: 8:10pm",
+            "Sat Nov 14: 10:00am",
+            "Sat Nov 14: 3:00pm",
+            "Sat Nov 14: 8:10pm",
+            "Sun Nov 15: 10:00am"
           ],
           "ticketUrl": "https://www.angelikafilmcenter.com/nyc"
         }
@@ -391,30 +342,94 @@
       "rank": 15
     },
     {
-      "title": "The Great Mouse Detective",
-      "director": "Ron Clements",
-      "year": 1986,
-      "summary": "When the diabolical Professor Ratigan kidnaps London's master toymaker, the brilliant master of disguise Basil of Baker Street and his trusted sidekick Dawson try to elude the ultimate trap and foil the perfect crime.",
-      "poster": "https://image.tmdb.org/t/p/w500/9uDr7vfjCFr39KGCcqrk44Cg7fQ.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE GREAT MOUSE DETECTIVE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">RON CLEMENTS // 1986</text></svg>",
+      "title": "To Die For",
+      "director": "Gus Van Sant",
+      "year": 1995,
+      "summary": "Suzanne Stone wants to be a world-famous news anchor and she is willing to do anything to get what she wants. What she lacks in intelligence, she makes up for in cold determination and diabolical wiles. As she pursues her goal with relentless focus, she is forced to destroy anything and anyone that may stand in her way, regardless of the ultimate cost or means necessary.",
+      "poster": "https://image.tmdb.org/t/p/w500/ji0F2HvO58iIrNfbo41lrnYybed.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">TO DIE FOR</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">GUS VAN SANT // 1995</text></svg>",
+      "seen": false,
+      "venues": [
+        {
+          "theater": "The Paris Theater",
+          "neighborhood": "Midtown",
+          "format": "Standard DCP",
+          "showtimes": [
+            "Sat Nov 14: 9:50pm"
+          ],
+          "ticketUrl": "https://www.paristheaternyc.com/"
+        }
+      ],
+      "rank": 16
+    },
+    {
+      "title": "Paper Tiger",
+      "director": "James Gray",
+      "year": 2026,
+      "summary": "Two brothers become entangled in a scheme that turns out to be too good to be true. As they try to navigate their way through the dangerous world of the Russian mafia, family bonds begin to fray with life-altering consequences.",
+      "poster": "https://image.tmdb.org/t/p/w500/p6oLmq5KmuWY6uRXBQBL2q30jia.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">PAPER TIGER</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">JAMES GRAY // 2026</text></svg>",
+      "seen": false,
+      "venues": [
+        {
+          "theater": "Angelika Film Center",
+          "neighborhood": "SoHo",
+          "format": "35mm Print",
+          "showtimes": [
+            "Fri Nov 13: 5:15pm",
+            "Fri Nov 13: 1:40pm",
+            "Fri Nov 13: 4:20pm",
+            "Fri Nov 13: 7:00pm",
+            "Fri Nov 13: 10:10pm",
+            "Sat Nov 14: 5:15pm"
+          ],
+          "ticketUrl": "https://www.angelikafilmcenter.com/nyc"
+        }
+      ],
+      "rank": 17
+    },
+    {
+      "title": "Cloverfield",
+      "director": "Matt Reeves",
+      "year": 2008,
+      "summary": "Five young New Yorkers throw their friend a going-away party the night that a monster the size of a skyscraper descends upon the city. Told from the point of view of their video camera, the film is a document of their attempt to survive the most surreal, horrifying event of their lives.",
+      "poster": "https://image.tmdb.org/t/p/w500/qIegUGJqyMMCRjkKV1s7A9MqdJ8.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">CLOVERFIELD</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">MATT REEVES // 2008</text></svg>",
       "seen": false,
       "venues": [
         {
           "theater": "IFC Center",
           "neighborhood": "West Village",
-          "format": "Standard DCP",
+          "format": "35mm Print",
           "showtimes": [
-            "Fri Nov 06: 1:15pm",
-            "Fri Nov 06: 4:00pm",
-            "Fri Nov 06: 6:45pm",
-            "Fri Nov 06: 9:30pm",
-            "Sat Nov 07: 1:15pm",
-            "Sat Nov 07: 4:00pm"
+            "Fri Nov 13: 11:35pm",
+            "Sat Nov 14: 11:35pm"
           ],
           "ticketUrl": "https://www.ifccenter.com/"
         }
       ],
-      "rank": 16
+      "rank": 18
+    },
+    {
+      "title": "All of a Sudden",
+      "director": "Ryusuke Hamaguchi",
+      "year": 2026,
+      "summary": "Director of a care facility for the elderly, Marie-Lou strives to introduce an innovative care philosophy based on listening and respecting residents’ dignity, despite resistance from part of her staff. Her encounter with Mari, a Japanese theater director battling cancer, will profoundly reshape her path. By forming a deep, supportive friendship, the two women join forces in a shared struggle to make the impossible possible.",
+      "poster": "https://image.tmdb.org/t/p/w500/fgxhBo4elwt89J5k9wzhHSXGQmY.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">ALL OF A SUDDEN</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">RYUSUKE HAMAGUCHI // 2026</text></svg>",
+      "seen": false,
+      "venues": [
+        {
+          "theater": "Metrograph",
+          "neighborhood": "Lower East Side",
+          "format": "Standard DCP",
+          "showtimes": [
+            "Fri Nov 13: 5:00pm"
+          ],
+          "ticketUrl": "https://metrograph.com/nyc/"
+        }
+      ],
+      "rank": 19
     },
     {
       "title": "NAZA",
@@ -430,76 +445,12 @@
           "neighborhood": "West Village",
           "format": "Standard DCP",
           "showtimes": [
-            "Fri Nov 06: 2:10pm",
-            "Fri Nov 06: 4:55pm",
-            "Fri Nov 06: 7:00pm",
-            "Sat Nov 07: 10:45am",
-            "Sat Nov 07: 2:10pm",
-            "Sat Nov 07: 5:35pm"
-          ],
-          "ticketUrl": "https://www.ifccenter.com/"
-        }
-      ],
-      "rank": 17
-    },
-    {
-      "title": "Leonora in the Morning Light",
-      "director": "Thor Klein",
-      "year": 2025,
-      "summary": "Leonora Carrington, an outstanding figure of surrealism, along with Frida Kahlo, was one of Mexico's most famous painters. As the long-time partner of Max Ernst and close friend of André Breton and Jean Miró, she continually struggles with her visionary imagination, which often triggers serious psychological crises.",
-      "poster": "https://image.tmdb.org/t/p/w500/oi0i7alntRT5BwrWVB5pO3UVU1V.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">LEONORA IN THE MORNING LIGHT</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">THOR KLEIN // 2025</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "The Roxy Cinema",
-          "neighborhood": "Tribeca",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Fri Nov 06: 4:15pm"
-          ],
-          "ticketUrl": "https://www.roxycinematribeca.com/"
-        }
-      ],
-      "rank": 18
-    },
-    {
-      "title": "The Woman in the Window",
-      "director": "Joe Wright",
-      "year": 2021,
-      "summary": "An agoraphobic woman living alone in New York begins spying on her new neighbors only to witness a disturbing act of violence.",
-      "poster": "https://image.tmdb.org/t/p/w500/wcrjc1uwQaqoqtqi67Su4VCOYo0.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE WOMAN IN THE WINDOW</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">JOE WRIGHT // 2021</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "Metrograph",
-          "neighborhood": "Lower East Side",
-          "format": "35mm Print",
-          "showtimes": [
-            "Sat Nov 07: 8:45pm"
-          ],
-          "ticketUrl": "https://metrograph.com/nyc/"
-        }
-      ],
-      "rank": 19
-    },
-    {
-      "title": "The Exorcist",
-      "director": "William Friedkin",
-      "year": 1973,
-      "summary": "When a mysterious entity possesses a young girl, her mother seeks the help of two Catholic priests to save her life.",
-      "poster": "https://image.tmdb.org/t/p/w500/5x0CeVHJI8tcDx8tUUwYHQSNILq.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE EXORCIST</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">WILLIAM FRIEDKIN // 1973</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "IFC Center",
-          "neighborhood": "West Village",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Fri Nov 06: 11:45pm",
-            "Sat Nov 07: 11:45pm"
+            "Fri Nov 13: 1:10pm",
+            "Fri Nov 13: 5:35pm",
+            "Fri Nov 13: 9:30pm",
+            "Sat Nov 14: 1:10pm",
+            "Sat Nov 14: 5:35pm",
+            "Sat Nov 14: 9:25pm"
           ],
           "ticketUrl": "https://www.ifccenter.com/"
         }
@@ -507,24 +458,22 @@
       "rank": 20
     },
     {
-      "title": "Fjord",
-      "director": "Cristian Mungiu",
-      "year": 2026,
-      "summary": "Following the deaths of Mihai's parents, Mihai and Lisbet Gheorghiu leave their life behind in Romania and move with their children to a remote village in Norway, hoping to rebuild their lives near Lisbet's family. There, they grow close to their neighbors, the Halbergs, whose warmth gives them hope for a fresh start. But the fragile peace begins to unravel when the Gheorghiu family’s young daughter, Elia, arrives at school covered in bruises.",
-      "poster": "https://image.tmdb.org/t/p/w500/rhKlzjAJCEKUjxEk1qwr4bgbXlG.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">FJORD</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">CRISTIAN MUNGIU // 2026</text></svg>",
+      "title": "The Woman on the Beach",
+      "director": "Jean Renoir",
+      "year": 1947,
+      "summary": "A sailor suffering from post-traumatic stress becomes involved with a beautiful and enigmatic seductress married to a blind painter.",
+      "poster": "https://image.tmdb.org/t/p/w500/fz7ASNtc7koTdrx4fuRZbLobgSw.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE WOMAN ON THE BEACH</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">JEAN RENOIR // 1947</text></svg>",
       "seen": false,
       "venues": [
         {
-          "theater": "IFC Center",
-          "neighborhood": "West Village",
-          "format": "Standard DCP",
+          "theater": "Metrograph",
+          "neighborhood": "Lower East Side",
+          "format": "35mm Print",
           "showtimes": [
-            "Fri Nov 06: 3:25pm",
-            "Sat Nov 07: 10:35am",
-            "Sun Nov 08: 10:35am"
+            "Sun Nov 15: 6:00pm"
           ],
-          "ticketUrl": "https://www.ifccenter.com/"
+          "ticketUrl": "https://metrograph.com/nyc/"
         }
       ],
       "rank": 21
@@ -543,12 +492,12 @@
           "neighborhood": "Greenwich Village",
           "format": "Standard DCP",
           "showtimes": [
-            "Fri Nov 06: 12:25pm",
-            "Fri Nov 06: 2:25pm",
-            "Fri Nov 06: 4:30pm",
-            "Fri Nov 06: 6:30pm",
-            "Fri Nov 06: 8:30pm",
-            "Sat Nov 07: 12:25pm"
+            "Fri Nov 13: 2:25pm",
+            "Fri Nov 13: 4:30pm",
+            "Fri Nov 13: 6:30pm",
+            "Fri Nov 13: 8:30pm",
+            "Sat Nov 14: 12:25pm",
+            "Sat Nov 14: 2:25pm"
           ],
           "ticketUrl": "https://filmforum.org/now_playing"
         }
@@ -556,55 +505,33 @@
       "rank": 22
     },
     {
-      "title": "Sense and Sensibility",
-      "director": "Georgia Oakley",
-      "year": 2026,
-      "summary": "A charming, witty, and deeply relatable story of love and sisterhood.",
-      "poster": "https://image.tmdb.org/t/p/w500/czsyPHosFNbh4PPqXfqWu1aBXnA.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">SENSE AND SENSIBILITY</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">GEORGIA OAKLEY // 2026</text></svg>",
+      "title": "Maurice",
+      "director": "James Ivory",
+      "year": 1987,
+      "summary": "After his lover rejects him, Maurice attempts to come to terms with his sexuality within the restrictiveness of Edwardian society.",
+      "poster": "https://image.tmdb.org/t/p/w500/8HhCyxxzoUqEBmVGK25Jq69LhVo.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">MAURICE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">JAMES IVORY // 1987</text></svg>",
       "seen": false,
       "venues": [
         {
-          "theater": "AMC Lincoln Square 13",
-          "neighborhood": "Upper West Side",
+          "theater": "The Paris Theater",
+          "neighborhood": "Midtown",
           "format": "Standard DCP",
           "showtimes": [
-            "Sat Nov 07: 10:00am",
-            "Sun Nov 08: 9:15am"
+            "Sun Nov 15: 2:00pm"
           ],
-          "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"
+          "ticketUrl": "https://www.paristheaternyc.com/"
         }
       ],
       "rank": 23
     },
     {
-      "title": "The Housemaid",
-      "director": "Paul Feig",
-      "year": 2025,
-      "summary": "Trying to escape her past, Millie Calloway accepts a job as a live-in housemaid for the wealthy Nina and Andrew Winchester. But what begins as a dream job quickly unravels into something far more dangerous—a sexy, seductive game of secrets, scandal, and power.",
-      "poster": "https://image.tmdb.org/t/p/w500/cWsBscZzwu5brg9YjNkGewRUvJX.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE HOUSEMAID</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">PAUL FEIG // 2025</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "Metrograph",
-          "neighborhood": "Lower East Side",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Sat Nov 07: 12:00pm"
-          ],
-          "ticketUrl": "https://metrograph.com/nyc/"
-        }
-      ],
-      "rank": 24
-    },
-    {
-      "title": "Filipiñana",
-      "director": "Rafael Manuel",
-      "year": 2020,
-      "summary": "A film about a girl drawn to a golf course.",
-      "poster": "https://image.tmdb.org/t/p/w500/d9bovHgEC90yTgqLsoarQWnh6JW.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">FILIPIÑANA</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">RAFAEL MANUEL // 2020</text></svg>",
+      "title": "Over the Hedge",
+      "director": "Karey Kirkpatrick",
+      "year": 2006,
+      "summary": "A scheming raccoon fools a mismatched family of forest creatures into helping him repay a debt of food, by invading the new suburban sprawl that popped up while they were hibernating – and learns a lesson about family himself.",
+      "poster": "https://image.tmdb.org/t/p/w500/jtZnymorbnHY7mOiBXR14ZDJseM.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">OVER THE HEDGE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">KAREY KIRKPATRICK // 2006</text></svg>",
       "seen": false,
       "venues": [
         {
@@ -612,8 +539,48 @@
           "neighborhood": "Brooklyn",
           "format": "Standard DCP",
           "showtimes": [
-            "Sat Nov 07: 11:15am",
-            "Sun Nov 08: 11:15am"
+            "Sat Nov 14: 11:15am",
+            "Sun Nov 15: 11:15am"
+          ],
+          "ticketUrl": "https://nitehawkcinema.com/"
+        }
+      ],
+      "rank": 24
+    },
+    {
+      "title": "Club Kid",
+      "director": "Jordan Firstman",
+      "year": 2026,
+      "summary": "A hard-partying New York City club promoter sees his whirlwind lifestyle upended by the arrival of the 10-year-old son he never knew he had.",
+      "poster": "https://image.tmdb.org/t/p/w500/o1qMU0ZB5XDX8IXJFFu3AkhOqjh.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">CLUB KID</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">JORDAN FIRSTMAN // 2026</text></svg>",
+      "seen": false,
+      "venues": [
+        {
+          "theater": "Angelika Film Center",
+          "neighborhood": "SoHo",
+          "format": "35mm Print",
+          "showtimes": [
+            "Fri Nov 13: 10:30pm",
+            "Fri Nov 13: 1:15pm",
+            "Fri Nov 13: 4:00pm",
+            "Fri Nov 13: 10:00pm",
+            "Sat Nov 14: 12:15pm",
+            "Sat Nov 14: 10:30pm"
+          ],
+          "ticketUrl": "https://www.angelikafilmcenter.com/nyc"
+        },
+        {
+          "theater": "Nitehawk Cinema",
+          "neighborhood": "Brooklyn",
+          "format": "Standard DCP",
+          "showtimes": [
+            "Fri Nov 13: 3:30pm",
+            "Fri Nov 13: 6:00pm",
+            "Fri Nov 13: 9:30pm",
+            "Fri Nov 13: 11:25pm",
+            "Sat Nov 14: 11:00am",
+            "Sat Nov 14: 1:45pm"
           ],
           "ticketUrl": "https://nitehawkcinema.com/"
         }
@@ -621,75 +588,71 @@
       "rank": 25
     },
     {
-      "title": "Her Song",
-      "director": "John M. Keller",
+      "title": "Mouse",
+      "director": "Kelly O'Sullivan",
       "year": 2026,
-      "summary": "Olivia, a Franco-American writer, returns to her ancestral village in the south of France to write the story of her grandmother, who fled Paris during the Nazi invasion during World War II. There, she meets Madeline, a talented local artist, who quickly replaces her grandmother as the face of the novel. As a number of strange coincidences ensue, fiction and reality intermingle uncannily, and Olivia starts to ask whether she's part of history's unfolding story, or vice-versa.",
-      "poster": "https://image.tmdb.org/t/p/w500/8lbdVpNZ56RFc9YFKdDDG5DigmK.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">HER SONG</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">JOHN M. KELLER // 2026</text></svg>",
+      "summary": "When her closest friendship is suddenly disrupted the summer before senior year, a teenager struggles to find her footing and develops an unexpected, complicated bond with her best friend’s mother.",
+      "poster": "https://image.tmdb.org/t/p/w500/iKBFfOCdeu21lxxLxWaSAXxkmJ5.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">MOUSE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">KELLY O&#x27;SULLIVAN // 2026</text></svg>",
       "seen": false,
       "venues": [
         {
-          "theater": "Cinema Village",
-          "neighborhood": "Greenwich Village",
+          "theater": "IFC Center",
+          "neighborhood": "West Village",
           "format": "Standard DCP",
           "showtimes": [
-            "Fri Nov 06: 2:00pm",
-            "Fri Nov 06: 4:15pm",
-            "Fri Nov 06: 6:30pm",
-            "Fri Nov 06: 8:45pm",
-            "Sat Nov 07: 2:00pm",
-            "Sat Nov 07: 4:15pm"
+            "Fri Nov 13: 3:55pm",
+            "Fri Nov 13: 6:40pm",
+            "Sat Nov 14: 10:50am",
+            "Sat Nov 14: 3:55pm",
+            "Sat Nov 14: 6:40pm",
+            "Sun Nov 15: 10:50am"
           ],
-          "ticketUrl": "https://www.cinemavillage.com/"
+          "ticketUrl": "https://www.ifccenter.com/"
         }
       ],
       "rank": 26
     },
     {
-      "title": "Wildwood",
-      "director": "Travis Knight",
-      "year": 2026,
-      "summary": "Prue and her classmate Curtis are drawn into a magical forest filled with enchanted creatures, loyal allies, and formidable adversaries as they embark on a desperate quest to rescue Prue's abducted baby brother from a murder of crows led by a mysterious woman named Alexandra.",
-      "poster": "https://image.tmdb.org/t/p/w500/snFM00mpNAfUzUtkdEW0uDEvXA0.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">WILDWOOD</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">TRAVIS KNIGHT // 2026</text></svg>",
+      "title": "The Wild Bunch",
+      "director": "Sam Peckinpah",
+      "year": 1969,
+      "summary": "An aging group of outlaws look for one last big score as the \"traditional\" American West is disappearing around them.",
+      "poster": "https://image.tmdb.org/t/p/w500/8j9yEC3xjy1PJDSizIbaxcHaSph.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE WILD BUNCH</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">SAM PECKINPAH // 1969</text></svg>",
       "seen": false,
       "venues": [
         {
-          "theater": "AMC Lincoln Square 13",
-          "neighborhood": "Upper West Side",
+          "theater": "IFC Center",
+          "neighborhood": "West Village",
           "format": "Standard DCP",
           "showtimes": [
-            "Fri Nov 06: 3:00pm",
-            "Fri Nov 06: 6:00pm",
-            "Sat Nov 07: 10:30am",
-            "Sat Nov 07: 1:30pm",
-            "Sat Nov 07: 4:30pm",
-            "Sat Nov 07: 7:30pm"
+            "Fri Nov 13: 11:30pm",
+            "Sat Nov 14: 11:30pm"
           ],
-          "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"
+          "ticketUrl": "https://www.ifccenter.com/"
         }
       ],
       "rank": 27
     },
     {
-      "title": "The Mosquito Bowl",
-      "director": "Peter Berg",
-      "year": 2026,
-      "summary": "In the aftermath of Pearl Harbor, four college football stars enlist in the US Marines, discovering the strength of brotherhood and the cost of war.",
-      "poster": "https://image.tmdb.org/t/p/w500/zbT4sxoCEeFWlQG4SC5X9Q8v6PC.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE MOSQUITO BOWL</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">PETER BERG // 2026</text></svg>",
+      "title": "The Souvenir",
+      "director": "Joanna Hogg",
+      "year": 2019,
+      "summary": "A shy but ambitious film student falls into an intense, emotionally fraught relationship with a charismatic but untrustworthy older man.",
+      "poster": "https://image.tmdb.org/t/p/w500/2Nj04HsZ0lNkv07JnfBZ0bAIECn.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE SOUVENIR</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">JOANNA HOGG // 2019</text></svg>",
       "seen": false,
       "venues": [
         {
-          "theater": "AMC Lincoln Square 13",
-          "neighborhood": "Upper West Side",
+          "theater": "Metrograph",
+          "neighborhood": "Lower East Side",
           "format": "Standard DCP",
           "showtimes": [
-            "Sat Nov 07: 10:45pm",
-            "Sun Nov 08: 10:45pm"
+            "Sat Nov 14: 12:35pm",
+            "Sun Nov 15: 1:15pm"
           ],
-          "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"
+          "ticketUrl": "https://metrograph.com/nyc/"
         }
       ],
       "rank": 28
@@ -708,38 +671,17 @@
           "neighborhood": "West Village",
           "format": "Standard DCP",
           "showtimes": [
-            "Fri Nov 06: 4:10pm",
-            "Fri Nov 06: 8:50pm",
-            "Sat Nov 07: 4:10pm",
-            "Sat Nov 07: 8:50pm",
-            "Sun Nov 08: 4:10pm",
-            "Sun Nov 08: 8:45pm"
+            "Fri Nov 13: 3:10pm",
+            "Fri Nov 13: 7:05pm",
+            "Fri Nov 13: 9:50pm",
+            "Sat Nov 14: 10:45am",
+            "Sat Nov 14: 3:10pm",
+            "Sat Nov 14: 7:05pm"
           ],
           "ticketUrl": "https://www.ifccenter.com/"
         }
       ],
       "rank": 29
-    },
-    {
-      "title": "The Red Balloon",
-      "director": "Albert Lamorisse",
-      "year": 1956,
-      "summary": "A young boy discovers a stray balloon, which seems to have a mind of its own, on the streets of Paris. The two become inseparable, yet the world’s harsh realities finally interfere.",
-      "poster": "https://image.tmdb.org/t/p/w500/5i9qweJTrkyIhg7lrSHRAUtpeA4.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE RED BALLOON</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">ALBERT LAMORISSE // 1956</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "Film Forum",
-          "neighborhood": "Greenwich Village",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Sun Nov 08: 11:00am"
-          ],
-          "ticketUrl": "https://filmforum.org/now_playing"
-        }
-      ],
-      "rank": 30
     },
     {
       "title": "Zi",
@@ -755,101 +697,34 @@
           "neighborhood": "Lower East Side",
           "format": "Standard DCP",
           "showtimes": [
-            "Fri Nov 06: 6:30pm",
-            "Sat Nov 07: 5:15pm",
-            "Sun Nov 08: 7:00pm"
+            "Fri Nov 13: 2:45pm",
+            "Sun Nov 15: 11:00am"
           ],
           "ticketUrl": "https://metrograph.com/nyc/"
+        }
+      ],
+      "rank": 30
+    },
+    {
+      "title": "Portrait of a Lady on Fire",
+      "director": "Céline Sciamma",
+      "year": 2019,
+      "summary": "On an isolated island in Brittany at the end of the eighteenth century, a female painter is obliged to paint a wedding portrait of a young woman.",
+      "poster": "https://image.tmdb.org/t/p/w500/rUDuOKpkKBHxx41BScqKej72iT3.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">PORTRAIT OF A LADY ON FIRE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">CÉLINE SCIAMMA // 2019</text></svg>",
+      "seen": false,
+      "venues": [
+        {
+          "theater": "The Paris Theater",
+          "neighborhood": "Midtown",
+          "format": "Standard DCP",
+          "showtimes": [
+            "Sat Nov 14: 11:00am"
+          ],
+          "ticketUrl": "https://www.paristheaternyc.com/"
         }
       ],
       "rank": 31
-    },
-    {
-      "title": "The General",
-      "director": "Clyde Bruckman",
-      "year": 1926,
-      "summary": "During America’s Civil War, Union spies steal engineer Johnnie Gray's beloved locomotive, 'The General'—with Johnnie's lady love aboard an attached boxcar—and he single-handedly must do all in his power to both get The General back and to rescue Annabelle.",
-      "poster": "https://image.tmdb.org/t/p/w500/4NmV1Wei4LxT2lpjViCAScgCZLq.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE GENERAL</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">CLYDE BRUCKMAN // 1926</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "Metrograph",
-          "neighborhood": "Lower East Side",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Sun Nov 08: 12:00pm"
-          ],
-          "ticketUrl": "https://metrograph.com/nyc/"
-        }
-      ],
-      "rank": 32
-    },
-    {
-      "title": "The Gorgon",
-      "director": "Terence Fisher",
-      "year": 1964,
-      "summary": "In the early 20th century a village experienced a series of inexplicable murders. All the victims were young men who had been turned to stone. The perpetrator of these deaths was a being so repulsive that she transformed the onlooker using the power of her deadly stare. Much of the time the creature took the form of a beautiful and seductive woman, but during periods of the full moon she becomes a living horror, vicious and deadly. A professor has come to investigate the deaths, bringing with him his beautiful assistant whose knowledge of the Gorgon is more intimate than anyone would ever realise.",
-      "poster": "https://image.tmdb.org/t/p/w500/yk0hJB3hy3o6cAzv5tjcPoKQd9p.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE GORGON</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">TERENCE FISHER // 1964</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "Metrograph",
-          "neighborhood": "Lower East Side",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Sun Nov 08: 5:45pm"
-          ],
-          "ticketUrl": "https://metrograph.com/nyc/"
-        }
-      ],
-      "rank": 33
-    },
-    {
-      "title": "Everest: The Other Side",
-      "director": "Jimmy Chin",
-      "year": 2026,
-      "summary": "An intimate portrait of two people bound by love, ambition, and the pursuit of the impossible. Elite ski mountaineers Jim Morrison and Hilaree Nelson fell deeply in love while reaching the pinnacle of their sport. Their drive sharpened into a shared dream: to climb and ski the direct North Face of Mount Everest—the most difficult and dangerous climb on the mountain and the most coveted ski line on Earth—something only a handful have ever achieved, and no one has successfully skied down.",
-      "poster": "https://image.tmdb.org/t/p/w500/2m9ts8LfjG8d4xcUtx66aApngJL.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">EVEREST: THE OTHER SIDE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">JIMMY CHIN // 2026</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "AMC Lincoln Square 13",
-          "neighborhood": "Upper West Side",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Fri Nov 06: 12:30pm",
-            "Sat Nov 07: 11:00am",
-            "Sat Nov 07: 2:00pm",
-            "Sun Nov 08: 2:00pm"
-          ],
-          "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"
-        }
-      ],
-      "rank": 34
-    },
-    {
-      "title": "Cria!",
-      "director": "Carlos Saura",
-      "year": 1976,
-      "summary": "Ana, an eight-year-old girl living in Madrid with her grandmother and two sisters, mourns the death of her mother.",
-      "poster": "https://image.tmdb.org/t/p/w500/dzgMW3wK3WJITovR9BZBnGRUlI7.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">CRIA!</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">CARLOS SAURA // 1976</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "Metrograph",
-          "neighborhood": "Lower East Side",
-          "format": "35mm Print",
-          "showtimes": [
-            "Fri Nov 06: 6:35pm"
-          ],
-          "ticketUrl": "https://metrograph.com/nyc/"
-        }
-      ],
-      "rank": 35
     },
     {
       "title": "Tenebrae",
@@ -865,20 +740,21 @@
           "neighborhood": "Lower East Side",
           "format": "Standard DCP",
           "showtimes": [
-            "Sat Nov 07: 10:45pm"
+            "Fri Nov 13: 11:00pm",
+            "Sun Nov 15: 9:45pm"
           ],
           "ticketUrl": "https://metrograph.com/nyc/"
         }
       ],
-      "rank": 36
+      "rank": 32
     },
     {
-      "title": "Hermia & Helena",
-      "director": "Matías Piñeiro",
-      "year": 2016,
-      "summary": "Camila, a young Argentine theater director, travels from Buenos Aires to New York to attend an artistic residency to develop a Spanish translation of Shakespeare's \"A Midsummer Night's Dream.\" Upon her arrival, she begins to receive a series of mysterious postcards which set her down a winding path through her past and towards her future.",
-      "poster": "https://image.tmdb.org/t/p/w500/loKzWM0467gOlpE6bJaDT8ALBQq.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">HERMIA &amp; HELENA</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">MATÍAS PIÑEIRO // 2016</text></svg>",
+      "title": "The State of Things",
+      "director": "Wim Wenders",
+      "year": 1982,
+      "summary": "On location in Portugal, a film crew runs out of film while making their own version of Roger Corman's The Day the World Ended (1956). The producer is nowhere to be found and director Munro attempts to find him in hopes of being able to finish the film.",
+      "poster": "https://image.tmdb.org/t/p/w500/gHFOZph5GuFcDKe3Xgmrcc2sYwP.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE STATE OF THINGS</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">WIM WENDERS // 1982</text></svg>",
       "seen": false,
       "venues": [
         {
@@ -886,20 +762,20 @@
           "neighborhood": "Lower East Side",
           "format": "Standard DCP",
           "showtimes": [
-            "Sun Nov 08: 1:50pm"
+            "Sat Nov 14: 8:00pm"
           ],
           "ticketUrl": "https://metrograph.com/nyc/"
         }
       ],
-      "rank": 37
+      "rank": 33
     },
     {
-      "title": "LA BOLA NEGRA",
+      "title": "La Bola Negra",
       "director": "Javier Ambrossi",
       "year": 2026,
       "summary": "The intertwined lives of three men in three different eras, three lives intimately linked by sexuality and desire, pain, and legacy.",
-      "poster": "https://image.tmdb.org/t/p/w500/jT5SR5qc9KvVg7HUEmjMWEUYMce.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">LA BOLA NEGRA</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">JAVIER AMBROSSI // 2026</text></svg>",
+      "poster": "https://image.tmdb.org/t/p/w500/7HwFQTMghL6HOvzEnXYUvyuZXeh.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">LA BOLA NEGRA</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">JAVIER AMBROSSI // 2026</text></svg>",
       "seen": false,
       "venues": [
         {
@@ -907,12 +783,9 @@
           "neighborhood": "Midtown",
           "format": "35mm Print",
           "showtimes": [
-            "Fri Nov 06: 2:35pm",
-            "Fri Nov 06: 6:15pm",
-            "Fri Nov 06: 9:55pm",
-            "Sat Nov 07: 10:55am",
-            "Sat Nov 07: 2:35pm",
-            "Sat Nov 07: 6:15pm"
+            "Fri Nov 13: 6:00pm",
+            "Sat Nov 14: 6:15pm",
+            "Sun Nov 15: 5:30pm"
           ],
           "ticketUrl": "https://www.paristheaternyc.com/"
         },
@@ -921,17 +794,17 @@
           "neighborhood": "SoHo",
           "format": "35mm Print",
           "showtimes": [
-            "Fri Nov 06: 2:50pm",
-            "Fri Nov 06: 6:20pm",
-            "Fri Nov 06: 9:50pm",
-            "Sat Nov 07: 8:50pm",
-            "Sat Nov 07: 11:20am",
-            "Sat Nov 07: 2:50pm"
+            "Fri Nov 13: 2:45pm",
+            "Fri Nov 13: 6:20pm",
+            "Fri Nov 13: 9:50pm",
+            "Sat Nov 14: 11:15am",
+            "Sat Nov 14: 2:45pm",
+            "Sat Nov 14: 6:20pm"
           ],
           "ticketUrl": "https://www.angelikafilmcenter.com/nyc"
         }
       ],
-      "rank": 38
+      "rank": 34
     },
     {
       "title": "The Reflecting Skin",
@@ -947,198 +820,21 @@
           "neighborhood": "West Village",
           "format": "Standard DCP",
           "showtimes": [
-            "Fri Nov 06: 11:59pm",
-            "Sat Nov 07: 11:59pm"
+            "Fri Nov 13: 11:25pm",
+            "Sat Nov 14: 11:25pm"
           ],
           "ticketUrl": "https://www.ifccenter.com/"
         }
       ],
-      "rank": 39
+      "rank": 35
     },
     {
-      "title": "Asako I & II",
-      "director": "Ryusuke Hamaguchi",
-      "year": 2018,
-      "summary": "Asako lives in Osaka. She falls in love with Baku, a free-spirit. One day, Baku suddenly disappears. Two years later, Asako now lives in Tokyo and meets Ryohei. He looks just like Baku, but has a completely different personality.",
-      "poster": "https://image.tmdb.org/t/p/w500/nqwfB2GMMjrjAJnQj1hxD97sQXF.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">ASAKO I &amp; II</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">RYUSUKE HAMAGUCHI // 2018</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "Metrograph",
-          "neighborhood": "Lower East Side",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Sat Nov 07: 8:10pm"
-          ],
-          "ticketUrl": "https://metrograph.com/nyc/"
-        }
-      ],
-      "rank": 40
-    },
-    {
-      "title": "Two Seasons, Two Strangers",
-      "director": "Sho Miyake",
-      "year": 2025,
-      "summary": "In summer, Nagisa and Natsuo meet by the sea. Their vacant gazes reflect each other as they exchange awkward words and wade into the rain-drenched ocean. In winter, Li, a screenwriter, travels to a snow-covered village. There, she finds a guesthouse run by Benzo.",
-      "poster": "https://image.tmdb.org/t/p/w500/peOymUmbUL3e3x3DJLDNpHbNFNW.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">TWO SEASONS, TWO STRANGERS</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">SHO MIYAKE // 2025</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "Metrograph",
-          "neighborhood": "Lower East Side",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Sat Nov 07: 2:15pm"
-          ],
-          "ticketUrl": "https://metrograph.com/nyc/"
-        }
-      ],
-      "rank": 41
-    },
-    {
-      "title": "De Gaulle: Liberté",
-      "director": "Antonin Baudry",
-      "year": 2026,
-      "summary": "Part two of a two-part biopic following French army officer Charles De Gaulle's life and political commitment between 1940 and 1945, and trace his development towards a political career.",
-      "poster": "https://image.tmdb.org/t/p/w500/297x0HIqSCp19pN9wlduK9PONRv.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">DE GAULLE: LIBERTÉ</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">ANTONIN BAUDRY // 2026</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "Cinema Village",
-          "neighborhood": "Greenwich Village",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Fri Nov 06: 1:45pm",
-            "Fri Nov 06: 4:50pm",
-            "Fri Nov 06: 8:00pm",
-            "Sat Nov 07: 1:45pm",
-            "Sat Nov 07: 4:50pm",
-            "Sat Nov 07: 8:00pm"
-          ],
-          "ticketUrl": "https://www.cinemavillage.com/"
-        }
-      ],
-      "rank": 42
-    },
-    {
-      "title": "Club Kid",
-      "director": "Jordan Firstman",
-      "year": 2026,
-      "summary": "A hard-partying New York City club promoter sees his whirlwind lifestyle upended by the arrival of the 10-year-old son he never knew he had.",
-      "poster": "https://image.tmdb.org/t/p/w500/o1qMU0ZB5XDX8IXJFFu3AkhOqjh.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">CLUB KID</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">JORDAN FIRSTMAN // 2026</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "AMC Lincoln Square 13",
-          "neighborhood": "Upper West Side",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Fri Nov 06: 1:00pm",
-            "Fri Nov 06: 2:00pm",
-            "Fri Nov 06: 4:00pm",
-            "Fri Nov 06: 5:00pm",
-            "Fri Nov 06: 6:00pm",
-            "Fri Nov 06: 7:00pm"
-          ],
-          "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"
-        },
-        {
-          "theater": "Angelika Film Center",
-          "neighborhood": "SoHo",
-          "format": "35mm Print",
-          "showtimes": [
-            "Fri Nov 06: 3:00pm",
-            "Fri Nov 06: 5:45pm",
-            "Fri Nov 06: 8:30pm",
-            "Fri Nov 06: 2:00pm",
-            "Fri Nov 06: 4:45pm",
-            "Fri Nov 06: 10:45pm"
-          ],
-          "ticketUrl": "https://www.angelikafilmcenter.com/nyc"
-        }
-      ],
-      "rank": 43
-    },
-    {
-      "title": "Birds of War",
-      "director": "Janay Boulos",
-      "year": 2026,
-      "summary": "The love story of a London-based Lebanese journalist and a Syrian activist and cameraman as told through 13 years of personal archives across revolutions, war, and exile.",
-      "poster": "https://image.tmdb.org/t/p/w500/c7GFI0u7Fu8s3vbW0RZRDiWFm2n.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">BIRDS OF WAR</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">JANAY BOULOS // 2026</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "IFC Center",
-          "neighborhood": "West Village",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Fri Nov 06: 6:30pm",
-            "Sat Nov 07: 10:35am",
-            "Sat Nov 07: 12:20pm",
-            "Sat Nov 07: 6:30pm",
-            "Sun Nov 08: 10:35am",
-            "Sun Nov 08: 12:20pm"
-          ],
-          "ticketUrl": "https://www.ifccenter.com/"
-        }
-      ],
-      "rank": 44
-    },
-    {
-      "title": "Sad Vacation",
-      "director": "Shinji Aoyama",
-      "year": 2007,
-      "summary": "Abandoned by his mother, Kenji scrapes out a meager existence doing odd jobs, including driving bar hostesses and their customers home. Besides this, he cares for the sister of an incarcerated friend and a young illegal immigrant. Eventually, his life reaches a turning point.",
-      "poster": "https://image.tmdb.org/t/p/w500/bqpueFITvE4hPEyuP4THvpNWkOM.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">SAD VACATION</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">SHINJI AOYAMA // 2007</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "Metrograph",
-          "neighborhood": "Lower East Side",
-          "format": "35mm Print",
-          "showtimes": [
-            "Sun Nov 08: 9:15pm"
-          ],
-          "ticketUrl": "https://metrograph.com/nyc/"
-        }
-      ],
-      "rank": 45
-    },
-    {
-      "title": "Spellbound",
-      "director": "Vicky Jenson",
-      "year": 2024,
-      "summary": "When a powerful spell turns her parents into giant monsters, a teenage princess must journey into the wild to reverse the curse before it's too late.",
-      "poster": "https://image.tmdb.org/t/p/w500/4dSrwXJNKtMtlkwJPgZMkjjuHvD.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">SPELLBOUND</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">VICKY JENSON // 2024</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "Metrograph",
-          "neighborhood": "Lower East Side",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Fri Nov 06: 4:10pm",
-            "Sun Nov 08: 11:30am"
-          ],
-          "ticketUrl": "https://metrograph.com/nyc/"
-        }
-      ],
-      "rank": 46
-    },
-    {
-      "title": "Haute Couture",
-      "director": "Sylvie Ohayon",
+      "title": "Benedetta",
+      "director": "Paul Verhoeven",
       "year": 2021,
-      "summary": "Esther is at the end of her career as Head Seamstress at Dior Avenue Montaigne workshop. One day, she gets her handbag stolen in the metro by a 20 years old girl, Jade. Instead of calling the police she decides to take care of Jade. She sees in her the opportunity to pass on her skills, the craft of dressmaking, her only wealth. In the frenetic world of Haute Couture, Esther will give Jade la beauté du geste, a way to reach beyond herself.",
-      "poster": "https://image.tmdb.org/t/p/w500/srN0iA97EfjZReGlGyDNcDh8ZPs.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">HAUTE COUTURE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">SYLVIE OHAYON // 2021</text></svg>",
+      "summary": "A 17th-century nun becomes entangled in a forbidden lesbian affair with a novice. But it is Benedetta's shocking religious visions that threaten to shake the Church to its core.",
+      "poster": "https://image.tmdb.org/t/p/w500/yofVXmLYQbr8pdOeyDRrf9N8rF4.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">BENEDETTA</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">PAUL VERHOEVEN // 2021</text></svg>",
       "seen": false,
       "venues": [
         {
@@ -1146,20 +842,20 @@
           "neighborhood": "Lower East Side",
           "format": "Standard DCP",
           "showtimes": [
-            "Sat Nov 07: 6:00pm"
+            "Sun Nov 15: 1:10pm"
           ],
           "ticketUrl": "https://metrograph.com/nyc/"
         }
       ],
-      "rank": 47
+      "rank": 36
     },
     {
-      "title": "After Winter Comes Spring",
-      "director": "Helke Misselwitz",
-      "year": 1989,
-      "summary": "A locomotive journey traversing the North to the South of the German Democratic Republic on the eve of its dissolution. Labourers, punks, mothers, intellectuals, young and old are implored to reflect on their life choices, the sacrifices they've made, and their place in the world. Despite everything, hope persists.",
-      "poster": "https://image.tmdb.org/t/p/w500/pWyB7KTNGXUfPmMXnQwzxuVRpcP.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">AFTER WINTER COMES SPRING</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">HELKE MISSELWITZ // 1989</text></svg>",
+      "title": "In Bed with Victoria",
+      "director": "Justine Triet",
+      "year": 2016,
+      "summary": "Victoria is a thirty-something divorced lawyer who's struggling to raise her two daughters. She is canny and cynical but on the verge of an emotional breakdown. At a friend's wedding she reconnects with Vincent, an old friend, and Sam, an old client. Her life is about to take a new turn.",
+      "poster": "https://image.tmdb.org/t/p/w500/fEt9U7JQYO8j8VtCCuyDzznPM2x.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">IN BED WITH VICTORIA</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">JUSTINE TRIET // 2016</text></svg>",
       "seen": false,
       "venues": [
         {
@@ -1167,89 +863,20 @@
           "neighborhood": "Lower East Side",
           "format": "Standard DCP",
           "showtimes": [
-            "Sat Nov 07: 3:40pm"
+            "Fri Nov 13: 9:15pm"
           ],
           "ticketUrl": "https://metrograph.com/nyc/"
         }
       ],
-      "rank": 48
+      "rank": 37
     },
     {
-      "title": "The Cat in the Hat",
-      "director": "Erica Rivinoja",
-      "year": 2026,
-      "summary": "Assigned his toughest mission yet, the Cat must cheer up siblings Gabby and Sebastian as they adjust to life in a new town. Known for pushing boundaries, this agent of chaos must prove himself or risk losing his magical hat forever.",
-      "poster": "https://image.tmdb.org/t/p/w500/tYH4rQZlHtuFSeDS0bsV17khvJC.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE CAT IN THE HAT</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">ERICA RIVINOJA // 2026</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "AMC Lincoln Square 13",
-          "neighborhood": "Upper West Side",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Fri Nov 06: 1:00pm",
-            "Fri Nov 06: 4:00pm",
-            "Fri Nov 06: 10:00pm",
-            "Fri Nov 06: 7:00pm",
-            "Sat Nov 07: 10:00am",
-            "Sat Nov 07: 1:00pm"
-          ],
-          "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"
-        }
-      ],
-      "rank": 49
-    },
-    {
-      "title": "Ju-on: The Grudge",
-      "director": "Takashi Shimizu",
-      "year": 2002,
-      "summary": "When a social worker is sent to check on a traumatized elderly woman whose family have moved in at the site of a notorious murder case, she unwittingly unleashes a cycle of terror that transmits via its victims.",
-      "poster": "https://image.tmdb.org/t/p/w500/6q1hlBC6rudc3mHwXsbMBR2xAT6.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">JU-ON: THE GRUDGE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">TAKASHI SHIMIZU // 2002</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "IFC Center",
-          "neighborhood": "West Village",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Fri Nov 06: 11:15pm",
-            "Sat Nov 07: 11:15pm"
-          ],
-          "ticketUrl": "https://www.ifccenter.com/"
-        }
-      ],
-      "rank": 50
-    },
-    {
-      "title": "Columbus",
-      "director": "Kogonada",
-      "year": 2017,
-      "summary": "When a renowned architecture scholar falls suddenly ill during a speaking tour, his son Jin finds himself stranded in Columbus, Indiana - a small Midwestern city celebrated for its many significant modernist buildings. Jin strikes up a friendship with Casey, a young architecture enthusiast who works at the local library.",
-      "poster": "https://image.tmdb.org/t/p/w500/3ZE5Wl3CdfUH4BkWRmyMKPHkWHx.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">COLUMBUS</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">KOGONADA // 2017</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "Metrograph",
-          "neighborhood": "Lower East Side",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Sun Nov 08: 4:15pm"
-          ],
-          "ticketUrl": "https://metrograph.com/nyc/"
-        }
-      ],
-      "rank": 51
-    },
-    {
-      "title": "Tripolar The Movie",
-      "director": "Eleanor Gaver",
-      "year": 2025,
-      "summary": "A washed-up 50-something with no filter enlists her daughter’s Gen Z friends to make a movie—and everything goes off the rails.",
-      "poster": "https://image.tmdb.org/t/p/w500/hICokVLN7hzRPpqODMwQ0Fm6NIx.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">TRIPOLAR THE MOVIE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">ELEANOR GAVER // 2025</text></svg>",
+      "title": "Raunchy Late Night Theatre",
+      "director": "Lee Jun",
+      "year": 2016,
+      "summary": "Choong-shik, who works in a small movie theater projection room in a small town in the province, has an eccentric personality, stupid appearance and messy clothes, and no one likes him. Jung-min starts to show late-night movies at the command of the president and has been seen frequently since one day. The first time he speaks, he gets closer to Jung-min. As he gets closer to Jung-min, Choong-shik feels himself changing, and his appearance changes as well. But it feels like you are out of touch with reality. Choong-cheok ignores those feelings and decides to enjoy the moment. It is because he does not want to miss Jeong-min, who is like an angel from heaven, to Chung-sik, who has been living alone every day since his wife ran away.  Chung-sik and Jeong-min are getting closer. What is the end of those two?",
+      "poster": "https://image.tmdb.org/t/p/w500/jhO6kLE9U69Hh7yqBSySrcgJ7Ug.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">RAUNCHY LATE NIGHT THEATRE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">LEE JUN // 2016</text></svg>",
       "seen": false,
       "venues": [
         {
@@ -1257,12 +884,12 @@
           "neighborhood": "Tribeca",
           "format": "Standard DCP",
           "showtimes": [
-            "Sun Nov 08: 7:30pm"
+            "Sat Nov 14: 2:00pm"
           ],
           "ticketUrl": "https://www.roxycinematribeca.com/"
         }
       ],
-      "rank": 52
+      "rank": 38
     },
     {
       "title": "Wild Horse Nine",
@@ -1274,30 +901,16 @@
       "seen": false,
       "venues": [
         {
-          "theater": "AMC Lincoln Square 13",
-          "neighborhood": "Upper West Side",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Fri Nov 06: 1:15pm",
-            "Fri Nov 06: 4:15pm",
-            "Fri Nov 06: 7:15pm",
-            "Fri Nov 06: 10:15pm",
-            "Sat Nov 07: 10:15am",
-            "Sat Nov 07: 1:15pm"
-          ],
-          "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"
-        },
-        {
           "theater": "Angelika Film Center",
           "neighborhood": "SoHo",
           "format": "Standard DCP",
           "showtimes": [
-            "Fri Nov 06: 12:40pm",
-            "Fri Nov 06: 1:45pm",
-            "Fri Nov 06: 3:25pm",
-            "Fri Nov 06: 6:10pm",
-            "Fri Nov 06: 7:20pm",
-            "Fri Nov 06: 8:55pm"
+            "Fri Nov 13: 1:50pm",
+            "Fri Nov 13: 4:45pm",
+            "Fri Nov 13: 7:30pm",
+            "Fri Nov 13: 10:15pm",
+            "Sat Nov 14: 11:05am",
+            "Sat Nov 14: 1:50pm"
           ],
           "ticketUrl": "https://www.angelikafilmcenter.com/nyc"
         },
@@ -1306,43 +919,206 @@
           "neighborhood": "Brooklyn",
           "format": "Standard DCP",
           "showtimes": [
-            "Fri Nov 06: 2:55pm",
-            "Fri Nov 06: 6:45pm",
-            "Fri Nov 06: 9:15pm",
-            "Sat Nov 07: 2:00pm",
-            "Sat Nov 07: 4:40pm",
-            "Sat Nov 07: 7:20pm"
+            "Fri Nov 13: 3:15pm",
+            "Fri Nov 13: 6:50pm",
+            "Fri Nov 13: 8:45pm",
+            "Sat Nov 14: 1:20pm",
+            "Sat Nov 14: 4:30pm",
+            "Sat Nov 14: 7:35pm"
           ],
           "ticketUrl": "https://nitehawkcinema.com/"
         }
       ],
-      "rank": 53
+      "rank": 39
     },
     {
-      "title": "Avedon",
-      "director": "Ron Howard",
-      "year": 2026,
-      "summary": "Richard Avedon's photographs didn't just reflect culture, they shaped it, and continue to do so. The feature documentary AVEDON traces the life and legacy of an artist who used fashion, portraiture, and commercial photography to explore identity, power, fear and beauty. With unprecedented access to Avedon's archive, including never before seen photos, behind the scenes recordings, and interviews with those who knew him best, AVEDON is a visually stunning examination of the mind of an artist who shaped our collective image of the 20th century.",
-      "poster": "https://image.tmdb.org/t/p/w500/ziyEHM0P1TgvhVXIqqguoMAD0TJ.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">AVEDON</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">RON HOWARD // 2026</text></svg>",
+      "title": "And Your Bird Can Sing",
+      "director": "Sho Miyake",
+      "year": 2018,
+      "summary": "With a contagious sense of abandon, three young adults' lives become intimately entangled over the course of a long summer in Hakodate, Hokkaido.",
+      "poster": "https://image.tmdb.org/t/p/w500/cfGfVLvXwe0a5W519dvTcISq82Y.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">AND YOUR BIRD CAN SING</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">SHO MIYAKE // 2018</text></svg>",
       "seen": false,
       "venues": [
         {
-          "theater": "IFC Center",
-          "neighborhood": "West Village",
+          "theater": "Metrograph",
+          "neighborhood": "Lower East Side",
           "format": "Standard DCP",
           "showtimes": [
-            "Fri Nov 06: 1:00pm",
-            "Fri Nov 06: 6:35pm",
-            "Sat Nov 07: 10:40am",
-            "Sat Nov 07: 1:00pm",
-            "Sat Nov 07: 6:35pm",
-            "Sun Nov 08: 10:40am"
+            "Sat Nov 14: 3:10pm"
           ],
-          "ticketUrl": "https://www.ifccenter.com/"
+          "ticketUrl": "https://metrograph.com/nyc/"
         }
       ],
-      "rank": 54
+      "rank": 40
+    },
+    {
+      "title": "Slither",
+      "director": "James Gunn",
+      "year": 2006,
+      "summary": "A small town is taken over by an alien plague, turning residents into zombies and all forms of mutant monsters.",
+      "poster": "https://image.tmdb.org/t/p/w500/zNlJvCY3Pz7SE09Lf4G7uPs5XFZ.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">SLITHER</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">JAMES GUNN // 2006</text></svg>",
+      "seen": false,
+      "venues": [
+        {
+          "theater": "Metrograph",
+          "neighborhood": "Lower East Side",
+          "format": "35mm Print",
+          "showtimes": [
+            "Sat Nov 14: 5:45pm"
+          ],
+          "ticketUrl": "https://metrograph.com/nyc/"
+        }
+      ],
+      "rank": 41
+    },
+    {
+      "title": "Losing Ground",
+      "director": "Bryan Wizemann",
+      "year": 2005,
+      "summary": "Adapted from the critically acclaimed New York stage play presented by Tom Noonan, LOSING GROUND unfolds in real-time over a single night in a Las Vegas video-poker bar where seven people come in, interact, strike up friendships of convenience, win, lose, and go home. Bryan Wizemann's haunting and elegiac feature film debut is a contemporary portrait of ritual and superstition, intimacy and estrangement. In direct contrast with the current zeitgeist of a Las Vegas myth, LOSING GROUND is a personal and closely observed work on the addictions of human nature.",
+      "poster": "https://image.tmdb.org/t/p/w500/mN7rtokao6TsErAMg1y8fWq2yAx.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">LOSING GROUND</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">BRYAN WIZEMANN // 2005</text></svg>",
+      "seen": false,
+      "venues": [
+        {
+          "theater": "The Roxy Cinema",
+          "neighborhood": "Tribeca",
+          "format": "Standard DCP",
+          "showtimes": [
+            "Sun Nov 15: 3:00pm"
+          ],
+          "ticketUrl": "https://www.roxycinematribeca.com/"
+        }
+      ],
+      "rank": 42
+    },
+    {
+      "title": "The Gorilla",
+      "director": "Romolo Guerrieri",
+      "year": 1982,
+      "summary": "Ruby has been trained in martial arts by her father and now has a job safeguarding a wide range of people and their valuables. A clumsy artist named Adelmo falls for Ruby at first sight but remains clueless about her profession. Things are complicated by Adelmo’s French neighbor and sometime model having a crush on him, and Ruby’s father trying to hook up his daughter with various body builders while putting the moves on the French girl.",
+      "poster": "https://image.tmdb.org/t/p/w500/uwnTGEArvMZT6uolxel59UPz5KZ.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE GORILLA</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">ROMOLO GUERRIERI // 1982</text></svg>",
+      "seen": false,
+      "venues": [
+        {
+          "theater": "The Roxy Cinema",
+          "neighborhood": "Tribeca",
+          "format": "Standard DCP",
+          "showtimes": [
+            "Sun Nov 15: 5:00pm"
+          ],
+          "ticketUrl": "https://www.roxycinematribeca.com/"
+        }
+      ],
+      "rank": 43
+    },
+    {
+      "title": "Master of the Flying Guillotine",
+      "director": "Jimmy Wang Yu",
+      "year": 1976,
+      "summary": "A one-armed martial arts master is being stalked by an Imperial assassin, the master of two fighters  killed in the previous film. When the One-Armed Boxer is invited to attend a martial arts tournament, his efforts to lay low are unsuccessful, and the assassin soon tracks him down with the help of his three subordinates: a Thai boxer, a yoga master, and a kobojutsu user.",
+      "poster": "https://image.tmdb.org/t/p/w500/upa8qI25kJrrQHgYz66IO2ccvoH.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">MASTER OF THE FLYING GUILLOTINE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">JIMMY WANG YU // 1976</text></svg>",
+      "seen": false,
+      "venues": [
+        {
+          "theater": "Nitehawk Cinema",
+          "neighborhood": "Brooklyn",
+          "format": "Standard DCP",
+          "showtimes": [
+            "Fri Nov 13: 11:55pm"
+          ],
+          "ticketUrl": "https://nitehawkcinema.com/"
+        }
+      ],
+      "rank": 44
+    },
+    {
+      "title": "The Court Jester",
+      "director": "Norman Panama",
+      "year": 1955,
+      "summary": "A hapless carnival performer masquerades as the court jester as part of a plot against a usurper who has overthrown the rightful king of England.",
+      "poster": "https://image.tmdb.org/t/p/w500/pPCOAipDP0sm8SLChpTMBPdCiqB.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE COURT JESTER</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">NORMAN PANAMA // 1955</text></svg>",
+      "seen": false,
+      "venues": [
+        {
+          "theater": "Film Forum",
+          "neighborhood": "Greenwich Village",
+          "format": "Standard DCP",
+          "showtimes": [
+            "Sun Nov 15: 11:00am"
+          ],
+          "ticketUrl": "https://filmforum.org/now_playing"
+        }
+      ],
+      "rank": 45
+    },
+    {
+      "title": "Playback",
+      "director": "Michael A. Nickles",
+      "year": 2012,
+      "summary": "While digging into their town's infamous past, a group of high school students unwittingly unlock an even darker secret. Now, an evil spirit has been awakened and will stop at nothing to find his true heir.",
+      "poster": "https://image.tmdb.org/t/p/w500/7hkG8yiUasGSSayvqJ6MT4OWkn0.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">PLAYBACK</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">MICHAEL A. NICKLES // 2012</text></svg>",
+      "seen": false,
+      "venues": [
+        {
+          "theater": "Metrograph",
+          "neighborhood": "Lower East Side",
+          "format": "Standard DCP",
+          "showtimes": [
+            "Fri Nov 13: 7:00pm"
+          ],
+          "ticketUrl": "https://metrograph.com/nyc/"
+        }
+      ],
+      "rank": 46
+    },
+    {
+      "title": "The Meetings of Anna",
+      "director": "Chantal Akerman",
+      "year": 1978,
+      "summary": "Detached filmmaker Anna Silver arrives in Germany to show her latest film; over the course of some days, she encounters a variety of new and old faces, some of whom make personal revelations to her to little affect.",
+      "poster": "https://image.tmdb.org/t/p/w500/1ZoR7DQQrkAEqFgllXmPxCUoNvS.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE MEETINGS OF ANNA</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">CHANTAL AKERMAN // 1978</text></svg>",
+      "seen": false,
+      "venues": [
+        {
+          "theater": "Metrograph",
+          "neighborhood": "Lower East Side",
+          "format": "Standard DCP",
+          "showtimes": [
+            "Sat Nov 14: 12:20pm"
+          ],
+          "ticketUrl": "https://metrograph.com/nyc/"
+        }
+      ],
+      "rank": 47
+    },
+    {
+      "title": "THE COCKPIT",
+      "director": "Sho Miyake",
+      "year": 2015,
+      "summary": "In a small cockpit-like room, we see two young hip hop musicians from Tokyo giving birth to a beat: precision, patience and camaraderie hold sway, midway between an installation and sitcom.",
+      "poster": "https://image.tmdb.org/t/p/w500/aeJknlUCbaQ9Ugb30fS16TdvuYs.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE COCKPIT</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">SHO MIYAKE // 2015</text></svg>",
+      "seen": false,
+      "venues": [
+        {
+          "theater": "Metrograph",
+          "neighborhood": "Lower East Side",
+          "format": "Standard DCP",
+          "showtimes": [
+            "Sun Nov 15: 6:15pm"
+          ],
+          "ticketUrl": "https://metrograph.com/nyc/"
+        }
+      ],
+      "rank": 48
     },
     {
       "title": "Once Upon a Time in Harlem",
@@ -1358,17 +1134,17 @@
           "neighborhood": "Greenwich Village",
           "format": "Standard DCP",
           "showtimes": [
-            "Fri Nov 06: 1:00pm",
-            "Fri Nov 06: 3:45pm",
-            "Fri Nov 06: 6:00pm",
-            "Fri Nov 06: 8:15pm",
-            "Sat Nov 07: 1:00pm",
-            "Sat Nov 07: 3:45pm"
+            "Fri Nov 13: 1:00pm",
+            "Fri Nov 13: 3:45pm",
+            "Fri Nov 13: 6:00pm",
+            "Fri Nov 13: 8:15pm",
+            "Sat Nov 14: 1:00pm",
+            "Sat Nov 14: 3:45pm"
           ],
           "ticketUrl": "https://filmforum.org/now_playing"
         }
       ],
-      "rank": 55
+      "rank": 49
     },
     {
       "title": "I Love You, Man",
@@ -1384,46 +1160,20 @@
           "neighborhood": "Lower East Side",
           "format": "Standard DCP",
           "showtimes": [
-            "Sun Nov 08: 2:00pm"
+            "Fri Nov 13: 5:00pm"
           ],
           "ticketUrl": "https://metrograph.com/nyc/"
         }
       ],
-      "rank": 56
+      "rank": 50
     },
     {
-      "title": "Trauma or, Monsters All",
-      "director": "Larry Fessenden",
-      "year": 2026,
-      "summary": "An aspiring author gets more than she bargained for when she writes an article for the local paper about her small town’s dark history, prompting unwanted speculation on what monsters may lie within.",
-      "poster": "https://image.tmdb.org/t/p/w500/31hZFL1SbYqwHn4bDNOGabxnekI.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">TRAUMA OR, MONSTERS ALL</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">LARRY FESSENDEN // 2026</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "IFC Center",
-          "neighborhood": "West Village",
-          "format": "Standard DCP",
-          "showtimes": [
-            "Fri Nov 06: 2:35pm",
-            "Fri Nov 06: 9:00pm",
-            "Sat Nov 07: 3:35pm",
-            "Sat Nov 07: 9:40pm",
-            "Sun Nov 08: 3:35pm",
-            "Sun Nov 08: 9:40pm"
-          ],
-          "ticketUrl": "https://www.ifccenter.com/"
-        }
-      ],
-      "rank": 57
-    },
-    {
-      "title": "News From Home/News From House",
-      "director": "Amos Gitai",
-      "year": 2006,
-      "summary": "Documentary about a house and its politically divided ownership over time.",
-      "poster": "https://image.tmdb.org/t/p/w500/3zs8N55ZpqodR5HWQEZaAxhkyQT.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">NEWS FROM HOME/NEWS FROM HOUSE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">AMOS GITAI // 2006</text></svg>",
+      "title": "All the Long Nights",
+      "director": "Sho Miyake",
+      "year": 2024,
+      "summary": "Misa, battling PMS and stigma, starts anew at Kurita Optics. Amidst work and sweets, she meets Takatoshi. Despite his quiet demeanor and struggle with panic attacks, a deep bond forms.",
+      "poster": "https://image.tmdb.org/t/p/w500/cihErynZk0v0A0xKlMMg6tb9zfJ.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">ALL THE LONG NIGHTS</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">SHO MIYAKE // 2024</text></svg>",
       "seen": false,
       "venues": [
         {
@@ -1431,20 +1181,20 @@
           "neighborhood": "Lower East Side",
           "format": "Standard DCP",
           "showtimes": [
-            "Fri Nov 06: 2:15pm"
+            "Sat Nov 14: 5:40pm"
           ],
           "ticketUrl": "https://metrograph.com/nyc/"
         }
       ],
-      "rank": 58
+      "rank": 51
     },
     {
-      "title": "Tickled",
-      "director": "David Farrier",
-      "year": 2016,
-      "summary": "Journalist David Farrier stumbles upon a mysterious tickling competition online. As he delves deeper he comes up against fierce resistance, but that doesn’t stop him getting to the bottom of a story stranger than fiction.",
-      "poster": "https://image.tmdb.org/t/p/w500/qxUbPwyhzNEyUZYOZm6t8yYSQf.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">TICKLED</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">DAVID FARRIER // 2016</text></svg>",
+      "title": "American Baby",
+      "director": "Raymond Knudsen",
+      "year": 2026,
+      "summary": "A Filipino immigrant and her charismatic American husband, a casket salesman, share a life shaped by sacrifice and silence, as their child revisits the fragile promise of the American Dream inside the quiet fractures of their marriage.",
+      "poster": null,
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">AMERICAN BABY</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">RAYMOND KNUDSEN // 2026</text></svg>",
       "seen": false,
       "venues": [
         {
@@ -1452,21 +1202,20 @@
           "neighborhood": "Tribeca",
           "format": "Standard DCP",
           "showtimes": [
-            "Fri Nov 06: 7:00pm",
-            "Sun Nov 08: 5:00pm"
+            "Sat Nov 14: 4:30pm"
           ],
           "ticketUrl": "https://www.roxycinematribeca.com/"
         }
       ],
-      "rank": 59
+      "rank": 52
     },
     {
-      "title": "Personal Problems",
-      "director": "Bill Gunn",
-      "year": 1980,
-      "summary": "An “experimental soap opera” centered on a Harlem nurse, her husband, her father-in-law, and her lover.",
-      "poster": "https://image.tmdb.org/t/p/w500/jICYJWiDK53aUVcaqsKiNkTPTmC.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">PERSONAL PROBLEMS</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">BILL GUNN // 1980</text></svg>",
+      "title": "Domestic Disturbance",
+      "director": "Harold Becker",
+      "year": 2001,
+      "summary": "Frank Morrison is a divorced father with a 12-year-old son, Danny. His ex-wife Susan and son Danny now live with Rick Barnes, Susan's new husband. Danny, who has a reputation for telling lies, accuses his stepfather of committing a murder. Initially, no one believes his accusations, but then Frank becomes convinced and is the only one who believes him. Now, the father Danny trusts must protect him from the stepfather he fears.",
+      "poster": "https://image.tmdb.org/t/p/w500/d1ow5nXv659GOQWGONnASpLVERw.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">DOMESTIC DISTURBANCE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">HAROLD BECKER // 2001</text></svg>",
       "seen": false,
       "venues": [
         {
@@ -1474,61 +1223,64 @@
           "neighborhood": "Tribeca",
           "format": "Standard DCP",
           "showtimes": [
-            "Sat Nov 07: 3:30pm"
+            "Sun Nov 15: 7:30pm"
           ],
           "ticketUrl": "https://www.roxycinematribeca.com/"
         }
       ],
-      "rank": 60
+      "rank": 53
     },
     {
-      "title": "I Play Rocky",
-      "director": "Peter Farrelly",
+      "title": "Quarter",
+      "director": "Kelsey Bascom",
       "year": 2026,
-      "summary": "The electrifying true story about an unknown actor with an unshakable belief that he wasn't just meant to write Rocky—he was meant to be Rocky Balboa. Told \"no\" at every turn, Sylvester Stallone bets everything on himself, holding the line on playing the lead against seemingly impossible odds.",
-      "poster": "https://image.tmdb.org/t/p/w500/xE5tY3lppZUyG7WKKThsuYHuAHr.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">I PLAY ROCKY</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">PETER FARRELLY // 2026</text></svg>",
+      "summary": "Kelly, a young woman living with Type 1 diabetes, is about to turn 25, as she deals with the ups and downs of her blood sugar levels and the ups and downs of her personal life.",
+      "poster": "https://image.tmdb.org/t/p/w500/1P68oOf9uBw8tbLc1CaJBQuJiWX.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">QUARTER</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">KELSEY BASCOM // 2026</text></svg>",
       "seen": false,
       "venues": [
         {
-          "theater": "AMC Lincoln Square 13",
-          "neighborhood": "Upper West Side",
-          "format": "Dolby Cinema",
-          "showtimes": [
-            "Fri Nov 06: 1:15pm",
-            "Fri Nov 06: 4:30pm",
-            "Fri Nov 06: 5:00pm",
-            "Fri Nov 06: 3:30pm",
-            "Fri Nov 06: 6:45pm",
-            "Fri Nov 06: 10:00pm"
-          ],
-          "ticketUrl": "https://www.amctheatres.com/movie-theatres/new-york-city/amc-lincoln-square-13"
-        }
-      ],
-      "rank": 61
-    },
-    {
-      "title": "Queen at Sea",
-      "director": "Lance Hammer",
-      "year": 2026,
-      "summary": "As advanced dementia erodes an older woman's ability to communicate her inner life, her husband and daughter struggle to act in her best interests, navigating love and the fragile boundaries between care, protection and autonomy.",
-      "poster": "https://image.tmdb.org/t/p/w500/ueYawr1nldKchzyP8Q9KJpn31SK.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">QUEEN AT SEA</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">LANCE HAMMER // 2026</text></svg>",
-      "seen": false,
-      "venues": [
-        {
-          "theater": "Angelika Film Center",
-          "neighborhood": "SoHo",
+          "theater": "Cinema Village",
+          "neighborhood": "Greenwich Village",
           "format": "Standard DCP",
           "showtimes": [
-            "Fri Nov 06: 4:30pm",
-            "Sat Nov 07: 12:40pm",
-            "Sun Nov 08: 6:05pm"
+            "Fri Nov 13: 2:00pm",
+            "Fri Nov 13: 4:10pm",
+            "Fri Nov 13: 6:20pm",
+            "Fri Nov 13: 8:30pm",
+            "Sat Nov 14: 2:00pm",
+            "Sat Nov 14: 4:10pm"
           ],
-          "ticketUrl": "https://www.angelikafilmcenter.com/nyc"
+          "ticketUrl": "https://www.cinemavillage.com/"
         }
       ],
-      "rank": 62
+      "rank": 54
+    },
+    {
+      "title": "Hidden Colors 6: The Culture of Resistance",
+      "director": "Tariq Nasheed",
+      "year": 2026,
+      "summary": "Hidden Colors 6 examines overlooked stories of Black American resistance, resilience, innovation and cultural survival.",
+      "poster": "https://image.tmdb.org/t/p/w500/pwgz9HlSgrCaqFqQXe8XNv4ZjpX.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">HIDDEN COLORS 6: THE CULTURE OF RESISTANCE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">TARIQ NASHEED // 2026</text></svg>",
+      "seen": false,
+      "venues": [
+        {
+          "theater": "Cinema Village",
+          "neighborhood": "Greenwich Village",
+          "format": "Standard DCP",
+          "showtimes": [
+            "Fri Nov 13: 2:00pm",
+            "Fri Nov 13: 5:00pm",
+            "Fri Nov 13: 8:00pm",
+            "Sat Nov 14: 2:00pm",
+            "Sat Nov 14: 5:00pm",
+            "Sat Nov 14: 8:00pm"
+          ],
+          "ticketUrl": "https://www.cinemavillage.com/"
+        }
+      ],
+      "rank": 55
     },
     {
       "title": "Soul Patrol",
@@ -1544,17 +1296,40 @@
           "neighborhood": "West Village",
           "format": "Standard DCP",
           "showtimes": [
-            "Fri Nov 06: 2:25pm",
-            "Fri Nov 06: 4:50pm",
-            "Fri Nov 06: 7:15pm",
-            "Sat Nov 07: 2:25pm",
-            "Sat Nov 07: 4:50pm",
-            "Sat Nov 07: 7:15pm"
+            "Fri Nov 13: 1:30pm",
+            "Sat Nov 14: 1:30pm",
+            "Sun Nov 15: 1:30pm"
           ],
           "ticketUrl": "https://www.ifccenter.com/"
         }
       ],
-      "rank": 63
+      "rank": 56
+    },
+    {
+      "title": "threeASFOUR: FULL CIRCLE",
+      "director": "Sean Ono Lennon",
+      "year": 2026,
+      "summary": "For threeASFOUR, fashion is an act of creativity, collaboration and cultural connection. But after more than two decades of acclaim, can three artists who refuse to sell out survive in an industry built on compromise?",
+      "poster": "https://image.tmdb.org/t/p/w500/b6SNyiD5DKzAKkXUGOo0DXt8awt.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#06090c\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">THREEASFOUR: FULL CIRCLE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#e5a93c\" text-anchor=\"middle\">SEAN ONO LENNON // 2026</text></svg>",
+      "seen": false,
+      "venues": [
+        {
+          "theater": "Film Forum",
+          "neighborhood": "Greenwich Village",
+          "format": "Standard DCP",
+          "showtimes": [
+            "Fri Nov 13: 2:30pm",
+            "Fri Nov 13: 4:40pm",
+            "Fri Nov 13: 7:00pm",
+            "Sat Nov 14: 12:20pm",
+            "Sat Nov 14: 2:30pm",
+            "Sat Nov 14: 4:40pm"
+          ],
+          "ticketUrl": "https://filmforum.org/now_playing"
+        }
+      ],
+      "rank": 57
     },
     {
       "title": "Crystal Voyager",
@@ -1570,20 +1345,62 @@
           "neighborhood": "Lower East Side",
           "format": "Standard DCP",
           "showtimes": [
-            "Sun Nov 08: 7:30pm"
+            "Fri Nov 13: 9:20pm"
           ],
           "ticketUrl": "https://metrograph.com/nyc/"
         }
       ],
-      "rank": 64
+      "rank": 58
     },
     {
-      "title": "The Silence of the Lambs",
-      "director": "Jonathan Demme",
+      "title": "Wallace & Gromit: The Classic Shorts",
+      "director": "Unknown",
+      "year": "Classic",
+      "summary": "Playing at Metrograph.",
+      "poster": null,
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">WALLACE &amp; GROMIT: THE CLASSIC SHORTS</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">UNKNOWN // Classic</text></svg>",
+      "seen": false,
+      "venues": [
+        {
+          "theater": "Metrograph",
+          "neighborhood": "Lower East Side",
+          "format": "Standard DCP",
+          "showtimes": [
+            "Sun Nov 15: 11:15am"
+          ],
+          "ticketUrl": "https://metrograph.com/nyc/"
+        }
+      ],
+      "rank": 59
+    },
+    {
+      "title": "Shutter Island",
+      "director": "Martin Scorsese",
+      "year": 2010,
+      "summary": "World War II soldier-turned-U.S. Marshal Teddy Daniels investigates the disappearance of a patient from a hospital for the criminally insane, but his efforts are compromised by troubling visions and a mysterious doctor.",
+      "poster": "https://image.tmdb.org/t/p/w500/nrmXQ0zcZUL8jFLrakWc90IR8z9.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#080507\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#ff2a4b\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">SHUTTER ISLAND</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#00e5bc\" text-anchor=\"middle\">MARTIN SCORSESE // 2010</text></svg>",
+      "seen": true,
+      "venues": [
+        {
+          "theater": "Metrograph",
+          "neighborhood": "Lower East Side",
+          "format": "35mm Print",
+          "showtimes": [
+            "Sat Nov 14: 3:00pm"
+          ],
+          "ticketUrl": "https://metrograph.com/nyc/"
+        }
+      ],
+      "rank": 60
+    },
+    {
+      "title": "Thelma & Louise",
+      "director": "Ridley Scott",
       "year": 1991,
-      "summary": "Clarice Starling is a top student at the FBI's training academy.  Jack Crawford wants Clarice to interview Dr. Hannibal Lecter, a brilliant psychiatrist who is also a violent psychopath, serving life behind bars for various acts of murder and cannibalism.  Crawford believes that Lecter may have insight into a case and that Starling, as an attractive young woman, may be just the bait to draw him out.",
-      "poster": "https://image.tmdb.org/t/p/w500/uS9m8OBk1A8eM9I042bx8XXpqAq.jpg",
-      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#04080e\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#00e5bc\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE SILENCE OF THE LAMBS</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#f3ebd7\" text-anchor=\"middle\">JONATHAN DEMME // 1991</text></svg>",
+      "summary": "Taking a break from their dreary lives, close friends Thelma and Louise embark on a short weekend trip that ends in unforeseen incriminating circumstances. As fugitives, both women rediscover the strength of their bond and their newfound resilience.",
+      "poster": "https://image.tmdb.org/t/p/w500/vbRAGLzbC75QfiKD1lKjmnQGuph.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">THELMA &amp; LOUISE</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">RIDLEY SCOTT // 1991</text></svg>",
       "seen": true,
       "venues": [
         {
@@ -1591,12 +1408,57 @@
           "neighborhood": "Brooklyn",
           "format": "Standard DCP",
           "showtimes": [
-            "Fri Nov 06: 11:55pm"
+            "Sat Nov 14: 11:00am",
+            "Sun Nov 15: 11:00am"
           ],
           "ticketUrl": "https://nitehawkcinema.com/"
         }
       ],
-      "rank": 65
+      "rank": 61
+    },
+    {
+      "title": "The Killing of a Sacred Deer",
+      "director": "Yorgos Lanthimos",
+      "year": 2017,
+      "summary": "Dr. Steven Murphy is a renowned cardiovascular surgeon who presides over a spotless household with his wife and two children. Lurking at the margins of his idyllic suburban existence is Martin, a fatherless teen who insinuates himself into the doctor's life in gradually unsettling ways.",
+      "poster": "https://image.tmdb.org/t/p/w500/e4DGlsc9g0h5AyoyvvAuIRnofN7.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"11\" fill=\"#f3ebd7\" text-anchor=\"middle\">THE KILLING OF A SACRED DEER</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">YORGOS LANTHIMOS // 2017</text></svg>",
+      "seen": true,
+      "venues": [
+        {
+          "theater": "Metrograph",
+          "neighborhood": "Lower East Side",
+          "format": "Standard DCP",
+          "showtimes": [
+            "Fri Nov 13: 2:30pm",
+            "Sat Nov 14: 8:10pm"
+          ],
+          "ticketUrl": "https://metrograph.com/nyc/"
+        }
+      ],
+      "rank": 62
+    },
+    {
+      "title": "Drive - The Pretenders",
+      "director": "Sergej Moya",
+      "year": 2026,
+      "summary": "A young mechanic fakes an engagement with racing's most scandalous star — officially for his reputation, secretly for her own shot behind the wheel. But soon the lie threatens to destroy everything — including what's already become so much more than just a deal.",
+      "poster": "https://image.tmdb.org/t/p/w500/s9syckECnUYhKePQ1A0DC0mFVZ9.jpg",
+      "svg": "<svg viewBox=\"0 0 200 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"200\" height=\"300\" fill=\"#0c0608\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"#e5a93c\" opacity=\"0.8\"/><text x=\"100\" y=\"238\" font-family=\"Instrument Serif, serif\" font-size=\"14\" fill=\"#f3ebd7\" text-anchor=\"middle\">DRIVE - THE PRETENDERS</text><text x=\"100\" y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"7\" fill=\"#8b93a6\" text-anchor=\"middle\">SERGEJ MOYA // 2026</text></svg>",
+      "seen": true,
+      "venues": [
+        {
+          "theater": "Metrograph",
+          "neighborhood": "Lower East Side",
+          "format": "Standard DCP",
+          "showtimes": [
+            "Fri Nov 13: 11:15pm",
+            "Sun Nov 15: 9:50pm"
+          ],
+          "ticketUrl": "https://metrograph.com/nyc/"
+        }
+      ],
+      "rank": 63
     }
   ]
 }
